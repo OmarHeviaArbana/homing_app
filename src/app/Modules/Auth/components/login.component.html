@@ -1,0 +1,41 @@
+<div style="margin-left: auto; margin-right: auto">
+  <p id="loginFeedback"></p>
+</div>
+<div>
+  <h1>Login</h1>
+  <div *ngIf="loading$ | async" class="spinner-container">
+    <mat-progress-spinner
+      diameter="100"
+      class="spinner"
+      mode="indeterminate"
+      color="primary">
+    </mat-progress-spinner>
+  </div>
+  <div *ngIf="(loaded$ | async) || !(loading$ | async) ">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="container-form">
+        <mat-form-field appearance="fill" >
+          <mat-label>Email:</mat-label>
+          <input
+            matInput
+            type="email"
+            placeholder="pat@example.com"
+            [formControl]="email"
+            required
+          />
+          <mat-error *ngIf="email.invalid">{{getErrorEmailMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Password:</mat-label>
+          <input
+            matInput
+            type="password"
+            [formControl]="password"
+            required
+          />
+          <mat-error *ngIf="password.invalid">{{getErrorPasswordMessage()}}</mat-error>
+        </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+    </form>
+  </div>
+</div>
