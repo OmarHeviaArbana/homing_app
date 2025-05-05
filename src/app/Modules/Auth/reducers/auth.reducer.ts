@@ -10,7 +10,7 @@ export interface AuthState {
 }
 
 export const initialState: AuthState = {
-  credentials: new AuthDTO('', '', '', ''),
+  credentials: new AuthDTO('', '', '', '', 2),
   loading: false,
   loaded: false,
   error: null,
@@ -46,3 +46,4 @@ export function authReducer(
 ): AuthState {
   return _authReducer(state, action);
 }
+

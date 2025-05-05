@@ -21,8 +21,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import  {MatChipsModule } from '@angular/material/chips';
 
+import { HeaderComponent } from './Shared/Components/header/header.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent],
 
   imports: [
     BrowserModule,
