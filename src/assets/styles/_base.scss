@@ -1,0 +1,51 @@
+html, body { height: 100%; background-color: rgb(238, 238, 238) }
+body { margin: 0; font-family: Poppins, "Helvetica Neue", sans-serif; }
+
+/* Shadows */
+
+.inner-shadow {
+  box-shadow: 0px 0px 2px 2.5px rgb(229, 229, 229, 0.5) ;
+}
+
+.drop-shadow {
+  box-shadow: 0px 0px 3px 2.5px rgb(229, 229, 229, 0.4) ;
+}
+
+.up-shadow {
+  box-shadow: 0px -1.5px 1.5px 2px rgb(229, 229, 229, 0.5) ;
+}
+
+.down-shadow {
+  box-shadow: 0px 2px 4px 2.5px rgb(229, 229, 229, 0.5) ;
+}
+
+.modal-shadow {
+  box-shadow: 0px 4px 4px 2.5px rgb(16, 32, 31, 0.1) ;
+}
+
+/* Others */
+
+.container-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+mat-form-field {
+  margin-bottom: 10px;
+  @media  (min-width: 375px ) {
+    width: 80%;
+  }
+  @media  (min-width: 600px ) {
+    width: 50%;
+  }
+  @media  (min-width: 1200px ) {
+    width: 30%;
+  }
+
+}

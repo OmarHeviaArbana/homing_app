@@ -1,0 +1,10 @@
+@use './../../../../assets/styles/variables' as vars;
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  background-color: vars.$color-primary;
+
+}

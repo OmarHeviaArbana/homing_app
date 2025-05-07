@@ -7,7 +7,7 @@ Este repositorio contiene el cliente web de la plataforma **Homing**, desarrolla
 
 ## Tecnologías utilizadas
 
-- Angular 18
+- Angular 15
 - Angular Material
 - NgRx Store (Redux para Angular)
 - NgRx Effects
@@ -22,6 +22,7 @@ Este repositorio contiene el cliente web de la plataforma **Homing**, desarrolla
 El proyecto sigue una arquitectura modular escalable:
 
 ```
+
 src/
 ├── app/
 │   ├── Modules/            # Módulos de autenticación, usuarios, refugios y criaders
@@ -30,9 +31,16 @@ src/
 │   ├── app.module.ts       # Módulo principal
 │   ├── app.reducers.ts     # Estado global con NgRx
 │   └── app.routes.ts       # Enrutamiento principal
+── assets/
+│   ├── styles/             
+  │     ├── -variables      # Estilos de colores, tamaños de fuente y responsive
+  │     ├── _base.scss      # Estilos varios y de caracter global
+  │     ├── _fonts.scss     # Estilos de fuente
+  │     ├── theme.scss      # Reseteo de estilos Angular Material 
 ├── environments/           # Configuración de entorno
 └── styles.scss             # Estilos globales
 ```
+
 ---
 
 ## Configuración

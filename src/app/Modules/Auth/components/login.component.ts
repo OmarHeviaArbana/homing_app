@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
       password: this.password.value,
       user_id: '',
       access_token: '',
+      role_id: ''
     };
 
    this.store.dispatch(AuthAction.login({ credentials }));

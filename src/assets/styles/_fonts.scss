@@ -1,0 +1,84 @@
+/* Font Class */
+
+@use './variables' as vars;
+.title-xl {
+  font-size: vars.$font-size-68;
+  font-weight: 700;
+}
+.title {
+  font-size: vars.$font-size-42;
+  font-weight: 700;
+}
+
+.title-sm {
+  font-size: vars.$font-size-26;
+  font-weight: 700;
+}
+
+.subtitle-bold {
+  font-size: vars.$font-size-26;
+  font-weight: 700;
+}
+
+.subtitle-medium {
+  font-size: vars.$font-size-26;
+  font-weight: 500;
+}
+
+.subtitle-sm-bold {
+  font-size: vars.$font-size-16;
+  font-weight: 700;
+}
+
+.subtitle-sm-medium {
+  font-size: vars.$font-size-16;
+  font-weight: 500;
+}
+
+.text-bold {
+  font-size: vars.$font-size-16;
+  font-weight: 700;
+}
+
+.text {
+  font-size: vars.$font-size-16;
+  font-weight: 400;
+}
+
+.text-sm {
+  font-size: vars.$font-size-14;
+  font-weight: 500;
+}
+
+.text-button {
+  font-size: vars.$font-size-16;
+  font-weight: 700;
+}
+
+.text-tooltip {
+  font-size: vars.$font-size-14;
+  font-weight: 400;
+}
+
+.text-link {
+  font-size: vars.$font-size-16;
+  font-weight: 700;
+}
+
+.text-card-bold {
+  font-size: vars.$font-size-16;
+  font-weight: 700;
+}
+
+.text-card-medium {
+  font-size: vars.$font-size-16;
+  font-weight: 500;
+}
+.text-cards-sm-bold {
+  font-size: vars.$font-size-14;
+  font-weight: 700;
+}
+.text-card-sm-medium {
+  font-size: vars.$font-size-14;
+  font-weight: 500;
+}

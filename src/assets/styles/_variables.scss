@@ -1,0 +1,26 @@
+/* Colores principales */
+
+$color-primary: #7EB794;
+$color-accent: #916953;
+$color-warn: #E63946;
+
+/* Otros colores */
+$color-text: #10201F;
+$color-white: #FFFFFF;
+$color-gray: #E5E5E5;
+
+/* Font sizes */
+$font-size-14: 0.87rem; // 14px
+$font-size-16: 1rem; // 16px
+$font-size-18: 1.2rem; // 18px
+$font-size-26: 1.62rem; // 26px
+$font-size-42: 2.6rem; // 48px
+$font-size-68: 4.25rem; // 68px
+
+/* Responsive */
+
+$breakpoint-xs: 0px;        // Extra pequeño
+$breakpoint-sm: 375px;      // Pequeño
+$breakpoint-md: 768px;      // Mediano
+$breakpoint-lg: 1200px;     // Grande
+$breakpoint-xx: 1600px;     // Extra grande

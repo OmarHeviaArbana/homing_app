@@ -11,6 +11,7 @@ export interface AuthToken {
   token: string;
   user_id: string;
   access_token: string;
+  role_id: string;
 }
 
 @Injectable({

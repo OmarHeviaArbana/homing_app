@@ -32,6 +32,7 @@ export class AuthEffects {
               password: credentials.password,
               user_id: userToken.user.id,
               access_token: userToken.token,
+              role_id: userToken.role_id
             };
 
             return AuthActions.loginSuccess({ credentials: credentialsTemp });

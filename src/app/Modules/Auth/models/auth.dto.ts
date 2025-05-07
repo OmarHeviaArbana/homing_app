@@ -3,16 +3,19 @@ export class AuthDTO {
   access_token: string;
   email: string;
   password: string;
+  role_id: string;
 
   constructor(
     user_id: string,
     access_token: string,
     email: string,
-    password: string
+    password: string,
+    role_id: string
   ) {
     this.user_id = user_id;
     this.access_token = access_token;
     this.email = email;
     this.password = password;
+    this.role_id = role_id
   }
 }
