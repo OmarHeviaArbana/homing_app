@@ -12,7 +12,6 @@ $custom-theme: mat.define-light-theme((
     accent: $custom-accent,
     warn: $custom-warn,
   ),
-  typography: mat.define-typography-config(),
   density: 0,
 ));
 

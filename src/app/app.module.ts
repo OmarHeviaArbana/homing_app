@@ -22,9 +22,10 @@ import { MatIconModule } from '@angular/material/icon';
 import  {MatChipsModule } from '@angular/material/chips';
 
 import { HeaderComponent } from './Shared/Components/header/header.component';
+import { FooterComponent } from './Shared/Components/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
 
   imports: [
     BrowserModule,

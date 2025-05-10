@@ -1,0 +1,134 @@
+@use '/src/assets/styles/variables' as vars;
+
+.footer {
+  display:          flex;
+  flex-direction:   column;
+  align-items:      center;
+  justify-content:  center;
+  padding:          32px;
+  margin-top:       50px;
+  background-color: vars.$color-primary;
+  @media (min-width:vars.$breakpoint-md) {
+    flex-direction: column;
+  }
+
+  &__legal-contact {
+    margin-top: 40px;
+    @media (min-width: vars.$breakpoint-md) {
+      width:            100%;
+      display:          flex;
+      flex-direction:   row;
+      align-items:      flex-start;
+      justify-content:  space-between;
+      margin-bottom:    20px;
+    }
+    @media (min-width: vars.$breakpoint-lg) { margin-top: 20px; }
+  }
+
+  &__logotipo {
+    width:    80px;
+    height:   auto;
+    &:hover { cursor: pointer; }
+    @media (min-width: vars.$breakpoint-md) { margin-bottom: 10px; }
+    @media (min-width: vars.$breakpoint-lg) {
+      width:          120px;
+      margin-bottom:  30px; }
+  }
+
+  &__legal {
+    display:         flex;
+    flex-direction:  column;
+    align-items:     center;
+    @media (min-width: vars.$breakpoint-md) { align-items: flex-start; }
+    @media (min-width: vars.$breakpoint-lg) { align-items: flex-start; }
+  }
+
+  &__links-list {
+    padding:        0;
+    margin-bottom:  40px;
+    @media (min-width: vars.$breakpoint-md) {
+      display:          flex;
+      align-items:      flex-start;
+      justify-content:  flex-start;
+      flex-direction:   column;
+      margin:           0;
+    }
+    @media (min-width: vars.$breakpoint-lg) {
+      flex-direction: row;
+      gap:            40px;
+    }
+  }
+
+  &__item {
+    margin-bottom:  20px;
+    text-align:     center;
+    list-style:     none;
+    @media (min-width: vars.$breakpoint-md) { text-align: start; }
+    @media (min-width: vars.$breakpoint-lg) { margin-bottom: 0; }
+  }
+
+  &__link {
+    font-size:       vars.$font-size-16;
+    font-weight:     300;
+    color:           vars.$color-text;
+    text-decoration: none;
+    cursor:          pointer;
+    &:hover { color: vars.$color-white; }
+  }
+
+  &__legal-text {
+    margin-top:  30px;
+    font-size:   vars.$font-size-16;
+    font-weight: 300;
+    color:       vars.$color-text;
+    text-align:  center;
+    @media (min-width: vars.$breakpoint-md) {
+      margin:     10px 0;
+      text-align: right;
+    }
+  }
+
+  &__contact {
+    display:          flex;
+    justify-content:  center;
+    align-items:      center;
+    flex-direction:   column;
+    margin-bottom:    36px;
+    cursor:           pointer;
+
+    &-title {
+      font-size:    vars.$font-size-16;
+      font-weight:  700;
+    }
+    &-link {
+      font-size:        vars.$font-size-16;
+      font-weight:      300;
+      color:            vars.$color-text;
+      text-decoration:  none;
+      cursor:           pointer;
+      &:hover { color: vars.$color-white; }
+    }
+    @media (min-width: vars.$breakpoint-lg) {
+      margin-bottom:  0;
+      align-self:     flex-end;
+    }
+  }
+  &__bottom {
+    display:          flex;
+    border-top:       0.5px solid rgb(16, 32, 31, 0.6);
+    padding-top:      20px;
+    flex-direction:   column;
+    align-items:      center;
+    @media (min-width: vars.$breakpoint-md) { width: 100%; }
+    @media (min-width: vars.$breakpoint-lg) {
+      flex-direction:   row;
+      justify-content:  space-between;
+    }
+    &-text {
+      font-size:    vars.$font-size-14;
+      font-weight:  300;
+      opacity:      0.6;
+      text-align:   center;
+    }
+  }
+}
