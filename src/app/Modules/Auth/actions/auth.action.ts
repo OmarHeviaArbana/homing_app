@@ -1,15 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
-import { AuthDTO } from '../models/auth.dto';
+/* import { AuthDTO } from '../models/auth.dto'; */
+import { UserDTO } from '../../Users/user.dto';
+import { LoginDTO } from '../models/login.dto';
 
 export const login = createAction(
   '[Login Page] Login',
-  props<{ credentials: AuthDTO }>()
+  props<{ credentials: LoginDTO }>()
 );
 
 export const loginSuccess = createAction(
   '[Login Page] Login Success',
-  props<{ credentials: AuthDTO }>()
+  props<{ user: UserDTO; access_token: string }>()
 );
 
 export const loginFailure = createAction(

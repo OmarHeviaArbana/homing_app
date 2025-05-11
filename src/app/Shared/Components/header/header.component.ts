@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import * as AuthAction from '../../../Modules/Auth/actions';
+import { AuthState } from '../../../Modules/Auth/reducers/auth.reducer';
 
 @Component({
   selector: 'app-header',
@@ -12,25 +13,37 @@ import * as AuthAction from '../../../Modules/Auth/actions';
 export class HeaderComponent implements OnInit {
   showAuthSection: boolean;
   showNoAuthSection: boolean;
+  userInitials: string;
 
   constructor(private router: Router, private store: Store<AppState>) {
     this.showAuthSection = false;
     this.showNoAuthSection = true;
+    this.userInitials = '';
   }
 
   ngOnInit(): void {
     this.store.select('auth').subscribe((auth) => {
       this.showAuthSection = false;
       this.showNoAuthSection = true;
-      if (auth.credentials.access_token) {
+      console.log(auth.user);
+
+
+      if (auth.access_token) {
         this.showAuthSection = true;
         this.showNoAuthSection = false;
+      }
+
+      if (auth.user) {
+        this.userInitials = `${auth.user.name[0]}${auth.user.username[0]}`.toUpperCase();
+      } else {
+        this.userInitials = 'H.';
       }
     });
   }
 
   logout(): void {
     this.store.dispatch(AuthAction.logout());
+    localStorage.removeItem('auth_homing')
     this.router.navigateByUrl('/');
   }
 }

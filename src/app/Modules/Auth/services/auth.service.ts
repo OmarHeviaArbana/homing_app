@@ -5,11 +5,12 @@ import { catchError } from 'rxjs/operators';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { AuthDTO } from '../models/auth.dto';
 import { environment } from '../../../../environments/environment';
+import { UserDTO } from '../../Users/user.dto';
+import { LoginDTO } from '../models/login.dto';
 
 export interface AuthToken {
-  user: any;
+  user: UserDTO;
   token: string;
-  user_id: string;
   access_token: string;
   role_id: string;
 }
@@ -25,7 +26,7 @@ export class AuthService {
     this.controller = 'auth';
   }
 
-  login(auth: AuthDTO): Observable<AuthToken> {
+  login(auth: LoginDTO): Observable<AuthToken> {
     return this.http
       .post<AuthToken>(`${this.API_URL}/auth/login`, auth)
       .pipe(catchError(this.sharedService.handleError));

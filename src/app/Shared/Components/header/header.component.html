@@ -1,37 +1,31 @@
 <!-- NO AUTH REQUIRED -->
 <div *ngIf="showNoAuthSection">
-  <h1>NoAuth</h1>
-  <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+  <mat-toolbar class="header">
+    <button mat-icon-button class="header__menu-btn" aria-label="Menu principal">
+      <img class="header__menu-icon" src="assets/icons/navegacion/menu.svg" alt="Logotipo Homing">
     </button>
-    <span>Homing</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+    <a href="/"><img class="header__logotipo" src="assets/logo/logotipo-homing.svg" alt="Logotipo Homing"></a>
   </mat-toolbar>
- <h1>Homing.</h1>
 </div>
 
 <!-- AUTH REQUIRED -->
 <div *ngIf="showAuthSection">
-  <h1>Auth</h1>
-  <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
+  <mat-toolbar class="header">
+    <button mat-icon-button class="header__menu-btn" aria-label="Menu principal">
+      <img class="header__menu-icon" src="assets/icons/navegacion/menu.svg" alt="Logotipo Homing">
     </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
+    <a href="/"><img class="header__logotipo" src="assets/logo/logotipo-homing.svg" alt="Logotipo Homing"></a>
+
+    <mat-menu #appMenu="matMenu" class="header__avatar-menu">
+      <ng-template matMenuContent>
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item>Help</button>
+      </ng-template>
+    </mat-menu>
+
+    <button mat-icon-button class="header__avatar-btn" [matMenuTriggerFor]="appMenu">
+      <div class="heade">{{userInitials}}</div>
     </button>
   </mat-toolbar>
-
 </div>
+

@@ -10,6 +10,8 @@ import { AppState } from 'src/app/app.reducers';
 import * as AuthAction from '../actions';
 import { AuthDTO } from '../models/auth.dto';
 import { Observable } from 'rxjs';
+import { UserDTO } from '../../Users/user.dto';
+import { LoginDTO } from '../models/login.dto';
 
 @Component({
   selector: 'app-login',
@@ -52,12 +54,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(): void {
-    const credentials: AuthDTO = {
+    const credentials: LoginDTO = {
       email: this.email.value,
       password: this.password.value,
-      user_id: '',
-      access_token: '',
-      role_id: ''
     };
 
    this.store.dispatch(AuthAction.login({ credentials }));

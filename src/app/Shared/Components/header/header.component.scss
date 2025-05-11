@@ -1,10 +1,61 @@
 @use '/src/assets/styles/variables' as vars;
 
-.example-spacer {
-  flex: 1 1 auto;
-}
-
-mat-toolbar {
+.header {
   background-color: vars.$color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  padding: 32px;
+  height: 60px;
+  @media (min-width: vars.$breakpoint-lg) {
+    height: 70px;
+  }
+
+  &__menu-btn {
+    width: 26px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+  &__menu-icon {
+    width: 26px;
+  }
+
+  &__logotipo {
+    width: 100px;
+    padding-top: 15px;
+    @media (min-width: vars.$breakpoint-lg) {
+      width: 120px;
+    }
+  }
+
+  &__avatar {
+    &-menu {
+
+    }
+    &-btn {
+      background-color: vars.$color-white;
+      border: none;
+      border-radius: 50%;
+      height: 36px;
+      width: 36px;
+      font-size: vars.$font-size-16;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+
+      @media (min-width: vars.$breakpoint-lg) {
+        height: 48px;
+        width: 48px;
+        font-size: vars.$font-size-18;
+
+      }
+
+    }
+  }
+
+
 
 }
+

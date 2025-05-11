@@ -20,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import  {MatChipsModule } from '@angular/material/chips';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { HeaderComponent } from './Shared/Components/header/header.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
@@ -50,7 +51,8 @@ import { FooterComponent } from './Shared/Components/footer/footer.component';
     MatTabsModule,
     MatCardModule,
     MatIconModule,
-    MatChipsModule
+    MatChipsModule,
+    MatMenuModule
 
   ],
   providers: [

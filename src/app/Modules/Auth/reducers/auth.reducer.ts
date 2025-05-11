@@ -1,19 +1,22 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { login, loginFailure, loginSuccess, logout } from '../actions';
 import { AuthDTO } from '../models/auth.dto';
+import { UserDTO } from '../../Users/user.dto';
 
 export interface AuthState {
-  credentials: AuthDTO;
+  user: UserDTO | null;
+  access_token: string;
   loading: boolean;
   loaded: boolean;
   error: any;
 }
 
 export const initialState: AuthState = {
-  credentials: new AuthDTO('', '', '', '', ''),
+  user: null,
+  access_token: '',
   loading: false,
   loaded: false,
-  error: null,
+  error: null
 };
 
 const _authReducer = createReducer(
@@ -24,9 +27,10 @@ const _authReducer = createReducer(
     loaded: false,
     error: null,
   })),
-  on(loginSuccess, (state, action) => ({
+  on(loginSuccess, (state, { user, access_token }) => ({
     ...state,
-    credentials: action.credentials,
+    user,
+    access_token,
     loading: false,
     loaded: true,
     error: null,

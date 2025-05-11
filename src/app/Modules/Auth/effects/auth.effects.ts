@@ -7,6 +7,7 @@ import { SharedService } from 'src/app/Shared/Services/shared.service';
 import * as AuthActions from '../actions';
 import { AuthDTO } from '../models/auth.dto';
 import { AuthService } from '../services/auth.service';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
@@ -27,15 +28,11 @@ export class AuthEffects {
       exhaustMap(({ credentials }) =>
         this.authService.login(credentials).pipe(
           map((userToken) => {
-            const credentialsTemp: AuthDTO = {
-              email: credentials.email,
-              password: credentials.password,
-              user_id: userToken.user.id,
-              access_token: userToken.token,
-              role_id: userToken.role_id
-            };
-
-            return AuthActions.loginSuccess({ credentials: credentialsTemp });
+            this.responseOK = true;
+            return AuthActions.loginSuccess({
+              user: userToken.user,
+              access_token: userToken.token
+            });
           }),
           catchError((error) => {
             return of(AuthActions.loginFailure({ payload: error }));
@@ -60,8 +57,11 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
-        map(() => {
+        map((action) => {
           this.responseOK = true;
+          const userData = action.user;
+          const accessToken = action.access_token;
+          localStorage.setItem( 'auth_homing', JSON.stringify({ user: userData, access_token: accessToken }));
         })
       ),
     { dispatch: false }
