@@ -1,0 +1,72 @@
+<!-- Hero Section -->
+<section class="home">
+  <div class="container">
+    <div class="home__content">
+      <div class="home__image-container">
+        <img
+          src="/assets/img/dog-287420_1920.jpg"
+          alt="Perro buscando hogar"
+          class="home__image"
+        >
+      </div>
+      <div class="home__text">
+        <h1 class="home__title">¡Bienvenido a Homing!</h1>
+        <p class="home__description">
+          En Homing tenemos el compromiso de dar un hogar a todos aquellos animales que lo necesiten.
+        </p>
+        <div class="home__divider"></div>
+        <p class="home__question">¿Nos ayudas a conseguirlo?</p>
+        <div class="home__actions">
+                 <app-button variant="primary">Iniciar sesión</app-button>
+          <app-button variant="secondary">Registrate</app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pets Carousel Section -->
+<!-- <section class="pets-section">
+  <div class="container">
+    <h2 class="pets-section__title">
+      <span class="pets-section__icon">💚</span>
+      Mascotas que te esperan
+    </h2>
+
+    <div class="carousel">
+      <button
+        class="carousel__arrow carousel__arrow--prev"
+        (click)="prevSlide()"
+        [attr.aria-label]="'Anterior mascota'"
+      >
+        <span>‹</span>
+      </button>
+
+      <div class="carousel__container">
+        <div class="carousel__track" [style.transform]="'translateX(' + (-currentSlide * 100) + '%)'">
+          <div class="carousel__item" *ngFor="let pet of pets">
+            <app-pet-card [pet]="pet"></app-pet-card>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="carousel__arrow carousel__arrow--next"
+        (click)="nextSlide()"
+        [attr.aria-label]="'Siguiente mascota'"
+      >
+        <span>›</span>
+      </button>
+    </div>
+
+    <div class="carousel-indicators">
+      <button
+        *ngFor="let pet of pets; let i = index"
+        class="carousel-indicators__dot"
+        [class.carousel-indicators__dot--active]="i === currentSlide"
+        (click)="currentSlide = i"
+        [attr.aria-label]="'Ver mascota ' + (i + 1)"
+      ></button>
+    </div>
+  </div>
+</section> -->

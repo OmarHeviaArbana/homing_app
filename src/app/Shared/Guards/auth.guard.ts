@@ -12,8 +12,8 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router, private store: Store<AppState>) {
     this.store.select('auth').subscribe((auth) => {
       this.access_token = '';
-      if (auth.credentials.access_token) {
-        this.access_token = auth.credentials.access_token;
+      if (auth.access_token) {
+        this.access_token = auth.access_token;
       }
     });
   }

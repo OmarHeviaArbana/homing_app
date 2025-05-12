@@ -1,0 +1,51 @@
+@use '/src/assets/styles/variables' as vars;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 12px 16px;
+  box-shadow: 0px 2px 4px 2.5px rgb(229, 229, 229, 0.5) ;
+  width: 100%;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &--primary {
+    background-color: vars.$color-primary;
+    color: vars.$color-text;
+    font-size:  vars.$font-size-18;;
+    font-weight: 600;
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+
+  &--secondary {
+    background-color: vars.$color-text;;
+    color: vars.$color-white;
+     font-size:  vars.$font-size-18;;
+    font-weight: 500;
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    color: vars.$color-text;
+    font-size:  vars.$font-size-18;;
+    border: 2px solid vars.$color-text;;
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+}

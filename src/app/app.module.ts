@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducers, EffectsArray } from './app.reducers';
 import { AuthModule } from './Modules/Auth/auth.module';
+
 import { AuthInterceptorService } from './Shared/Services/auth-interceptor.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ import {MatMenuModule} from '@angular/material/menu';
 
 import { HeaderComponent } from './Shared/Components/header/header.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
+import { AnimalModule } from './Modules/Animals/animal.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -34,7 +36,7 @@ import { FooterComponent } from './Shared/Components/footer/footer.component';
     ReactiveFormsModule,
     HttpClientModule,
     AuthModule,
-
+    AnimalModule,
     StoreModule.forRoot(appReducers, {
       runtimeChecks: {
         strictStateImmutability: false,

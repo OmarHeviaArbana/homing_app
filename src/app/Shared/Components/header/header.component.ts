@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import * as AuthAction from '../../../Modules/Auth/actions';
-import { AuthState } from '../../../Modules/Auth/reducers/auth.reducer';
 
 @Component({
   selector: 'app-header',
@@ -47,3 +46,5 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 }
+
+
