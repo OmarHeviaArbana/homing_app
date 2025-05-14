@@ -2,6 +2,7 @@
 <section class="home">
   <div class="container">
     <div class="home__content">
+      <h1 class="home__title_small_devices">¡Bienvenido a Homing!</h1>
       <div class="home__image-container">
         <img
           src="/assets/img/dog-287420_1920.jpg"
@@ -11,10 +12,10 @@
       </div>
       <div class="home__text">
         <h1 class="home__title">¡Bienvenido a Homing!</h1>
+        <div class="home__divider"></div>
         <p class="home__description">
           En Homing tenemos el compromiso de dar un hogar a todos aquellos animales que lo necesiten.
         </p>
-        <div class="home__divider"></div>
         <p class="home__question">¿Nos ayudas a conseguirlo?</p>
         <div class="home__actions">
                  <app-button variant="primary">Iniciar sesión</app-button>
@@ -23,6 +24,13 @@
       </div>
     </div>
   </div>
+<div *ngIf="loading$ | async">Cargando...</div>
+  <div *ngIf="(animals$ | async) as animals">
+  <div *ngFor="let animal of animals">
+    <h3>{{ animal.name }}</h3>
+    <p>{{ animal.description }}</p>
+  </div>
+</div>
 </section>
 
 <!-- Pets Carousel Section -->

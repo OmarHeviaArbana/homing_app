@@ -5,9 +5,7 @@ import { of } from 'rxjs';
 import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import * as AuthActions from '../actions';
-import { AuthDTO } from '../models/auth.dto';
 import { AuthService } from '../services/auth.service';
-import { Action } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
@@ -45,7 +43,7 @@ export class AuthEffects {
             );
 
             if (this.responseOK) {
-              this.router.navigateByUrl('login');
+              this.router.navigateByUrl('home');
             }
           })
         )

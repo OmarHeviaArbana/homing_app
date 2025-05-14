@@ -1,6 +1,6 @@
 import { AuxiliarEntityDTO } from "src/app/Shared/Models/auxiliar-entity.dto";
 
-export interface Animal {
+export interface AnimalDTO {
   id: number;
   name: string;
   location: string;
