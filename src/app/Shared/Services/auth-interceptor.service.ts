@@ -13,14 +13,11 @@ import { AppState } from '../../app.reducers';
   providedIn: 'root',
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  private access_token: string = '';
+  private userAccessToken: string = '';
 
   constructor(private store: Store<AppState>) {
     this.store.select('auth').subscribe((auth) => {
-      this.access_token = '';
-      if (auth.access_token) {
-        this.access_token = auth.access_token;
-      }
+      this.userAccessToken = auth ? auth.access_token : '';
     });
   }
 
@@ -28,12 +25,21 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (this.access_token) {
+
+    let token = this.userAccessToken
+    if (!token) {
+      const apiToken = localStorage.getItem('api_token');
+      if (apiToken) {
+        token = apiToken
+      }
+    }
+
+    if (token) {
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
           Accept: 'application/json',
-          Authorization: `Bearer ${this.access_token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
     }

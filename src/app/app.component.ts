@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from './app.reducers';
 import * as AuthActions from './Modules/Auth/actions';
 import { AuthDTO } from './Modules/Auth/models/auth.dto';
+import { ApiAuthService } from './Shared/Services/api-auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { AuthDTO } from './Modules/Auth/models/auth.dto';
 })
 export class AppComponent {
   title = 'homing-app';
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>,private apiAuthService: ApiAuthService ) {}
 
   ngOnInit(): void {
     const authData = localStorage.getItem('auth_homing');
@@ -24,6 +25,14 @@ export class AppComponent {
         user: user,
         access_token: access_token,
       }));
+    }
+    const token = localStorage.getItem('api_token');
+
+    if (!token) {
+      this.apiAuthService.apiLogin().subscribe({
+        next: () => console.log('API token generado correctamente'),
+        error: () => console.error('Fallo en el login del sistema')
+      });
     }
   }
 }
