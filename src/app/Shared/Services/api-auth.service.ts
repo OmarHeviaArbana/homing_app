@@ -7,8 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApiAuthService {
-  private apiUrl = 'http://localhost:8000/api/auth/system-login';
-    private readonly API_URL = environment.apiUrl
+  private readonly API_URL = environment.apiUrl
   constructor(private http: HttpClient) {}
 
   apiLogin() {

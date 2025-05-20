@@ -1,0 +1,17 @@
+<div class="animal-card">
+  <div class="animal-card__image-container">
+    <img src="/assets/img/animals-3982204_1920.jpg" [alt]="animal.name" class="animal-card__image">
+    <span class="animal-card__location">
+     <img src="/assets/icons/light/24x/localizacion.svg" :alt="animal.location">
+      {{ animal.location }}
+    </span>
+  </div>
+
+  <div class="animal-card__content">
+    <h3 class="animal-card__name">{{ animal.name }}</h3>
+    <p class="animal-card__type">{{ animal.species.name }}</p>
+  </div>
+  <div class="animal-card__action">
+    <app-button variant="card" size="md" [fullWidth]="true">{{ animal.status.name }}</app-button>
+  </div>
+</div>

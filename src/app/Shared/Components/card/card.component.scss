@@ -1,0 +1,73 @@
+@use '/src/assets/styles/variables' as vars;
+.animal-card {
+  background-color: vars.$color-white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  max-width: 340px;
+
+
+  &:hover {
+    transform: translateY(-5px);
+
+    .animal-card__image {
+      transform: scale(1.05);
+    }
+  }
+
+  &__image-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 75%;
+  }
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease;
+  }
+
+  &__location-icon {
+    margin-right: 8px;
+    font-size: vars.$font-size-14;
+  }
+
+  &__content {
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: vars.$font-size-16;
+    font-weight: 700;
+    color: vars.$color-primary;
+    @media (min-width: vars.$breakpoint-md) {
+      font-size: vars.$font-size-18;
+    }
+  }
+
+  &__type {
+    color: vars.$color-text;
+    font-weight: 700;
+    font-size: vars.$font-size-14;
+    margin-bottom: 0;
+    @media (min-width: vars.$breakpoint-md) {
+      font-size: vars.$font-size-16;
+    }
+  }
+
+  &__action {
+    margin-top: auto;
+    border-radius: 0 0 8px 8px;
+  }
+}

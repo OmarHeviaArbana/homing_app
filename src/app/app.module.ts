@@ -26,6 +26,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { HeaderComponent } from './Shared/Components/header/header.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
 import { AnimalModule } from './Modules/Animals/animal.module';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -54,8 +55,9 @@ import { AnimalModule } from './Modules/Animals/animal.module';
     MatCardModule,
     MatIconModule,
     MatChipsModule,
-    MatMenuModule
-
+    MatMenuModule,
+    MatIconModule,
+    MatGridListModule,
   ],
   providers: [
     {

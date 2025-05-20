@@ -102,8 +102,12 @@
 
   &__actions {
     display: flex;
+    flex-direction: column;
     gap: 28px;
     margin-top: 24px;
+    @media (min-width: vars.$breakpoint-md) {
+      flex-direction: row;
+    }
   }
 
   &__image-container {
@@ -126,4 +130,76 @@
   }
 }
 
+.animal-section {
+  margin: 90px 0 90px;
+  padding: 60px 0 40px;
+  background-color: vars.$color-gray;
 
+  &__title {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: vars.$font-size-18;
+    font-weight: 700;
+    color: vars.$color-text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     @media (min-width: vars.$breakpoint-lg) {
+      font-size: vars.$font-size-26;
+     }
+  }
+
+  &__icon {
+    width: 16px;
+    margin-right: 8px;
+    @media (min-width: vars.$breakpoint-md) {
+      width: 24px;
+    }
+  }
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 30px;
+
+  &__container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  &__track {
+    display: flex;
+    transition: transform 300ms ease;
+  }
+
+  &__item {
+    flex: 0 0 100%;
+    padding: 0 30px;
+
+    @media (min-width: vars.$breakpoint-md) {
+      flex: 0 0 50%;
+    }
+
+    @media (min-width: vars.$breakpoint-lg) {
+      flex: 0 0 25%;
+    }
+  }
+
+  &__arrow {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    &-icon {
+      width: 38px;
+    }
+    &--prev {
+      margin-right: 8px;
+    }
+    &--next {
+      margin-left: 8px;
+      transform: rotate(180deg);
+    }
+  }
+}

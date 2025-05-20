@@ -18,42 +18,40 @@
         </p>
         <p class="home__question">¿Nos ayudas a conseguirlo?</p>
         <div class="home__actions">
-                 <app-button variant="primary">Iniciar sesión</app-button>
-          <app-button variant="secondary">Registrate</app-button>
+                 <app-button variant="primary" (click)="goToLogin()">Iniciar sesión</app-button>
+          <app-button variant="secondary" (click)="goToRegister()">Registrate</app-button>
         </div>
       </div>
     </div>
   </div>
-<div *ngIf="loading$ | async">Cargando...</div>
-  <div *ngIf="(animals$ | async) as animals">
-  <div *ngFor="let animal of animals">
-    <h3>{{ animal.name }}</h3>
-    <p>{{ animal.description }}</p>
-  </div>
-</div>
+  <div *ngIf="loading$ | async">Cargando...</div>
 </section>
 
-<!-- Pets Carousel Section -->
-<!-- <section class="pets-section">
+<!--    <mat-grid-list cols="4" rowHeight="350px" gutterSize="16px">
+      <mat-grid-tile *ngFor="let animal of (animals$ | async) as animals">
+      <app-card [animal]="animal"></app-card>
+      </mat-grid-tile>
+    </mat-grid-list> -->
+
+<section class="animal-section">
   <div class="container">
-    <h2 class="pets-section__title">
-      <span class="pets-section__icon">💚</span>
+    <h2 class="animal-section__title">
+      <img class="animal-section__icon" src="/assets/icons/bold/24x/donaciones.svg" alt="Icono Corazón">
       Mascotas que te esperan
     </h2>
-
     <div class="carousel">
       <button
         class="carousel__arrow carousel__arrow--prev"
         (click)="prevSlide()"
         [attr.aria-label]="'Anterior mascota'"
       >
-        <span>‹</span>
+        <img class="carousel__arrow-icon" src="/assets/icons/navegacion/arrow-carousel.svg" alt="Icono flecha izquierda">
       </button>
 
       <div class="carousel__container">
         <div class="carousel__track" [style.transform]="'translateX(' + (-currentSlide * 100) + '%)'">
-          <div class="carousel__item" *ngFor="let pet of pets">
-            <app-pet-card [pet]="pet"></app-pet-card>
+          <div class="carousel__item"  *ngFor="let animal of animals">
+            <app-card [animal]="animal"></app-card>
           </div>
         </div>
       </div>
@@ -63,18 +61,8 @@
         (click)="nextSlide()"
         [attr.aria-label]="'Siguiente mascota'"
       >
-        <span>›</span>
+         <img class="carousel__arrow-icon" src="/assets/icons/navegacion/arrow-carousel.svg" alt="Icono flecha derecha">
       </button>
     </div>
-
-    <div class="carousel-indicators">
-      <button
-        *ngFor="let pet of pets; let i = index"
-        class="carousel-indicators__dot"
-        [class.carousel-indicators__dot--active]="i === currentSlide"
-        (click)="currentSlide = i"
-        [attr.aria-label]="'Ver mascota ' + (i + 1)"
-      ></button>
-    </div>
   </div>
-</section> -->
+</section>
