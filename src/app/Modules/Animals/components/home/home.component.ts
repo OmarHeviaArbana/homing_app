@@ -27,8 +27,8 @@ export class HomeComponent implements OnInit {
       this.animals = animals.animals;
     });
 
-    this.loading$ = this.store.select(AnimalSelectors.selectAnimalsLoading);
-    this.loaded$ = this.store.select(AnimalSelectors.selectAnimalsFailure);
+    this.loading$ = this.store.select((state) => state.auth.loading);
+    this.loaded$ = this.store.select((state) => state.auth.loaded);
   }
 
   ngOnInit(): void {

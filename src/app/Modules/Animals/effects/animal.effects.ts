@@ -12,7 +12,7 @@ export class AnimalEffects {
     this.actions$.pipe(
       ofType(AnimalActions.getAllAnimals),
       mergeMap(() =>
-        this.animalService.getAll().pipe(
+        this.animalService.getAllAnimals().pipe(
           map((animals) => AnimalActions.getAllAnimalsSuccess({ animals })),
           catchError((error) => of(AnimalActions.getAllAnimalsFailure({ error })))
         )

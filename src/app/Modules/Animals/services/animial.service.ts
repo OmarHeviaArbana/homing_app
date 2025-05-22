@@ -10,14 +10,11 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AnimalService {
-   private readonly API_URL = environment.apiUrl
+  private readonly API_URL = environment.apiUrl
 
   constructor(private http: HttpClient, private sharedService: SharedService ) {}
 
-  /**
-   * Obtener todos los animales
-   */
-  getAll(): Observable<AnimalDTO[]> {
+  getAllAnimals(): Observable<AnimalDTO[]> {
     return this.http
     .get<AnimalDTO[]>(`${this.API_URL}/animals/getAll`)
     .pipe(catchError(this.sharedService.handleError));

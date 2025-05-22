@@ -8,9 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import * as AuthAction from '../actions';
-import { AuthDTO } from '../models/auth.dto';
 import { Observable } from 'rxjs';
-import { UserDTO } from '../../Users/user.dto';
 import { LoginDTO } from '../models/login.dto';
 
 @Component({
@@ -39,7 +37,6 @@ export class LoginComponent implements OnInit {
     this.password = new FormControl('', [
       Validators.required,
       Validators.minLength(8),
-      Validators.maxLength(16),
     ]);
 
     this.loginForm = this.formBuilder.group({
@@ -66,22 +63,19 @@ export class LoginComponent implements OnInit {
 
   getErrorEmailMessage(): any {
     if (this.email.hasError('required')) {
-      return 'Email is required'
+       return 'Campo obligatorio'
     }
     if (this.email.hasError('pattern') && !this.email.hasError('required')) {
-      return 'Email not a valid format.'
+      return 'El formato del email no es válido'
     }
   }
 
   getErrorPasswordMessage(): any {
     if (this.password.hasError('required')) {
-      return 'Password is required'
+      return 'Campo obligatorio'
     }
     if (this.password.hasError('minlength') && !this.password.hasError('maxlength') && !this.password.hasError('required')) {
-      return 'Password must be greater tha 8 characters.'
-    }
-    if (this.password.hasError('maxlength') && !this.password.hasError('minlength') && !this.password.hasError('required')) {
-      return 'Password can be max 16 characters long.'
+      return 'La contraseña debe tener al menos 8 caracteres'
     }
   }
 }

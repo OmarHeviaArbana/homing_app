@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { login, loginFailure, loginSuccess, logout } from '../actions';
-import { UserDTO } from '../../Users/user.dto';
+import { UserDTO } from '../../Users/models/user.dto';
 
 export interface AuthState {
   user: UserDTO | null;

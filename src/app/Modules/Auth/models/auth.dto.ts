@@ -1,4 +1,4 @@
-import { UserDTO } from './../../Users/user.dto';
+import { UserDTO } from '../../Users/models/user.dto';
 
 export class AuthDTO {
   user: UserDTO;

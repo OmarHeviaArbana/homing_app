@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { AuthDTO } from '../models/auth.dto';
 import { environment } from '../../../../environments/environment';
-import { UserDTO } from '../../Users/user.dto';
+import { UserDTO } from '../../Users/models/user.dto';
 import { LoginDTO } from '../models/login.dto';
 
 export interface AuthToken {

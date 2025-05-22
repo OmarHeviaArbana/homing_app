@@ -27,6 +27,8 @@ import { HeaderComponent } from './Shared/Components/header/header.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
 import { AnimalModule } from './Modules/Animals/animal.module';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { UserModule } from './Modules/Users/user.module';
+import { SharedModule } from './Shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -38,6 +40,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
     HttpClientModule,
     AuthModule,
     AnimalModule,
+    UserModule,
+    SharedModule,
     StoreModule.forRoot(appReducers, {
       runtimeChecks: {
         strictStateImmutability: false,
