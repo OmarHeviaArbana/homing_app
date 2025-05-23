@@ -40,7 +40,7 @@ export class UserEffects {
             );
 
             if (this.responseOK) {
-              this.router.navigateByUrl('home');
+              this.router.navigateByUrl('/login');
             }
           })
         )
@@ -52,8 +52,13 @@ export class UserEffects {
     () =>
       this.actions$.pipe(
         ofType(UserActions.registerSuccess),
-        map(() => {
+        map((action) => {
           this.responseOK = true;
+          console.log(action);
+          localStorage.removeItem('auth_homing')
+
+          /* const userData = action.user;
+          localStorage.setItem( 'auth_homing', JSON.stringify({ user: userData })); */
         })
       ),
     { dispatch: false }
@@ -64,6 +69,8 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.registerFailure),
         map((error) => {
+          console.log(error);
+
           this.responseOK = false;
           this.errorResponse = error.payload.error;
           this.sharedService.errorLog(error.payload.error);

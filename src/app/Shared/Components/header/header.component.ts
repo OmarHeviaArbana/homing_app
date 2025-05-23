@@ -24,18 +24,20 @@ export class HeaderComponent implements OnInit {
     this.store.select('auth').subscribe((auth) => {
       this.showAuthSection = false;
       this.showNoAuthSection = true;
-      console.log(auth.user);
 
-
-      if (auth.access_token) {
+      if (auth.access_token ) {
         this.showAuthSection = true;
         this.showNoAuthSection = false;
+        if (auth.user)  {
+          this.userInitials = `${auth.user.name[0]}${auth.user.username[0]}`.toUpperCase();
+        } else {
+          this.userInitials = 'H.';
+        }
       }
 
-      if (auth.user) {
-        this.userInitials = `${auth.user.name[0]}${auth.user.username[0]}`.toUpperCase();
-      } else {
-        this.userInitials = 'H.';
+      if(!localStorage.getItem('auth_homing')) {
+        this.showAuthSection = false;
+        this.showNoAuthSection = true;
       }
     });
   }

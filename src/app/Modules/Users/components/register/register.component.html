@@ -39,17 +39,21 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <div class="register__actions" *ngIf="role_id.value !== 3 && role_id.value !==4">
+          <app-button variant="primary" type="submit" [disabled]="!registerFormUser.valid" >Registrarme</app-button>
+          <app-button variant="outline">Cancelar</app-button>
+        </div>
       </form>
 
 
-     <form *ngIf="role_id.value == 3 || role_id.value == 4" [formGroup]="registerFormShelterBreeder" (ngSubmit)="register()" class="container-form">
+     <form *ngIf="role_id.value == 3 || role_id.value == 4" [formGroup]="registerFormShelterBreeder" (ngSubmit)="register()" class="register__container-form">
 
         <h2>Datos adicionales</h2>
 
         <mat-form-field appearance="fill">
           <mat-label>Nombre del refugio</mat-label>
-          <input matInput type="text" [formControl]="name" required aria-label="Introduce el nombre del refugio" />
-          <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
+          <input matInput type="text" [formControl]="name_second" required aria-label="Introduce el nombre del refugio" />
+          <mat-error *ngIf="name_second.invalid">{{getErrorNameMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" *ngIf="role_id.value == 3">
@@ -88,20 +92,34 @@
           <mat-error *ngIf="location.invalid">{{getErrorLocationMessage()}}</mat-error>
         </mat-form-field>
 
-        <input type="file" placeholder="Adjunta un Logotipo o Imágen representativo de tu actividad" accept="image/*" [formControl]="logo_url"  required />
+        <!-- <input type="file" (change)="onFileSelected($event)" placeholder="Adjunta un Logotipo o Imágen representativo de tu actividad" accept="image/*"  required  aria-label="Introduce una imagen representativa o logotipo"/>
        <mat-error *ngIf="logo_url.invalid">{{getErrorLocationMessage()}}</mat-error>
+ -->
+    <!--     <input
+  type="file"
+  accept="image/*"
+  (change)="onFileSelected($event)"
+  required
+  aria-label="Sube un logo o imagen"
+/> -->
+
+<!-- <mat-error *ngIf="logo_url.invalid">{{ getErrorLocationMessage() }}</mat-error> -->
 
         <mat-form-field appearance="fill">
           <mat-label>Descripción</mat-label>
           <textarea matInput maxlength="300" placeholder="Haz una breve descripción de tu actividad" [formControl]="description" required aria-label="Introduce una descripción de tu actividad"></textarea>
            <mat-error *ngIf="description.invalid">{{getErrorDescriptionMessage()}}</mat-error>
         </mat-form-field>
+        <div class="register__actions">
+          <app-button variant="primary" [disabled]="!registerFormUser.valid || ( (role_id.value == 3 || role_id.value == 4) && !registerFormShelterBreeder.valid )">Registrarme</app-button>
+          <app-button variant="outline">Cancelar</app-button>
+        </div>
       </form>
 
-      <div class="register__actions">
-        <app-button variant="primary" type="submit" [disabled]="!registerFormUser.valid || ( (role_id.value == 3 || role_id.value == 4) && !registerFormShelterBreeder.valid )">Registrarme</app-button>
-        <app-button variant="outline">Cancelar</app-button>
-      </div>
     </div>
   </div>
 </section>
+
+<p>registerFormUser.valid: {{ registerFormUser.valid }}</p>
+<p>registerFormShelterBreeder.valid: {{ registerFormShelterBreeder.valid }}</p>
+<p>logo_url: {{ registerFormShelterBreeder.get('logo_url')?.value?.name }}</p>

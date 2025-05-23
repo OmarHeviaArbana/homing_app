@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import * as UserAction from '../../actions';
@@ -13,14 +8,16 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { ShelterDTO } from 'src/app/Modules/Shelters/models/shelter.dto';
 import { BreederDTO } from 'src/app/Modules/Breeders/models/breeder.dto';
-import { MatSelectChange } from '@angular/material/select';
+import * as AuthAction from './../../../Auth/actions';
+import { LoginDTO } from 'src/app/Modules/Auth/models/login.dto';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent  {
 
   registerUser: UserDTO;
   registerShelter: ShelterDTO;
@@ -32,6 +29,7 @@ export class RegisterComponent implements OnInit {
   password: FormControl;
   role_id: FormControl;
 
+  name_second: FormControl;
   logo_url: FormControl;
   address: FormControl;
   location: FormControl;
@@ -45,7 +43,6 @@ export class RegisterComponent implements OnInit {
 
   registerFormUser: FormGroup;
   registerFormShelterBreeder: FormGroup;
-  isValidForm: boolean | null;
 
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
@@ -70,9 +67,12 @@ export class RegisterComponent implements OnInit {
           name: "Criadero"
         }
     ]
-    this.isValidForm = null;
 
     this.name = new FormControl(this.registerUser.name, [
+      Validators.required,
+    ]);
+
+    this.name_second = new FormControl(this.registerBreeder.name, [
       Validators.required,
     ]);
 
@@ -122,14 +122,14 @@ export class RegisterComponent implements OnInit {
 
     this.phone = new FormControl(this.registerBreeder.phone, [
       Validators.required,
+      Validators.pattern(/^(\+34|0034|34)?[6|7|9][0-9]{8}$/) /* 612345678, +34612345678, 0034612345678 */
     ]);
 
     this.cif = new FormControl(this.registerShelter.cif, [
 
       Validators.required,
-      Validators.pattern('/^[ABEH][0-9]{8}$/'),
-      Validators.pattern('/^[KPQS][0-9]{7}[A-J]$/'),
-      Validators.pattern('/^[CDFGJLMNRUVW][0-9]{7}[0-9A-J]$/'),
+      Validators.pattern(/^[A-HJ-NP-SUVW][0-9]{7}[0-9A-J]$/i)  /*  A12345678 , C1234567X */
+
     ]);
 
     this.certification = new FormControl(this.registerBreeder.certification, [
@@ -139,30 +139,19 @@ export class RegisterComponent implements OnInit {
     ]);
 
 
+
+
   this.registerFormUser = this.formBuilder.group({
       name: this.name,
       username: this.username,
       email: this.email,
       password: this.password,
       role_id: this.role_id,
-    /*   logo_url: this.logo_url,
-      address: this.address,
-      location: this.location,
-      description: this.description,
-      phone: this.phone,
-      email_shelter: this.email_shelter,
-      email_breeder: this.email_breeder,
-      cif: this.cif,
-      certification: this.certification */
   });
 
   this.registerFormShelterBreeder = this.formBuilder.group({
-  /*     name: this.name,
-      username: this.username,
-      email: this.email,
-      password: this.password,
-      role_id: this.role_id, */
-      logo_url: this.logo_url,
+      name_second: this.name_second,
+     /*  logo_url: this.logo_url, */
       address: this.address,
       location: this.location,
       description: this.description,
@@ -177,65 +166,74 @@ export class RegisterComponent implements OnInit {
     this.loaded$ = this.store.select((state) => state.auth.loaded);
   }
 
-  ngOnInit(): void {}
-
-
   register(): void {
-    this.isValidForm = false;
+    if (this.registerFormUser.invalid) return;
 
-    if (this.registerFormUser.invalid || this.registerFormShelterBreeder.invalid  ) {
-      return;
-    }
+    const user = this.registerFormUser.value;
+    this.store.dispatch(UserAction.register({ user }));
 
-    this.isValidForm = true;
+    this.store.select('auth').subscribe({
+      next: (userRegister: any) => {
+        const registeredUser = userRegister.user;
+        console.log(registeredUser);
 
-    const user = {
-      name: this.registerFormUser.value.name,
-      username: this.registerFormUser.value.username,
-      email: this.registerFormUser.value.email,
-      password: this.registerFormUser.value.password,
-      role_id: this.registerFormUser.value.role_id
-    };
-
-   this.store.dispatch(UserAction.register({ user }));
-
-   this.store.select('user').subscribe({
-     next: (user: any) => {
-      if (user.rol_id === 2) {
-        this.router.navigate(['/login']);
-        return;
-      }
-
-      const shelterOrBreeder = {
-        user_id: user.id,
-        name: this.registerFormShelterBreeder.value.name,
-        logo_url: this.registerFormShelterBreeder.value.logo_url,
-        address: this.registerFormShelterBreeder.value.address,
-        location: this.registerFormShelterBreeder.value.location,
-        description: this.registerFormShelterBreeder.value.description,
-        phone: this.registerFormShelterBreeder.value.phone,
-        [`email_${user.role_id == 3 ? 'shelter' : 'breeder'}`]: this.registerFormShelterBreeder.value.email[`_${user.role_id == 3 ? 'shelter' : 'breeder'}`],
-        [user.role_id === 3 ? 'cif' : 'certification']:  [user.role_id === 3 ? this.registerFormShelterBreeder.value.cif  : this.registerFormShelterBreeder.value.certification ]
-
-      };
-
-        if (user.role_id=== 3) {
-          console.log("Shelter");
-          console.log(shelterOrBreeder);
-
-
-
-        } else {
-            console.log("Breeder");
-            console.log(shelterOrBreeder);
-
+        if (registeredUser.role_id === 2) {
+          this.registerFormUser.reset();
+          return;
         }
+
+        if (this.registerFormShelterBreeder.invalid) return;
+
+        const isShelter = registeredUser.user.role_id === 3;
+        const entityEmailKey = isShelter ? 'email_shelter' : 'email_breeder';
+        const entityIdKey = isShelter ? 'cif' : 'certification';
+
+        const formValue = this.registerFormShelterBreeder.value;
+        const entity = {
+          user_id: registeredUser.user.id,
+          name: formValue.name,
+          logo_url: formValue.logo_url,
+          address: formValue.address,
+          location: formValue.location,
+          description: formValue.description,
+          phone: formValue.phone,
+          [entityEmailKey]: formValue[entityEmailKey],
+          [entityIdKey]: formValue[entityIdKey]
+        };
+
+        console.log(isShelter ? 'Shelter' : 'Breeder', entity);
+        console.log(entity);
+
+
+          this.registerFormShelterBreeder.reset();
       },
       error: (err: any) => {
-        console.error('Error registrando usuario o entidad:', err);
+        console.error('Error registering user or entity:', err);
       }
     });
   }
+
+ /*  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (!input.files || input.files.length === 0) {
+      console.warn('No file selected or file input is unusable.');
+      return;
+    }
+
+    const file = input.files[0];
+    console.log(file);
+
+
+
+    this.registerFormShelterBreeder.patchValue({
+      logo_url: file
+    });
+
+    this.registerFormShelterBreeder.get('logo_url')?.updateValueAndValidity();
+
+  } */
+
 
 
   getErrorNameMessage(): any {
@@ -252,6 +250,9 @@ export class RegisterComponent implements OnInit {
     if (this.phone.hasError('required')) {
       return 'Campo Obligatorio'
     }
+     if (this.phone.hasError('pattern') && !this.phone.hasError('required')) {
+      return 'El formato del teléfono no es válido'
+    }
   }
 
   getErrorLocationMessage(): any {
@@ -263,6 +264,9 @@ export class RegisterComponent implements OnInit {
   getErrorCifMessage(): any {
     if (this.cif.hasError('required')) {
       return 'Campo Obligatorio'
+    }
+     if (this.cif.hasError('pattern') && !this.cif.hasError('required')) {
+      return 'El formato del CIF no es valido'
     }
   }
 
@@ -283,23 +287,23 @@ export class RegisterComponent implements OnInit {
   }
 
   getErrorEmailMessage(): any {
-    if (this.email.hasError('required')) {
-      return 'Campo obligatorio'
+    if (this.role_id.value === 3 && this.email_shelter.hasError('required')) {
+      return 'Campo obligatorio';
     }
-    if (this.email.hasError('pattern') && !this.email.hasError('required')) {
-      return 'El formato del email no es válido'
+    if (this.role_id.value === 3 && this.email_shelter.hasError('pattern')) {
+      return 'El formato del email no es válido';
     }
-    if (this.email_shelter.hasError('required')) {
-      return 'Campo obligatorio'
+    if (this.role_id.value === 4 && this.email_breeder.hasError('required')) {
+      return 'Campo obligatorio';
     }
-    if (this.email_shelter.hasError('pattern') && !this.email_shelter.hasError('required')) {
-      return 'El formato del email no es válido'
+    if (this.role_id.value === 4 && this.email_breeder.hasError('pattern')) {
+      return 'El formato del email no es válido';
     }
-    if (this.email_breeder.hasError('required')) {
-      return 'Campo obligatorio'
+    if (this.role_id.value !== 3 && this.role_id.value !== 4 && this.email.hasError('required')) {
+      return 'Campo obligatorio';
     }
-    if (this.email_breeder.hasError('pattern') && !this.email_breeder.hasError('required')) {
-      return 'El formato del email no es válido'
+    if (this.role_id.value !== 3 && this.role_id.value !== 4 && this.email.hasError('pattern')) {
+      return 'El formato del email no es válido';
     }
   }
 
