@@ -1,0 +1,35 @@
+<form [formGroup]="formUser" class="register__container-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="name?.invalid">{{ getErrorMessage('name') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Apellidos</mat-label>
+    <input matInput formControlName="username" />
+    <mat-error *ngIf="username?.invalid">{{ getErrorMessage('username') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" />
+    <mat-error *ngIf="email?.invalid">{{ getErrorMessage('email') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Contraseña</mat-label>
+    <input matInput type="password" formControlName="password" />
+    <mat-error *ngIf="password?.invalid">{{ getErrorMessage('password') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Tipo de usuario</mat-label>
+    <mat-select formControlName="role_id">
+      <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
+        {{ rol.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</form>

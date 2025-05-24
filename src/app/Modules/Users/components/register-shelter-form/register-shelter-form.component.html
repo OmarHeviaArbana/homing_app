@@ -1,0 +1,53 @@
+<form [formGroup]="formShelter"  class="register__container-form">
+  <h2>Datos del Refugio</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nombre del refugio</mat-label>
+    <input matInput formControlName="name" />
+    <mat-error *ngIf="name?.invalid">{{ getErrorMessage('name') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>CIF</mat-label>
+    <input matInput formControlName="cif" />
+    <mat-error *ngIf="cif?.invalid">{{ getErrorMessage('cif') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email del refugio</mat-label>
+    <input matInput type="email" formControlName="email_shelter" />
+    <mat-error *ngIf="email_shelter?.invalid">{{ getErrorMessage('email_shelter') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Teléfono</mat-label>
+    <input matInput formControlName="phone" />
+    <mat-error *ngIf="phone?.invalid">{{ getErrorMessage('phone') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Dirección</mat-label>
+    <input matInput formControlName="address" />
+    <mat-error *ngIf="address?.invalid">{{ getErrorMessage('address') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Localidad</mat-label>
+    <input matInput formControlName="location" />
+    <mat-error *ngIf="location?.invalid">{{ getErrorMessage('location') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="description" maxlength="300" rows="4" placeholder="Describe tu actividad"></textarea>
+    <mat-hint align="end">{{ description?.value?.length || 0 }}/300</mat-hint>
+    <mat-error *ngIf="description?.invalid">{{ getErrorMessage('description') }}</mat-error>
+  </mat-form-field>
+
+  <div>
+    <label for="logo-upload">Logo o imagen representativa:</label>
+    <input type="file" id="logo-upload" formControlName="logo_url" accept="image/*" />
+    <mat-error *ngIf="logo_url?.invalid">{{ getErrorMessage('logo_url') }}</mat-error>
+  </div>
+</form>
+

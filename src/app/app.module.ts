@@ -29,6 +29,7 @@ import { AnimalModule } from './Modules/Animals/animal.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { UserModule } from './Modules/Users/user.module';
 import { SharedModule } from './Shared/shared.module';
+import { ShelterModule } from './Modules/Shelters/shelter.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -42,6 +43,7 @@ import { SharedModule } from './Shared/shared.module';
     AnimalModule,
     UserModule,
     SharedModule,
+    ShelterModule,
     StoreModule.forRoot(appReducers, {
       runtimeChecks: {
         strictStateImmutability: false,

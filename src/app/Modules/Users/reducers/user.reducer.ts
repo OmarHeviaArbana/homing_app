@@ -1,20 +1,16 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {
-  register,
-  registerFailure,
-  registerSuccess,
-} from '../actions';
+import { register,registerFailure, registerSuccess,} from '../actions';
 import { UserDTO } from '../models/user.dto';
 
 export interface UserState {
-  user: UserDTO;
+  user: UserDTO | null;
   loading: boolean;
   loaded: boolean;
   error: any;
 }
 
 export const initialState: UserState = {
-  user: new UserDTO('', '', '', '', ''),
+  user: null,
   loading: false,
   loaded: false,
   error: null,
@@ -28,9 +24,9 @@ const _userReducer = createReducer(
     loaded: false,
     error: null,
   })),
-  on(registerSuccess, (state, action) => ({
+  on(registerSuccess, (state, { user }) => ({
     ...state,
-    user: action.user,
+    user,
     loading: false,
     loaded: true,
     error: null,

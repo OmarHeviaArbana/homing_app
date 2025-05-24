@@ -6,34 +6,35 @@
       </mat-progress-spinner>
     </div>
     <div *ngIf="!(loading$ | async) || (loaded$ | async)">
-      <form [formGroup]="registerFormUser" (ngSubmit)="register()" class="register__container-form">
+      <form [formGroup]="form" (ngSubmit)="register()">
+     <!--  <form [formGroup]="registerFormUser" (ngSubmit)="registerAppUser()" class="register__container-form">
         <mat-form-field appearance="fill">
           <mat-label>Nombre</mat-label>
-          <input matInput type="text" [formControl]="name" required aria-label="Introduce tu nombre" />
+          <input matInput type="text" [formControl]="name" aria-label="Introduce tu nombre" />
           <mat-error *ngIf="name.invalid">{{getErrorNameMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Apellidos</mat-label>
-          <input matInput type="text" [formControl]="username" required aria-label="Introduce tus apellidos" />
+          <input matInput type="text" [formControl]="username" aria-label="Introduce tus apellidos" />
           <mat-error *ngIf="username.invalid">{{getErrorUserNameMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Email:</mat-label>
-          <input matInput type="email" [formControl]="email" required aria-label="introduce tu email" />
+          <input matInput type="email" [formControl]="email" aria-label="introduce tu email" />
           <mat-error *ngIf="email.invalid">{{getErrorEmailMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Contraseña</mat-label>
-          <input matInput type="password" [formControl]="password" required aria-label="Introduce una contraseña" />
+          <input matInput type="password" [formControl]="password" aria-label="Introduce una contraseña" />
           <mat-error *ngIf="password.invalid">{{getErrorPasswordMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Indica el tipo de usuario:</mat-label>
-          <mat-select [formControl]="role_id" required aria-label="Introduce la tipologia de usuario">
+          <mat-select [formControl]="role_id" aria-label="Introduce la tipologia de usuario">
             <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
               {{rol.name}}
             </mat-option>
@@ -45,81 +46,108 @@
         </div>
       </form>
 
+ -->
+      <app-register-user-form
+        (formReady)="onUserFormReady($event)"
+        (roleSelected)="onRoleSelected($event)">
+      </app-register-user-form>
+      <app-register-shelter-form
+        *ngIf="selectedRoleId === 3"
+        (formReady)="onShelterFormReady($event)">
+      </app-register-shelter-form>
 
-     <form *ngIf="role_id.value == 3 || role_id.value == 4" [formGroup]="registerFormShelterBreeder" (ngSubmit)="register()" class="register__container-form">
+
+<!--
+     <form *ngIf="role_id.value == 3 || role_id.value == 4" [formGroup]="registerFormShelter" (ngSubmit)="registerAppCenter()" class="register__container-form">
 
         <h2>Datos adicionales</h2>
 
         <mat-form-field appearance="fill">
           <mat-label>Nombre del refugio</mat-label>
-          <input matInput type="text" [formControl]="name_second" required aria-label="Introduce el nombre del refugio" />
-          <mat-error *ngIf="name_second.invalid">{{getErrorNameMessage()}}</mat-error>
+          <input matInput type="text" [formControl]="name_shelter" aria-label="Introduce el nombre del refugio" />
+          <mat-error *ngIf="name_shelter.invalid">{{getErrorNameMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" *ngIf="role_id.value == 3">
           <mat-label>CIF de refugio</mat-label>
-          <input matInput type="text" [formControl]="cif" required aria-label="Introduce el CIF del refugio" />
+          <input matInput type="text" [formControl]="cif" aria-label="Introduce el CIF del refugio" />
           <mat-error *ngIf="cif.invalid">{{getErrorCifMessage()}}</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field appearance="fill" *ngIf="role_id.value == 4">
+        <!-- <mat-form-field appearance="fill" *ngIf="role_id.value == 4">
           <mat-label>Núcleo zoológico</mat-label>
-          <input matInput type="text" [formControl]="certification" required aria-label="Introduce el nucleo zoológico del criadero" />
+          <input matInput type="text" [formControl]="certification"  aria-label="Introduce el nucleo zoológico del criadero" />
           <mat-error *ngIf="certification.invalid">{{getErrorCertificationMessage()}}</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field appearance="fill" *ngIf="role_id.value == 3">
+       <!--  <mat-form-field appearance="fill" *ngIf="role_id.value == 3">
           <mat-label>Email Refugio:</mat-label>
-          <input matInput type="email" [formControl]="email_shelter" required aria-label="Introduce el email del refugio" />
+          <input matInput type="email" [formControl]="email_shelter"  aria-label="Introduce el email del refugio" />
           <mat-error *ngIf="email_shelter.invalid">{{getErrorEmailMessage()}}</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field appearance="fill" *ngIf="role_id.value == 4">
+   <!--      <mat-form-field appearance="fill" *ngIf="role_id.value == 4">
           <mat-label>Email Criadero:</mat-label>
-          <input matInput type="email" [formControl]="email_breeder" required aria-label="Introduce el email del criedero" />
+          <input matInput type="email" [formControl]="email_breeder"  aria-label="Introduce el email del criedero" />
           <mat-error *ngIf="email_breeder.invalid">{{getErrorEmailMessage()}}</mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field appearance="fill">
+      <!--   <mat-form-field appearance="fill">
           <mat-label>Teléfono de contacto:</mat-label>
-          <input matInput type="text" [formControl]="phone" required aria-label="Introduce un telédono de contacto" />
+          <input matInput type="text" [formControl]="phone" aria-label="Introduce un telédono de contacto" />
           <mat-error *ngIf="phone.invalid">{{getErrorPhoneMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
+          <mat-label>Dirección del centro:</mat-label>
+          <input matInput type="text" [formControl]="address" aria-label="Introduce un telédono de contacto" />
+          <mat-error *ngIf="address.invalid">{{getErrorAddressMessage()}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
           <mat-label>Localidad</mat-label>
-          <input matInput type="text" [formControl]="location" required aria-label="Introduce la localidad" />
+          <input matInput type="text" [formControl]="location" aria-label="Introduce la localidad" />
           <mat-error *ngIf="location.invalid">{{getErrorLocationMessage()}}</mat-error>
         </mat-form-field>
 
-        <!-- <input type="file" (change)="onFileSelected($event)" placeholder="Adjunta un Logotipo o Imágen representativo de tu actividad" accept="image/*"  required  aria-label="Introduce una imagen representativa o logotipo"/>
+  <input type="file" [formControl]="logo_url" placeholder="Adjunta un Logotipo o Imágen representativo de tu actividad" accept="image/*"   aria-label="Introduce una imagen representativa o logotipo"/>
        <mat-error *ngIf="logo_url.invalid">{{getErrorLocationMessage()}}</mat-error>
  -->
-    <!--     <input
+<!--         <input
   type="file"
   accept="image/*"
   (change)="onFileSelected($event)"
-  required
+
   aria-label="Sube un logo o imagen"
 /> -->
 
 <!-- <mat-error *ngIf="logo_url.invalid">{{ getErrorLocationMessage() }}</mat-error> -->
 
-        <mat-form-field appearance="fill">
+       <!--  <mat-form-field appearance="fill">
           <mat-label>Descripción</mat-label>
-          <textarea matInput maxlength="300" placeholder="Haz una breve descripción de tu actividad" [formControl]="description" required aria-label="Introduce una descripción de tu actividad"></textarea>
+          <textarea matInput maxlength="300" placeholder="Haz una breve descripción de tu actividad" [formControl]="description" aria-label="Introduce una descripción de tu actividad"></textarea>
            <mat-error *ngIf="description.invalid">{{getErrorDescriptionMessage()}}</mat-error>
         </mat-form-field>
         <div class="register__actions">
-          <app-button variant="primary" [disabled]="!registerFormUser.valid || ( (role_id.value == 3 || role_id.value == 4) && !registerFormShelterBreeder.valid )">Registrarme</app-button>
+          <app-button variant="primary" type="submit" [disabled]="!registerFormUser.valid || !registerFormShelter.valid ">Registrarme</app-button>
           <app-button variant="outline">Cancelar</app-button>
         </div>
-      </form>
 
+      </form> -->
+        <div class="register__actions">
+           <app-button
+          variant="primary"
+          type="submit"
+          [disabled]="!formUser.valid || (selectedRoleId === 3 && (!formShelter || !formShelter.valid))">
+          Registrarme
+        </app-button>
+      <app-button variant="outline" (click)="cancel()">Cancelar</app-button>
+      </div>
+      </form>
     </div>
   </div>
 </section>
 
-<p>registerFormUser.valid: {{ registerFormUser.valid }}</p>
-<p>registerFormShelterBreeder.valid: {{ registerFormShelterBreeder.valid }}</p>
-<p>logo_url: {{ registerFormShelterBreeder.get('logo_url')?.value?.name }}</p>
+
+<!-- <p>registerFormShelterBreeder.valid: {{ registerFormShelter.valid }}</p> -->
+<!-- <p>logo_url: {{ registerFormShelter.get('logo_url')?.value?.name }}</p> -->
