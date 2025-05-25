@@ -34,9 +34,7 @@ export class AuthEffects {
             });
           }),
           catchError((error: HttpErrorResponse) => {
-            this.errorResponse = {
-              errors: error.error?.errors || 'Error en el registro'
-            };
+            this.errorResponse = error.error?.errors || 'Error en el proceso de autenticación'
             return of(AuthActions.loginFailure({ payload: this.errorResponse }));
           }),
           finalize(async () => {
@@ -75,7 +73,7 @@ export class AuthEffects {
         ofType(AuthActions.loginFailure),
         tap(({ payload }) => {
           this.responseOK = false;
-          this.errorResponse = payload.message || 'Error en el registro';
+          this.errorResponse = payload || 'Error en el proceso de autenticación';
           this.sharedService.managementToast('loginFeedback', this.responseOK, this.errorResponse);
         })
       ),

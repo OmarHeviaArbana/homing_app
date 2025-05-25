@@ -20,7 +20,14 @@ const _shelterReducer = createReducer(
   on(ShelterActions.clearShelterFormData, state => ({
     ...state,
     shelterFormData: null,
-  }))
+  })),
+   on(ShelterActions.createShelterFailure, (state, { error, shelterToRegister}) => ({
+      ...state,
+      shelterToRegister: shelterToRegister,
+      loading: false,
+      loaded: false,
+      error: error,
+    }))
 );
 
 export function shelterReducer(

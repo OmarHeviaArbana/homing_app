@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 
 import { ShelterDTO } from 'src/app/Modules/Shelters/models/shelter.dto';
 import { BreederDTO } from 'src/app/Modules/Breeders/models/breeder.dto';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -29,8 +30,11 @@ export class RegisterComponent {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
 
-
-  constructor( private formBuilder: FormBuilder,private store: Store<AppState>) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>,
+    private router: Router
+  ) {
 
     this.form = this.formBuilder.group({
     user: this.formUser,
@@ -104,5 +108,6 @@ export class RegisterComponent {
       this.formBreeder.reset();
     }
     this.selectedRoleId = 0;
+    this.router.navigateByUrl('/');
   }
 }

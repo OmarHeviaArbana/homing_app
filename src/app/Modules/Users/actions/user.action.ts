@@ -10,7 +10,7 @@ export const register = createAction(
 );
 export const registerSuccess = createAction(
   '[Register Page] Register new user Success',
-  props<{ user: UserDTO }>()
+  props<{ user: UserDTO}>()
 );
 
 export const registerFailure = createAction(
@@ -18,22 +18,18 @@ export const registerFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
-
-
-
-
-// Opcional para Breeder
-/* export const registerBreeder = createAction(
-  '[Breeder] Register Breeder',
-  props<{ breeder: BreederDTO }>()
+export const deleteUser = createAction(
+  '[User] Delete User',
+  props<{ id: number }>()
 );
 
-export const registerBreederSuccess = createAction(
-  '[Breeder] Register Breeder Success',
-  props<{ breeder: BreederDTO }>()
+export const deleteUserSuccess = createAction(
+  '[User] Delete User Success'
 );
 
-export const registerBreederFailure = createAction(
-  '[Breeder] Register Breeder Failure',
-  props<{ payload: HttpErrorResponse }>()
-); */
+export const deleteUserFailure = createAction(
+  '[User] Delete User Failure',
+  props<{  payload: HttpErrorResponse }>()
+);
+
+

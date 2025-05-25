@@ -19,4 +19,8 @@ export class UserService {
       .post<UserDTO>(`${this.API_URL}/auth/register`, user)
       .pipe(catchError(this.sharedService.handleError));
   }
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/users/delete/${id}`);
+  }
 }

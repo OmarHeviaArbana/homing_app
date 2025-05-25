@@ -2,10 +2,10 @@
 @use '/src/assets/styles/variables' as vars;
 
 .register {
-
   &__title {
   font-size: vars.$font-size-26;
   font-weight: 700;
+  margin-bottom: 30px;
 }
 
   &__actions {
@@ -24,6 +24,7 @@
     }
   }
   &__container {
+    margin-top: 40px;
     &-form {
         display: flex;
         flex-direction: column;
@@ -38,7 +39,7 @@
   color: red;
 }
 
-#registerFeedback {
+#registerFeedback , #registerBreederFeedback, #registerShelterFeedback {
   visibility: hidden;
   min-width: 250px;
   color: #fff;
@@ -49,17 +50,25 @@
   font-size: 14px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  right: 0;
+  width: 80%;
+  max-width: 500px;
+
 }
 
-#registerFeedback.requestOk {
-  background-color: green;
+#registerFeedback.requestOk,  #registerBreederFeedback.request.ok, #registerShelterFeedback.request.ok {
+  background-color: rgb(78, 224, 78);
 }
 
-#registerFeedback.requestKo {
-  background-color: red;
+#registerFeedback.requestKo, #registerBreederFeedback.requestKo, #registerShelterFeedback.requestKo {
+  background-color: rgb(251, 94, 94);
 }
 
-#registerFeedback.show {
+#registerFeedback.show, #registerBreederFeedback.show, #registerShelterFeedback.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
@@ -67,40 +76,40 @@
 
 @-webkit-keyframes fadein {
   from {
-    bottom: 0;
+   top: 0;
     opacity: 0;
   }
   to {
-    bottom: 30px;
+   top: 30px;
     opacity: 1;
   }
 }
 
 @keyframes fadein {
   from {
-    bottom: 0;
+   top: 0;
     opacity: 0;
   }
   to {
-    bottom: 30px;
+   top: 0;
     opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeout {
   from {
-    bottom: 30px;
+   top: 0;
     opacity: 1;
   }
   to {
-    bottom: 0;
+   top: 0;
     opacity: 0;
   }
 }
 
 @keyframes fadeout {
   from {
-    bottom: 30px;
+    bottom: 0px;
     opacity: 1;
   }
   to {

@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { BreederDTO } from '../models/breeder.dto';
+import { UserDTO } from '../../Users/models/user.dto';
 
 export const saveBreederFormData = createAction(
   '[Breeder Form] Save Breeder Form Data',
@@ -23,6 +24,6 @@ export const createBreederSuccess = createAction(
 
 export const createBreederFailure = createAction(
   '[Breeder] Create Breeder Failure',
-  props<{ payload: HttpErrorResponse }>()
+  props<{ error: any , breederToRegister: any}>()
 );
 

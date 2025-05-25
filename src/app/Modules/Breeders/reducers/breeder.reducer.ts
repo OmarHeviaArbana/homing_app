@@ -13,13 +13,21 @@ export const initialState: BreederState = {
 
 const _breederReducer = createReducer(
   initialState,
-   on(BreederActions.saveBreederFormData, (state, { breederFormData }) => ({
+    on(BreederActions.saveBreederFormData, (state, { breederFormData }) => ({
     ...state,
     breederFormData,
-  })),
-  on(BreederActions.clearBreederFormData, state => ({
+    })),
+    on(BreederActions.clearBreederFormData, state => ({
+      ...state,
+      breederFormData: null,
+    })),
+
+    on(BreederActions.createBreederFailure, (state, { error, breederToRegister}) => ({
     ...state,
-    breederFormData: null,
+    breederToRegister: breederToRegister,
+    loading: false,
+    loaded: false,
+    error: error,
   }))
 );
 

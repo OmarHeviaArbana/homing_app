@@ -38,12 +38,12 @@ export class BreederEffects {
         };
         return this.breederService.createBreeder(breederToRegister).pipe(
           map((breeder) => BreederActions.createBreederSuccess({ breeder })),
-          catchError((error: HttpErrorResponse) => {
+          catchError((error, breeder) => {
               this.errorResponse = {
               message: error.error?.message || 'Error en el registro',
               errors: error.error?.errors || {}
             };
-            return of(BreederActions.createBreederFailure({ payload: this.errorResponse }));
+            return of(BreederActions.createBreederFailure({ error, breederToRegister}));
           })
         );
       })
@@ -56,8 +56,8 @@ export class BreederEffects {
         ofType(BreederActions.createBreederSuccess),
         tap(() => {
           this.responseOK = true;
-          this.errorResponse = null;
-          this.sharedService.managementToast('registerBreederFeedback', this.responseOK, this.errorResponse);
+          const response = 'Registro a punto de finalizar. Haz login con las credenciales de usuario para finalizarlo'
+          this.sharedService.managementToast('registerBreederFeedback', this.responseOK, response)
           this.store.dispatch(BreederActions.clearBreederFormData());
           this.router.navigate(['/login']);
         })
@@ -69,10 +69,16 @@ export class BreederEffects {
     () =>
       this.actions$.pipe(
         ofType(BreederActions.createBreederFailure),
-        tap(({ payload }) => {
-          this.responseOK = false;
-          this.errorResponse = payload;
-          this.sharedService.managementToast('registerBreederFeedback', this.responseOK, this.errorResponse);
+        switchMap(({ error, breederToRegister }) => {
+          const failerBreeder = breederToRegister;
+          const id = failerBreeder.user_id
+          this.store.dispatch(UserActions.deleteUser({ id}));
+
+          return of(
+            this.responseOK = false,
+            this.errorResponse = 'El nombre del Criadero ya está en uso. Por favor, elije otro nombre.',
+            this.sharedService.managementToast('registerBreederFeedback', false, this.errorResponse)
+          );
         })
       ),
     { dispatch: false }

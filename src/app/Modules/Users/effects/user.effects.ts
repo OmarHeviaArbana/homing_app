@@ -9,6 +9,7 @@ import { UserService } from '../services/user.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ResponseError } from '../../../Shared/Services/shared.service';
 
 @Injectable()
 export class UserEffects {
@@ -47,12 +48,7 @@ export class UserEffects {
             }));
           }),
           finalize(async () => {
-            await this.sharedService.managementToast(
-              'registerFeedback',
-              this.responseOK,
-              this.errorResponse
-            );
-            if (this.responseOK) {
+            if (user.role_id == 2 && this.responseOK) {
               this.router.navigateByUrl('/login');
             }
           })
@@ -66,9 +62,12 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.registerSuccess),
         map((action) => {
-          this.responseOK = true;
+          console.log(action);
+          if(action.user.role_id  === 2) {
+          const response = 'Registro a punto de finalizar. Haz login con las credenciales de usuario para finalizarlo.'
+          this.sharedService.managementToast('registerFeedback', this.responseOK, response);
+          }
           localStorage.removeItem('auth_homing');
-          this.sharedService.managementToast('registerFeedback', this.responseOK, this.errorResponse);
         })
       ),
     { dispatch: false }
@@ -79,10 +78,22 @@ export class UserEffects {
     ofType(UserActions.registerFailure),
     tap(({ payload }) => {
           this.responseOK = false;
-          this.errorResponse = payload.message || 'Error en el registro';
+          this.errorResponse = 'El email de usuario ya está en uso. Por favor, elije otro email.',
           this.sharedService.managementToast('registerFeedback', this.responseOK, this.errorResponse);
         })
     ),
     { dispatch: false }
+  );
+
+  deleteUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.deleteUser),
+      switchMap(({ id }) =>
+        this.userService.deleteUser(id).pipe(
+          map(() => UserActions.deleteUserSuccess()),
+          catchError((error: HttpErrorResponse )=> of(UserActions.deleteUserFailure({ payload: error.error})))
+        )
+      )
+    )
   );
 }

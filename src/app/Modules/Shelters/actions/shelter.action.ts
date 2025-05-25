@@ -23,6 +23,6 @@ export const createShelterSuccess = createAction(
 
 export const createShelterFailure = createAction(
   '[Shelter] Create Shelter Failure',
-  props<{ payload: HttpErrorResponse }>()
+  props<{ error: any , shelterToRegister: any }>()
 );
 

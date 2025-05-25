@@ -10,6 +10,7 @@ import { AppState } from 'src/app/app.reducers';
 import * as AuthAction from '../actions';
 import { Observable } from 'rxjs';
 import { LoginDTO } from '../models/login.dto';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {
 
     this.email = new FormControl('', [
@@ -57,8 +59,10 @@ export class LoginComponent implements OnInit {
     };
 
    this.store.dispatch(AuthAction.login({ credentials }));
+  }
 
-
+  cancel(): void {
+    this.router.navigateByUrl('/');
   }
 
   getErrorEmailMessage(): any {

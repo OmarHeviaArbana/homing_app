@@ -38,12 +38,12 @@ export class ShelterEffects {
         };
         return this.shelterService.createShelter(shelterToRegister).pipe(
           map((shelter) => ShelterActions.createShelterSuccess({ shelter })),
-          catchError((error: HttpErrorResponse) => {
+          catchError((error, shelter) => {
               this.errorResponse = {
               message: error.error?.message || 'Error en el registro',
               errors: error.error?.errors || {}
             };
-            return of(ShelterActions.createShelterFailure({ payload: this.errorResponse}));
+              return of(ShelterActions.createShelterFailure({ error, shelterToRegister}));
           })
         );
       })
@@ -56,8 +56,8 @@ export class ShelterEffects {
         ofType(ShelterActions.createShelterSuccess),
         tap(() => {
           this.responseOK = true;
-          this.errorResponse = null;
-          this.sharedService.managementToast('registerBreederFeedback', this.responseOK, this.errorResponse);
+           const response = 'Registro a punto de finalizar. Haz login con las credenciales de usuario para finalizarlo'
+          this.sharedService.managementToast('registerShelterFeedback', this.responseOK, response)
           this.store.dispatch(ShelterActions.clearShelterFormData());
           this.router.navigate(['/login']);
         })
@@ -69,10 +69,17 @@ export class ShelterEffects {
     () =>
       this.actions$.pipe(
         ofType(ShelterActions.createShelterFailure),
-        tap(({ payload }) => {
-          this.responseOK = false;
-          this.errorResponse = payload;
-          this.sharedService.managementToast('registerBreederFeedback', this.responseOK, this.errorResponse);
+        switchMap(({ error, shelterToRegister }) => {
+          const failerBreeder = shelterToRegister;
+          const id = failerBreeder.user_id
+          console.log(id);
+          this.store.dispatch(UserActions.deleteUser({ id}));
+
+          return of(
+            this.responseOK = false,
+            this.errorResponse = 'El nombre del Refugio ya está en uso. Por favor, elije otro nombre.',
+            this.sharedService.managementToast('registerShelterFeedback', false, this.errorResponse)
+          );
         })
       ),
     { dispatch: false }
