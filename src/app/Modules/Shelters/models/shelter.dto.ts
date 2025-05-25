@@ -21,7 +21,7 @@ export class ShelterDTO {
     email_shelter: string,
     cif: string,
     id?: number
-
+/* sdfsdfds@vit.com */
   ) {
     this.id = id;
     this.user_id = user_id;

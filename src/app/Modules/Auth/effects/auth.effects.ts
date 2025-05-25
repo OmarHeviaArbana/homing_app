@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, exhaustMap, finalize, map } from 'rxjs/operators';
+import { catchError, exhaustMap, finalize, map, tap } from 'rxjs/operators';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import * as AuthActions from '../actions';
 import { AuthService } from '../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthEffects {
@@ -32,8 +33,11 @@ export class AuthEffects {
               access_token: userToken.token
             });
           }),
-          catchError((error) => {
-            return of(AuthActions.loginFailure({ payload: error }));
+          catchError((error: HttpErrorResponse) => {
+            this.errorResponse = {
+              errors: error.error?.errors || 'Error en el registro'
+            };
+            return of(AuthActions.loginFailure({ payload: this.errorResponse }));
           }),
           finalize(async () => {
             await this.sharedService.managementToast(
@@ -69,10 +73,10 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginFailure),
-        map((error) => {
+        tap(({ payload }) => {
           this.responseOK = false;
-          this.errorResponse = error.payload.error;
-          this.sharedService.errorLog(error.payload.error);
+          this.errorResponse = payload.message || 'Error en el registro';
+          this.sharedService.managementToast('loginFeedback', this.responseOK, this.errorResponse);
         })
       ),
     { dispatch: false }

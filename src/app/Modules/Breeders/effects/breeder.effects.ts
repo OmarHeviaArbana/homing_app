@@ -5,70 +5,70 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom, filter, tap } from 'rxjs/operators';
 
 import { AppState } from 'src/app/app.reducers';
-import { ShelterService } from '../services/shelter.service';
-import * as ShelterActions from './../actions';
+import { BreederService } from '../services//breeder.service';
+import * as BreederActions from './../actions';
 import * as UserActions from '../../Users/actions';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
-export class ShelterEffects {
+export class BreederEffects {
   private responseOK = false;
   private errorResponse: any;
 
   constructor(
     private actions$: Actions,
-    private shelterService: ShelterService,
+    private breederService: BreederService,
     private store: Store<AppState>,
     private router: Router,
     private sharedService: SharedService
   ) {}
 
-  registerShelterAfterUser$ = createEffect(() =>
+  registerBreederAfterUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.registerSuccess),
-      withLatestFrom(this.store.select(state => state.shelter.shelterFormData)),
-        filter(([action, shelterFormData]) => action.user.user?.role_id == 3 && !!shelterFormData),
-      switchMap(([action, shelterFormData]) => {
+      withLatestFrom(this.store.select(state => state.breeder.breederFormData)),
+      filter(([action, breederFormData]) => action.user.user?.role_id == 4 && !!breederFormData),
+      switchMap(([action, breederFormData]) => {
         const user = action.user.user
-        const shelterToRegister = {
-          ...shelterFormData,
+        const breederToRegister = {
+          ...breederFormData,
           user_id: user?.id
         };
-        return this.shelterService.createShelter(shelterToRegister).pipe(
-          map((shelter) => ShelterActions.createShelterSuccess({ shelter })),
+        return this.breederService.createBreeder(breederToRegister).pipe(
+          map((breeder) => BreederActions.createBreederSuccess({ breeder })),
           catchError((error: HttpErrorResponse) => {
               this.errorResponse = {
               message: error.error?.message || 'Error en el registro',
               errors: error.error?.errors || {}
             };
-            return of(ShelterActions.createShelterFailure({ payload: this.errorResponse}));
+            return of(BreederActions.createBreederFailure({ payload: this.errorResponse }));
           })
         );
       })
     )
   );
 
-  redirectAfterShelterSuccess$ = createEffect(
+  redirectAfterBreederSuccess$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ShelterActions.createShelterSuccess),
+        ofType(BreederActions.createBreederSuccess),
         tap(() => {
           this.responseOK = true;
           this.errorResponse = null;
           this.sharedService.managementToast('registerBreederFeedback', this.responseOK, this.errorResponse);
-          this.store.dispatch(ShelterActions.clearShelterFormData());
+          this.store.dispatch(BreederActions.clearBreederFormData());
           this.router.navigate(['/login']);
         })
       ),
     { dispatch: false }
   );
 
-  registerShelterFailure$ = createEffect(
+  registerBreederFailure$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(ShelterActions.createShelterFailure),
+        ofType(BreederActions.createBreederFailure),
         tap(({ payload }) => {
           this.responseOK = false;
           this.errorResponse = payload;

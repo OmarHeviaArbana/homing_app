@@ -12,6 +12,14 @@ export interface ResponseError {
   method: string;
 }
 
+export interface LaravelError {
+  message: string;
+  errors?: {
+    [key: string]: string[];
+  };
+}
+
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,34 +29,30 @@ export class SharedService {
   async managementToast(
     element: string,
     validRequest: boolean,
-    error?: ResponseError
+    error?: ResponseError | LaravelError | string
   ): Promise<void> {
     const toastMsg = document.getElementById(element);
     if (toastMsg) {
-      if (validRequest) {
-        toastMsg.className = 'show requestOk';
-        toastMsg.textContent = 'Form submitted successfully.';
-        await this.wait(2500);
-        toastMsg.className = toastMsg.className.replace('show', '');
-      } else {
-        toastMsg.className = 'show requestKo';
-        if (error?.messageDetail) {
-          toastMsg.textContent =
-            'Error on form submitted, show logs. Message: ' +
-            error?.message +
-            '. Message detail: ' +
-            error?.messageDetail +
-            '. Status code: ' +
-            error?.statusCode;
-        } else {
-          toastMsg.textContent =
-            'Error on form submitted, show logs. Message: ' +
-            error?.message +
-            '. Status code: ' +
-            error?.statusCode;
-        }
+    if (validRequest) {
+      toastMsg.className = 'show requestOk';
+      toastMsg.textContent = 'Form submitted successfully.';
+    } else {
+      toastMsg.className = 'show requestKo';
 
-        await this.wait(2500);
+      // Si es un string simple
+      if (typeof error === 'string') {
+        toastMsg.textContent = error;
+      }
+      // Si es un error de Laravel
+      else if (error && 'errors' in error) {
+        const laravelError = error as LaravelError;
+        const errorMessages = Object.values(laravelError.errors || {})
+          .flat()
+          .join(', ');
+        toastMsg.textContent = laravelError.message || errorMessages;
+      }
+      // Si es el error ResponseError original
+    await this.wait(2500);
         toastMsg.className = toastMsg.className.replace('show', '');
       }
     }

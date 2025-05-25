@@ -1,16 +1,17 @@
 export class BreederDTO {
-  user_id: string;
-  name: string;
-  logo_url: string;
-  address: string;
-  location: string;
-  description: string;
-  phone: string;
-  email_breeder: string;
-  certification: string;
+  id?: number
+  user_id?: number;
+  name?: string;
+  logo_url?: string;
+  address?: string;
+  location?: string;
+  description?: string;
+  phone?: string;
+  email_breeder?: string;
+  certification?: string;
 
   constructor(
-    user_id: string,
+    user_id: number,
     name: string,
     logo_url: string,
     address: string,
@@ -18,9 +19,11 @@ export class BreederDTO {
     description: string,
     phone: string,
     email_breeder: string,
-    certification: string
+    certification: string,
+    id?: number
 
   ) {
+    this.id = id;
     this.user_id = user_id;
     this.name = name;
     this.logo_url = logo_url;

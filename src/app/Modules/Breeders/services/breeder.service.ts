@@ -1,0 +1,22 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { SharedService } from 'src/app/Shared/Services/shared.service';
+import { BreederDTO } from '../models/breeder.dto';
+import { environment } from 'src/environments/environment';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class BreederService {
+   private readonly API_URL = environment.apiUrl
+
+   constructor(private http: HttpClient, private sharedService: SharedService ) {}
+
+  createBreeder(breeder: BreederDTO): Observable<BreederDTO> {
+    return this.http
+      .post<BreederDTO>(`${this.API_URL}/breeders/create`, breeder)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+}
