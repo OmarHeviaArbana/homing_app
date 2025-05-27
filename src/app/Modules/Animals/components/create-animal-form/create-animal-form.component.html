@@ -9,7 +9,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="input-location">
-        <mat-label>Localización</mat-label>
+        <mat-label>Localidad</mat-label>
         <input matInput formControlName="location" />
         <mat-error *ngIf="location?.invalid">{{ getErrorMessage('location') }}</mat-error>
       </mat-form-field>
@@ -37,66 +37,68 @@
 
    <fieldset class="form__fieldset">
     <legend class="form__legend">Datos principales de la mascota</legend>
-      <mat-form-field appearance="fill">
-        <mat-label>Selecciona la especie</mat-label>
-        <mat-select formControlName="species_id">
-          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
-            {{ rol.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Selecciona una situación</mat-label>
-        <mat-select formControlName="status_id">
-          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
-            {{ rol.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Selecciona la especie</mat-label>
+  <mat-select formControlName="species_id">
+    <mat-option *ngFor="let item of speciesList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Edad estimada</mat-label>
-        <mat-select formControlName="agecategory_id">
-          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
-            {{ rol.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Selecciona una situación</mat-label>
+  <mat-select formControlName="status_id">
+    <mat-option *ngFor="let item of statusList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Sexo</mat-label>
-        <mat-select formControlName="genre_id">
-          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
-            {{ rol.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Edad estimada</mat-label>
+  <mat-select formControlName="agecategory_id">
+    <mat-option *ngFor="let item of ageCategoriesList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Támaño</mat-label>
-        <mat-select formControlName="size_id">
-          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
-            {{ rol.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Sexo</mat-label>
+  <mat-select formControlName="genre_id">
+    <mat-option *ngFor="let item of genresList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Nível de energia</mat-label>
-        <mat-select formControlName="energylevel_id">
-          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
-            {{ rol.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Tamaño</mat-label>
+  <mat-select formControlName="size_id">
+    <mat-option *ngFor="let item of sizesList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Nivel de energía</mat-label>
+  <mat-select formControlName="energylevel_id">
+    <mat-option *ngFor="let item of energyLevelsList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
   </fieldset>
    <fieldset class="form__fieldset">
     <legend class="form__legend">Datos médicos</legend>
-    <mat-checkbox formControlName="identifier">Identificado</mat-checkbox>
-    <mat-checkbox formControlName="vaccines">Vacunas</mat-checkbox>
-    <mat-checkbox formControlName="sterilization">Esterilizado</mat-checkbox>
-    <mat-checkbox formControlName="care">Cuidado especial</mat-checkbox>
+    <mat-checkbox formControlName="identifier" class="input-checkbox">Identificado</mat-checkbox>
+    <mat-checkbox formControlName="vaccines"class="input-checkbox">Vacunas</mat-checkbox>
+    <mat-checkbox formControlName="sterelization" class="input-checkbox">Esterilizado</mat-checkbox>
+    <mat-checkbox formControlName="care" class="input-checkbox">Cuidado especial</mat-checkbox>
    </fieldset>
 </form>
 

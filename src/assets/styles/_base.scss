@@ -52,3 +52,15 @@ h1 {
 }
 
 
+/* mat-mdc-checkbox__background , mdc-checkbox__ripple
+.mat-mdc-checkbox.mat-accent .mdc-checkbox--selected ~ .mdc-checkbox__ripple {
+
+background-color: vars.$color-primary;
+}
+
+.mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background, .mat-mdc-checkbox .mdc-checkbox .mdc-checkbox__native-control[data-indeterminate="true"]:enabled ~ .mdc-checkbox__background {
+background-color: vars.$color-primary;
+} */
+.mat-ripple .mat-mdc-checkbox-ripple .mat-mdc-focus-indicator {
+background-color: vars.$color-primary !important;
+}

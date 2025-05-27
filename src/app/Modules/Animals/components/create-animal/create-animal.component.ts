@@ -28,6 +28,9 @@ export class CreateAnimalComponent {
       this.form = this.formBuilder.group({
         animal: this.formPublicAnimal,
       });
+
+      console.log(this.form);
+
     }
 
     onAnimalFormReady(form: FormGroup) {

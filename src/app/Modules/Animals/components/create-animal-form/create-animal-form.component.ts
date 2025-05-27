@@ -1,24 +1,32 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
+import * as AnimalActions from './../../actions';
+import { AppState } from 'src/app/app.reducers';
 
 @Component({
   selector: 'app-create-animal-form',
   templateUrl: './create-animal-form.component.html',
   styleUrls: ['./create-animal-form.component.scss']
 })
+
 export class CreateAnimalFormComponent {
    @Output() formReady = new EventEmitter<FormGroup>();
 
-
     formPublicAnimal!: FormGroup;
 
-    rolUserList = [
-      { id: 2, name: 'Adoptante' },
-      { id: 3, name: 'Refugio' },
-      { id: 4, name: 'Criadero' },
-    ];
+    speciesList$!: Observable<AuxiliarEntityDTO[]>;
+    statusList$!: Observable<AuxiliarEntityDTO[]>;
+    ageCategoriesList$!: Observable<AuxiliarEntityDTO[]>;
+    genresList$!: Observable<AuxiliarEntityDTO[]>;
+    sizesList$!: Observable<AuxiliarEntityDTO[]>;
+    energyLevelsList$!: Observable<AuxiliarEntityDTO[]>;
+    housingStagesList$!: Observable<AuxiliarEntityDTO[]>;
 
-    constructor(private formBuilder: FormBuilder) {}
+
+    constructor(private formBuilder: FormBuilder,  private store: Store<AppState>,) {}
 
     ngOnInit(): void {
       this.formPublicAnimal = this.formBuilder.group({
@@ -33,16 +41,33 @@ export class CreateAnimalFormComponent {
         genre_id: ['', Validators.required],
         size_id: ['', Validators.required],
         energylevel_id: ['', Validators.required],
-        identifier: ['', Validators.required],
-        vaccines: ['', Validators.required],
-        sterelization: ['', Validators.required],
-        care: ['', Validators.required],
+        identifier: [false, Validators.requiredTrue],
+        vaccines: [false, Validators.requiredTrue],
+        sterelization: [false, Validators.requiredTrue],
+        care: [false, Validators.requiredTrue],
       });
 
       this.formReady.emit(this.formPublicAnimal);
-      /*  this.formPublicAnimal.get('role_id')?.valueChanges.subscribe((roleId: number) => {
-        this.roleSelected.emit(roleId);
-      }); */
+
+      this.store.dispatch(AnimalActions.getSpeciesAux());
+      this.store.dispatch(AnimalActions.getStatusAux());
+      this.store.dispatch(AnimalActions.getAgeCategoriesAux());
+      this.store.dispatch(AnimalActions.getGenresAux());
+      this.store.dispatch(AnimalActions.getSizesAux());
+      this.store.dispatch(AnimalActions.getEnergyLevelsAux());
+      this.store.dispatch(AnimalActions.getHousingStagesAux());
+
+      this.loadSelects();
+    }
+
+    loadSelects(): void {
+      this.speciesList$ = this.store.select(state => state.animals.species);
+      this.statusList$ = this.store.select(state => state.animals.status);
+      this.ageCategoriesList$ = this.store.select(state => state.animals.ageCategories);
+      this.genresList$ = this.store.select(state => state.animals.genres);
+      this.sizesList$ = this.store.select(state => state.animals.sizes);
+      this.energyLevelsList$ = this.store.select(state => state.animals.energyLevels);
+      this.housingStagesList$ = this.store.select(state => state.animals.housingStages);
     }
 
     get name() {
