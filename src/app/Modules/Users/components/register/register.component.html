@@ -6,11 +6,6 @@
 <section class="register">
   <div class="register__container">
     <h1 class="register__title">Formulario de registro</h1>
-    <div *ngIf="loading$ | async" class="spinner-container">
-      <mat-progress-spinner diameter="100" class="spinner" mode="indeterminate" color="primary">
-      </mat-progress-spinner>
-    </div>
-    <div *ngIf="!(loading$ | async) || (loaded$ | async)">
       <form [formGroup]="form" (ngSubmit)="register()">
 
       <app-register-user-form
@@ -28,7 +23,7 @@
         (formReady)="onBreederFormReady($event)">
       </app-register-breeder-form>
 
-        <div class="register__actions">
+      <div class="register__actions">
          <app-button
           variant="primary"
           type="submit"
@@ -38,10 +33,9 @@
           || (selectedRoleId === 4 && (!formBreeder || !formBreeder.valid))">
           Registrarme
         </app-button>
-      <app-button variant="outline" (click)="cancel()">Cancelar</app-button>
+        <app-button variant="outline" (click)="cancel()">Cancelar</app-button>
       </div>
       </form>
     </div>
-  </div>
 </section>
 

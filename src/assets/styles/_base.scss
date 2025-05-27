@@ -1,7 +1,11 @@
 
-html, .mat-typography, .mat-typography h1 , .mat-typography h2, .mat-typography h3 ,.mat-typography h4 ,.mat-typography h5 ,.mat-typography p ,.mat-typography span ,.mat-typography  strong , .mat-typography ul , .mat-typography a {
+@use '/src/assets/styles/variables' as vars;
+
+
+html, .mat-typography, .mat-typography h1 , .mat-typography h2, .mat-typography h3 ,.mat-typography h4 ,.mat-typography h5 ,.mat-typography p ,.mat-typography span ,.mat-typography  strong , .mat-typography ul , .mat-typography a , .mdc-form-field ,  label {
   font-family:"Poppins", sans-serif;
   letter-spacing: normal;
+
 }
 
 
@@ -47,16 +51,4 @@ h1 {
   font-weight: bold;
 }
 
-mat-form-field {
-  margin-bottom: 10px;
-  @media  (min-width: 375px ) {
-    width: 80%;
-  }
-  @media  (min-width: 600px ) {
-    width: 50%;
-  }
-  @media  (min-width: 1200px ) {
-    width: 30%;
-  }
 
-}

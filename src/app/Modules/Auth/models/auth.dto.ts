@@ -1,10 +1,10 @@
 import { UserDTO } from '../../Users/models/user.dto';
 
 export class AuthDTO {
-  user: UserDTO;
-  access_token: string;
-  email: string;
-  password: string;
+  user?: UserDTO;
+  access_token?: string;
+  email?: string;
+  password?: string;
 
   constructor(
     user: UserDTO,

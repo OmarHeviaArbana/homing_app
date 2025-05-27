@@ -6,8 +6,6 @@ import * as UserActions from '../../actions';
 import * as ShelterActions from '../../../Shelters/actions';
 import * as BreederActions from '../../../Breeders/actions';
 import { UserDTO } from './../../models/user.dto';
-import { Observable } from 'rxjs';
-
 import { ShelterDTO } from 'src/app/Modules/Shelters/models/shelter.dto';
 import { BreederDTO } from 'src/app/Modules/Breeders/models/breeder.dto';
 import { Router } from '@angular/router';
@@ -27,9 +25,6 @@ export class RegisterComponent {
   selectedRoleId!: number;
   userId!: string;
 
-  loading$: Observable<boolean>;
-  loaded$: Observable<boolean>;
-
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
@@ -37,14 +32,10 @@ export class RegisterComponent {
   ) {
 
     this.form = this.formBuilder.group({
-    user: this.formUser,
-    shelter: this.formShelter,
-    breeder: this.formBreeder,
-
-  });
-
-  this.loading$ = this.store.select((state) => state.auth.loading);
-  this.loaded$ = this.store.select((state) => state.auth.loaded);
+      user: this.formUser,
+      shelter: this.formShelter,
+      breeder: this.formBreeder,
+    });
   }
 
   onUserFormReady(form: FormGroup) {
@@ -94,7 +85,6 @@ export class RegisterComponent {
     if (this.selectedRoleId === 4) {
       if (this.formBreeder.invalid) return;
       const BreederData: Partial<BreederDTO> = this.formBreeder.value;
-      console.log(BreederData);
       this.store.dispatch(BreederActions.saveBreederFormData({ breederFormData: BreederData }));
     }
     this.store.dispatch(UserActions.register({ user }));

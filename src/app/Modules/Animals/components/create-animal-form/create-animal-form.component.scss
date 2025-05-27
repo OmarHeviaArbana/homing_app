@@ -1,0 +1,61 @@
+@use '/src/assets/styles/variables' as vars;
+
+.form {
+
+
+border-radius: 8px;
+  &__fieldset {
+    padding:          30px 10px;
+    margin-bottom:    30px;
+    background-color: vars.$color-gray;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    }
+  &__legend {
+    font-size:       vars.$font-size-18;
+    color:           vars.$color-primary;
+  }
+
+  width: calc(100%);
+}
+
+
+mat-form-field {
+
+  margin-bottom: 10px;
+ padding: 20px;
+
+  @media  (min-width: vars.$breakpoint-sm ) {
+    width: calc(97% - 20px);
+  }
+  @media  (min-width: vars.$breakpoint-md ) {
+
+      width: calc(47.2% - 20px);
+  }
+  @media  (min-width: vars.$breakpoint-lg ) {
+     width: calc(48.55% - 20px);
+  }
+
+}
+
+.input-description {
+
+  @media  (min-width: vars.$breakpoint-md ) {
+      width: calc(97% - 20px);
+
+  }
+  @media  (min-width: vars.$breakpoint-lg ) {
+     width: calc(98.6% - 20px);
+  }
+}
+
+.input-name,.input-location, .input-weight , .input-height  {
+  @media  (min-width: vars.$breakpoint-md ) {
+    width: calc(22.6% - 20px);
+  }
+  @media  (min-width: vars.$breakpoint-lg ) {
+    width: calc(23.55% - 20px);
+  }
+
+}

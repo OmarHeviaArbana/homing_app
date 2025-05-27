@@ -1,0 +1,102 @@
+<form [formGroup]="formPublicAnimal" class="form">
+   <fieldset class="form__fieldset">
+    <legend class="form__legend">Datos situación mascota</legend>
+
+      <mat-form-field appearance="fill" class="input-name">
+        <mat-label>Nombre </mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="name?.invalid">{{ getErrorMessage('name') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-location">
+        <mat-label>Localización</mat-label>
+        <input matInput formControlName="location" />
+        <mat-error *ngIf="location?.invalid">{{ getErrorMessage('location') }}</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill" class="input-weight">
+        <mat-label>Peso aproximado</mat-label>
+        <input matInput formControlName="weight" />
+        <mat-error *ngIf="weight?.invalid">{{ getErrorMessage('weight') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-height">
+        <mat-label>Altura aproximada</mat-label>
+        <input matInput type="height" formControlName="height" />
+        <mat-error *ngIf="height?.invalid">{{ getErrorMessage('height') }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="input-description">
+        <mat-label>Texto descriptivo de la mascota</mat-label>
+        <textarea matInput formControlName="description" maxlength="600" rows="4" placeholder="Describe tu actividad"></textarea>
+        <mat-hint align="end">{{ description?.value?.length || 0 }}/600</mat-hint>
+        <mat-error *ngIf="description?.invalid">{{ getErrorMessage('description') }}</mat-error>
+      </mat-form-field>
+  </fieldset>
+
+   <fieldset class="form__fieldset">
+    <legend class="form__legend">Datos principales de la mascota</legend>
+      <mat-form-field appearance="fill">
+        <mat-label>Selecciona la especie</mat-label>
+        <mat-select formControlName="species_id">
+          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
+            {{ rol.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Selecciona una situación</mat-label>
+        <mat-select formControlName="status_id">
+          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
+            {{ rol.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Edad estimada</mat-label>
+        <mat-select formControlName="agecategory_id">
+          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
+            {{ rol.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Sexo</mat-label>
+        <mat-select formControlName="genre_id">
+          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
+            {{ rol.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Támaño</mat-label>
+        <mat-select formControlName="size_id">
+          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
+            {{ rol.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nível de energia</mat-label>
+        <mat-select formControlName="energylevel_id">
+          <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">
+            {{ rol.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </fieldset>
+   <fieldset class="form__fieldset">
+    <legend class="form__legend">Datos médicos</legend>
+    <mat-checkbox formControlName="identifier">Identificado</mat-checkbox>
+    <mat-checkbox formControlName="vaccines">Vacunas</mat-checkbox>
+    <mat-checkbox formControlName="sterilization">Esterilizado</mat-checkbox>
+    <mat-checkbox formControlName="care">Cuidado especial</mat-checkbox>
+   </fieldset>
+</form>
+

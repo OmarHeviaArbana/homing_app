@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     this.showAuthSection = false;
     this.showNoAuthSection = true;
     this.userInitials = '';
-    this.isMenuOpen = true;
+    this.isMenuOpen = false;
   }
 
   ngOnInit(): void {

@@ -20,10 +20,8 @@
   }
   &__menu-icon {
     width: 26px;
-    height: 24px;
       @media (min-width: vars.$breakpoint-lg) {
-      width: 28px;
-       height: 26px;
+      width: 30px;
     }
   }
 
