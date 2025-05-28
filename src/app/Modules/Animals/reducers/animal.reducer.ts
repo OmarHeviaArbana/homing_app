@@ -49,6 +49,27 @@ export const animalReducer = createReducer(
     loading: false,
   })),
 
+  on(AnimalActions.createAnimal, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(AnimalActions.createAnimalSuccess, (state, { animal }) => ({
+    ...state,
+    animal,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(AnimalActions.createAnimalFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  })),
+
+
   on(AnimalActions.getSpeciesAux, state => ({
     ...state,
     loading: true

@@ -22,47 +22,53 @@ export class AnimalService {
     ;
   }
 
- getSpeciesAux(): Observable<AuxiliarEntityDTO[]> {
-  return this.http
-    .get<AuxiliarEntityDTO[]>(`${this.API_URL}/species`)
-    .pipe(catchError(this.sharedService.handleError));
-}
+  createAnimal(animal: AnimalDTO): Observable<AnimalDTO> {
+      return this.http
+        .post<AnimalDTO>(`${this.API_URL}/animals/create`, animal)
+        .pipe(catchError(this.sharedService.handleError));
+  }
 
-getStatusAux(): Observable<AuxiliarEntityDTO[]> {
-  return this.http
-    .get<AuxiliarEntityDTO[]>(`${this.API_URL}/status`)
-    .pipe(catchError(this.sharedService.handleError));
-}
+  getSpeciesAux(): Observable<AuxiliarEntityDTO[]> {
+    return this.http
+      .get<AuxiliarEntityDTO[]>(`${this.API_URL}/species`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 
-getAgeCategoriesAux(): Observable<AuxiliarEntityDTO[]> {
-  return this.http
-    .get<AuxiliarEntityDTO[]>(`${this.API_URL}/agecategories`)
-    .pipe(catchError(this.sharedService.handleError));
-}
+  getStatusAux(): Observable<AuxiliarEntityDTO[]> {
+    return this.http
+      .get<AuxiliarEntityDTO[]>(`${this.API_URL}/status`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 
-getGenresAux(): Observable<AuxiliarEntityDTO[]> {
-  return this.http
-    .get<AuxiliarEntityDTO[]>(`${this.API_URL}/genres`)
-    .pipe(catchError(this.sharedService.handleError));
-}
+  getAgeCategoriesAux(): Observable<AuxiliarEntityDTO[]> {
+    return this.http
+      .get<AuxiliarEntityDTO[]>(`${this.API_URL}/agecategories`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 
-getSizesAux(): Observable<AuxiliarEntityDTO[]> {
-  return this.http
-    .get<AuxiliarEntityDTO[]>(`${this.API_URL}/sizes`)
-    .pipe(catchError(this.sharedService.handleError));
-}
+  getGenresAux(): Observable<AuxiliarEntityDTO[]> {
+    return this.http
+      .get<AuxiliarEntityDTO[]>(`${this.API_URL}/genres`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 
-getEnergyLevelsAux(): Observable<AuxiliarEntityDTO[]> {
-  return this.http
-    .get<AuxiliarEntityDTO[]>(`${this.API_URL}/energy-levels`)
-    .pipe(catchError(this.sharedService.handleError));
-}
+  getSizesAux(): Observable<AuxiliarEntityDTO[]> {
+    return this.http
+      .get<AuxiliarEntityDTO[]>(`${this.API_URL}/sizes`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 
-getHousingStagesAux(): Observable<AuxiliarEntityDTO[]> {
-  return this.http
-    .get<AuxiliarEntityDTO[]>(`${this.API_URL}/housing-stages`)
-    .pipe(catchError(this.sharedService.handleError));
-}
+  getEnergyLevelsAux(): Observable<AuxiliarEntityDTO[]> {
+    return this.http
+      .get<AuxiliarEntityDTO[]>(`${this.API_URL}/energy-levels`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
+
+  getHousingStagesAux(): Observable<AuxiliarEntityDTO[]> {
+    return this.http
+      .get<AuxiliarEntityDTO[]>(`${this.API_URL}/housing-stages`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 
 
 }

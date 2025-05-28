@@ -13,12 +13,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AnimalsListComponent } from './components/animal-list//animals-list.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CreateAnimalComponent,
     CreateAnimalFormComponent,
+    AnimalsListComponent,
   ],
   imports: [
     CommonModule,

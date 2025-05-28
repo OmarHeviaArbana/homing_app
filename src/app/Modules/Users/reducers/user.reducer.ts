@@ -32,7 +32,7 @@ const _userReducer = createReducer(
     loaded: true,
     error: null,
   })),
-  on(registerFailure, (state, { payload }) => ({
+  on(UserActions.registerFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

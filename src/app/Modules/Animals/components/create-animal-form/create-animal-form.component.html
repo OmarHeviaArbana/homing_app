@@ -9,20 +9,20 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="input-location">
-        <mat-label>Localidad</mat-label>
+        <mat-label>Localidad donde se encuentra el animal</mat-label>
         <input matInput formControlName="location" />
         <mat-error *ngIf="location?.invalid">{{ getErrorMessage('location') }}</mat-error>
       </mat-form-field>
 
 
       <mat-form-field appearance="fill" class="input-weight">
-        <mat-label>Peso aproximado</mat-label>
+        <mat-label>Peso aproximado (kg)</mat-label>
         <input matInput formControlName="weight" />
         <mat-error *ngIf="weight?.invalid">{{ getErrorMessage('weight') }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="input-height">
-        <mat-label>Altura aproximada</mat-label>
+        <mat-label>Altura aproximada (cm)</mat-label>
         <input matInput type="height" formControlName="height" />
         <mat-error *ngIf="height?.invalid">{{ getErrorMessage('height') }}</mat-error>
       </mat-form-field>
@@ -97,8 +97,17 @@
     <legend class="form__legend">Datos médicos</legend>
     <mat-checkbox formControlName="identifier" class="input-checkbox">Identificado</mat-checkbox>
     <mat-checkbox formControlName="vaccines"class="input-checkbox">Vacunas</mat-checkbox>
-    <mat-checkbox formControlName="sterelization" class="input-checkbox">Esterilizado</mat-checkbox>
-    <mat-checkbox formControlName="care" class="input-checkbox">Cuidado especial</mat-checkbox>
+    <mat-checkbox formControlName="sterilization" class="input-checkbox">Esterilizado</mat-checkbox>
    </fieldset>
+     <fieldset class="form__fieldset">
+    <legend class="form__legend">Cuidados especiales</legend>
+
+      <mat-form-field appearance="fill" class="input-care">
+        <mat-label>Cuentanos qué cuidados especiales necesita la mascota</mat-label>
+        <textarea matInput formControlName="care" maxlength="600" rows="4" placeholder="Describe tu actividad"></textarea>
+        <mat-hint align="end">{{ care?.value?.length || 0 }}/600</mat-hint>
+        <mat-error *ngIf="care?.invalid">{{ getErrorMessage('care') }}</mat-error>
+      </mat-form-field>
+  </fieldset>
 </form>
 

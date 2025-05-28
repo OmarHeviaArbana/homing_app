@@ -22,7 +22,7 @@ export class UserEffects {
     private userService: UserService,
     private router: Router,
     private sharedService: SharedService,
-       private store: Store<AppState>,
+    private store: Store<AppState>,
   ) {
     this.responseOK = false;
   }

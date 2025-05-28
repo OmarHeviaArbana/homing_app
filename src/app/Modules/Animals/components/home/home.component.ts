@@ -6,6 +6,8 @@ import { AppState } from 'src/app/app.reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import * as AnimalSelectors from '../../selectors/animal.selectors';
+import { AuthDTO } from 'src/app/Modules/Auth/models/auth.dto';
+import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
 
 
 @Component({
@@ -16,6 +18,7 @@ import * as AnimalSelectors from '../../selectors/animal.selectors';
 
 export class HomeComponent implements OnInit {
   animals: AnimalDTO[];
+  auth: UserDTO | null = null;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   currentSlide = 0;
@@ -23,12 +26,19 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private store: Store<AppState>) {
     this.animals = new Array<AnimalDTO>();
 
+
+
     this.store.select('animals').subscribe((animals) => {
       this.animals = animals.animals;
+    });
+    this.store.select('auth').subscribe((auth) => {
+      this.auth = auth?.user;
     });
 
     this.loading$ = this.store.select((state) => state.auth.loading);
     this.loaded$ = this.store.select((state) => state.auth.loaded);
+
+
   }
 
   ngOnInit(): void {

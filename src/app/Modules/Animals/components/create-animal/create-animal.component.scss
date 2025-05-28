@@ -1,9 +1,6 @@
 @use '/src/assets/styles/variables' as vars;
 .public {
   margin: 32px;
-
-
-
   &__title {
   font-size: vars.$font-size-26;
   font-weight: 700;
@@ -41,7 +38,7 @@
   color: red;
 }
 
-#registerFeedback , #registerBreederFeedback, #registerShelterFeedback {
+#createAnimalFeedback , #registerBreederFeedback, #registerShelterFeedback {
   visibility: hidden;
   min-width: 250px;
   color: #fff;
@@ -62,15 +59,15 @@
 
 }
 
-#registerFeedback.requestOk,  #registerBreederFeedback.request.ok, #registerShelterFeedback.request.ok {
+#createAnimalFeedback.requestOk  {
   background-color: rgb(78, 224, 78);
 }
 
-#registerFeedback.requestKo, #registerBreederFeedback.requestKo, #registerShelterFeedback.requestKo {
+#createAnimalFeedback.requestKo  {
   background-color: rgb(251, 94, 94);
 }
 
-#registerFeedback.show, #registerBreederFeedback.show, #registerShelterFeedback.show {
+#createAnimalFeedback.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;

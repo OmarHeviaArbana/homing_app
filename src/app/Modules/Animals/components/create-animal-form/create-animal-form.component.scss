@@ -39,7 +39,7 @@ mat-form-field {
 
 }
 
-.input-description {
+.input-description, .input-care {
 
   @media  (min-width: vars.$breakpoint-md ) {
       width: calc(97% - 20px);

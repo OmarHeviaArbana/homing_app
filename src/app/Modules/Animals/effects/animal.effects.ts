@@ -2,11 +2,26 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AnimalActions from '../actions/animal.action';
 import { AnimalService } from '../services/animial.service'
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, exhaustMap, finalize, map, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { SharedService } from 'src/app/Shared/Services/shared.service';
 @Injectable()
 export class AnimalEffects {
-  constructor(private actions$: Actions, private animalService: AnimalService) {}
+
+  private responseOK: boolean;
+  private errorResponse: any;
+
+  constructor(
+    private actions$: Actions,
+    private animalService: AnimalService,
+    private router: Router,
+    private sharedService: SharedService,
+
+  ) {
+    this.responseOK = false;
+  }
 
   getAllAnimals$ = createEffect(() =>
     this.actions$.pipe(
@@ -41,6 +56,66 @@ getStatusAux$ = createEffect(() =>
         )
       )
     )
+  );
+createAnimal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AnimalActions.createAnimal),
+      exhaustMap(({ animal }) =>
+        this.animalService.createAnimal(animal).pipe(
+          map(animalFromApi => {
+            this.responseOK = true;
+            return AnimalActions.createAnimalSuccess({ animal: animalFromApi });
+          }),
+          catchError((error: HttpErrorResponse) => {
+
+             this.errorResponse = {
+              message: error.error?.message || 'Error en el registro',
+              errors: error.error?.errors || {}
+            };
+
+            return of(AnimalActions.createAnimalFailure({
+              payload: this.errorResponse
+            }));
+          }),
+          finalize(async () => {
+            if (this.responseOK) {
+              this.router.navigateByUrl('/mascotas');
+            }
+          })
+        )
+      )
+    )
+  );
+
+  createAnimalSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AnimalActions.createAnimalSuccess),
+        map((action) => {
+          console.log(action);
+
+          //if(action.animal.role_id  === 2) {
+          const response = 'Animal creado y publicado con éxito.'
+          this.sharedService.managementToast('createAnimalFeedback', this.responseOK, response);
+         // }
+
+        })
+      ),
+    { dispatch: false }
+  );
+
+  createAnimalFailure$ = createEffect(() =>
+    this.actions$.pipe(
+    ofType(AnimalActions.createAnimalFailure),
+    tap(({ payload }) => {
+          this.responseOK = false;
+          console.log(payload);
+
+          this.errorResponse =  payload ? payload.message : "Se ha producido un problema y no se creado ni publica la mascota. Vuelve a intentarlo"
+          this.sharedService.managementToast('createAnimalFeedback', this.responseOK, this.errorResponse);
+        })
+    ),
+    { dispatch: false }
   );
 
   getAgeCategoriesAux$ = createEffect(() =>

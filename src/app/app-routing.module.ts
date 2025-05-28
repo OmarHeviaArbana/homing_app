@@ -5,6 +5,8 @@ import { HomeComponent } from './Modules/Animals/components/home/home.component'
 import { RegisterComponent } from './Modules/Users/components/register/register.component';
 import { AuthGuard } from './Shared/Guards/auth.guard';
 import { CreateAnimalComponent } from './Modules/Animals/components/create-animal/create-animal.component';
+import { RoleGuard } from './Shared/Guards/role.guard';
+import { AnimalsListComponent } from './Modules/Animals/components/animal-list/animals-list.component'
 
 
 const routes: Routes = [
@@ -25,10 +27,13 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'publicar-animal',
+    path: 'publicar-mascota',
     component: CreateAnimalComponent,
-    canActivate: [AuthGuard],
-
+    canActivate: [AuthGuard, RoleGuard],
+  },
+  {
+    path: 'mascotas',
+    component: AnimalsListComponent,
   },
 ];
 

@@ -7,6 +7,7 @@ import { AnimalDTO } from '../../models/animal.dto';
 import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/Shared/Components/dialog/dialog.component';
+import * as AnimalActions from '../../actions';
 
 @Component({
   selector: 'app-create-animal',
@@ -45,7 +46,7 @@ export class CreateAnimalComponent {
 
       console.log(animal);
 
-      //this.store.dispatch(AnimalActions.createAnimal({ animal }));
+      this.store.dispatch(AnimalActions.createAnimal({ animal }));
     }
 
     openDialog(): void {

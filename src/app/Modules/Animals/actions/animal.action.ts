@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { AnimalDTO } from '../models/animal.dto';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
 import { UserDTO } from '../../Users/models/user.dto';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const getAllAnimals = createAction(
   '[Animals] Load Animals',
@@ -15,6 +16,21 @@ export const getAllAnimalsSuccess = createAction(
 export const getAllAnimalsFailure = createAction(
   '[Animals] Load Animals Failure',
   props<{ error: any }>()
+);
+
+
+export const createAnimal = createAction(
+  '[Create Animal Page] Create Animal new user',
+  props<{ animal: AnimalDTO }>()
+);
+export const createAnimalSuccess = createAction(
+  '[Create Animal Page] Create Animal new animal Success',
+  props<{ animal: AnimalDTO}>()
+);
+
+export const createAnimalFailure = createAction(
+  '[Create Animal Page] Create Animal new user Failure',
+  props<{ payload: HttpErrorResponse }>()
 );
 
 

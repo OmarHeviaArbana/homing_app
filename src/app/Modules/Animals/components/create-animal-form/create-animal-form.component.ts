@@ -23,7 +23,6 @@ export class CreateAnimalFormComponent {
     genresList$!: Observable<AuxiliarEntityDTO[]>;
     sizesList$!: Observable<AuxiliarEntityDTO[]>;
     energyLevelsList$!: Observable<AuxiliarEntityDTO[]>;
-    housingStagesList$!: Observable<AuxiliarEntityDTO[]>;
 
 
     constructor(private formBuilder: FormBuilder,  private store: Store<AppState>,) {}
@@ -41,10 +40,10 @@ export class CreateAnimalFormComponent {
         genre_id: ['', Validators.required],
         size_id: ['', Validators.required],
         energylevel_id: ['', Validators.required],
-        identifier: [false, Validators.requiredTrue],
-        vaccines: [false, Validators.requiredTrue],
-        sterelization: [false, Validators.requiredTrue],
-        care: [false, Validators.requiredTrue],
+        identifier: [false, Validators.required],
+        vaccines: [false, Validators.required],
+        sterilization: [false, Validators.required],
+        care: ['', Validators.required],
       });
 
       this.formReady.emit(this.formPublicAnimal);
@@ -55,7 +54,6 @@ export class CreateAnimalFormComponent {
       this.store.dispatch(AnimalActions.getGenresAux());
       this.store.dispatch(AnimalActions.getSizesAux());
       this.store.dispatch(AnimalActions.getEnergyLevelsAux());
-      this.store.dispatch(AnimalActions.getHousingStagesAux());
 
       this.loadSelects();
     }
@@ -67,7 +65,7 @@ export class CreateAnimalFormComponent {
       this.genresList$ = this.store.select(state => state.animals.genres);
       this.sizesList$ = this.store.select(state => state.animals.sizes);
       this.energyLevelsList$ = this.store.select(state => state.animals.energyLevels);
-      this.housingStagesList$ = this.store.select(state => state.animals.housingStages);
+
     }
 
     get name() {
@@ -111,7 +109,7 @@ export class CreateAnimalFormComponent {
       return this.formPublicAnimal.get('vaccines');
     }
     get sterelization() {
-      return this.formPublicAnimal.get('sterelization');
+      return this.formPublicAnimal.get('sterilization');
     }
     get care() {
       return this.formPublicAnimal.get('care');
