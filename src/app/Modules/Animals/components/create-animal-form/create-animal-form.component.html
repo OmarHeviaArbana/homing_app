@@ -93,13 +93,15 @@
 </mat-form-field>
 
   </fieldset>
-   <fieldset class="form__fieldset">
+
+  <fieldset class="form__fieldset">
     <legend class="form__legend">Datos médicos</legend>
     <mat-checkbox formControlName="identifier" class="input-checkbox">Identificado</mat-checkbox>
     <mat-checkbox formControlName="vaccines"class="input-checkbox">Vacunas</mat-checkbox>
     <mat-checkbox formControlName="sterilization" class="input-checkbox">Esterilizado</mat-checkbox>
    </fieldset>
-     <fieldset class="form__fieldset">
+
+  <fieldset class="form__fieldset">
     <legend class="form__legend">Cuidados especiales</legend>
 
       <mat-form-field appearance="fill" class="input-care">
@@ -108,6 +110,28 @@
         <mat-hint align="end">{{ care?.value?.length || 0 }}/600</mat-hint>
         <mat-error *ngIf="care?.invalid">{{ getErrorMessage('care') }}</mat-error>
       </mat-form-field>
+  </fieldset>
+
+  <fieldset class="form__fieldset">
+    <legend class="form__legend">Adjunta una fotografía principal</legend>
+    <input type="file" id="principal-image" (change)="onImageSelected($event, 'principal_image')" formControlName="principal_image" accept="image/*" />
+     <img *ngIf="imagePreviews.principal_image" [src]="imagePreviews.principal_image" width="150" />
+
+    <mat-error *ngIf="principal_image?.invalid">{{ getErrorMessage('principal_image') }}</mat-error>
+  </fieldset>
+
+  <fieldset class="form__fieldset">
+    <legend class="form__legend">Fotografia opcional 1</legend>
+    <input type="file" id="optional_image_one" (change)="onImageSelected($event, 'optional_image_one')" formControlName="optional_image_one" accept="image/*" />
+    <img *ngIf="imagePreviews.optional_image_one" [src]="imagePreviews.optional_image_one" width="150" />
+    <mat-error *ngIf="optional_image_one?.invalid">{{ getErrorMessage('optional_image_one') }}</mat-error>
+  </fieldset>
+  <fieldset class="form__fieldset">
+    <legend class="form__legend">Fotografia opcional 2</legend>
+    <input type="file" id="optional-image-two" (change)="onImageSelected($event, 'optional_image_two')" formControlName="optional_image_two" accept="image/*" />
+    <img *ngIf="imagePreviews.optional_image_two" [src]="imagePreviews.optional_image_two" width="150" />
+
+    <mat-error *ngIf="optional_image_two?.invalid">{{ getErrorMessage('optional_image_two') }}</mat-error>
   </fieldset>
 </form>
 

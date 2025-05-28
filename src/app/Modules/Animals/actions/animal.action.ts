@@ -3,6 +3,7 @@ import { AnimalDTO } from '../models/animal.dto';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
 import { UserDTO } from '../../Users/models/user.dto';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AnimalPhotoDTO } from '../models/animal-photo.dto';
 
 export const getAllAnimals = createAction(
   '[Animals] Load Animals',
@@ -18,10 +19,9 @@ export const getAllAnimalsFailure = createAction(
   props<{ error: any }>()
 );
 
-
 export const createAnimal = createAction(
-  '[Create Animal Page] Create Animal new user',
-  props<{ animal: AnimalDTO }>()
+  '[Create Animal Page] Create Animal ',
+  props<{ animal: AnimalDTO}>()
 );
 export const createAnimalSuccess = createAction(
   '[Create Animal Page] Create Animal new animal Success',
@@ -29,9 +29,49 @@ export const createAnimalSuccess = createAction(
 );
 
 export const createAnimalFailure = createAction(
-  '[Create Animal Page] Create Animal new user Failure',
+  '[Create Animal Page] Create Animal Failure',
   props<{ payload: HttpErrorResponse }>()
 );
+
+
+export const deleteAnimal = createAction(
+  '[Animal] Delete Animal',
+  props<{ id: number }>()
+);
+
+export const deleteAnimalSuccess = createAction(
+  '[Animal] Delete Animal Success'
+);
+
+export const deleteAnimalFailure = createAction(
+  '[Animal] Delete Animal Failure',
+  props<{  payload: HttpErrorResponse }>()
+);
+
+export const saveAnimalFormData = createAction(
+  '[Animal Form] Save Animal Form Data',
+  props<{ animalFormData: Partial<AnimalDTO> }>()
+);
+
+export const clearAnimalFormData = createAction(
+  '[Animal Form] Clear Animal Form Data'
+);
+
+
+export const addAnimalPhotos = createAction(
+  '[Photo] Add photo ',
+);
+
+export const addAnimalPhotosSuccess = createAction(
+  '[Photo Add photo Success',
+    props<{ photo: AnimalPhotoDTO}>()
+);
+
+export const addAnimalPhotosFailure = createAction(
+  '[Photo] Add photo Failure',
+  props<{  error: any , animal_id: number }>()
+);
+
 
 
 export const getSpeciesAux = createAction(

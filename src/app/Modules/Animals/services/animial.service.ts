@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { AnimalDTO } from '../models/animal.dto';
 import { environment } from 'src/environments/environment';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
+import { addAnimalPhotos } from '../actions/animal.action';
+import { AnimalPhotoDTO } from '../models/animal-photo.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +26,20 @@ export class AnimalService {
 
   createAnimal(animal: AnimalDTO): Observable<AnimalDTO> {
       return this.http
-        .post<AnimalDTO>(`${this.API_URL}/animals/create`, animal)
+        .post<{message: string; animal: AnimalDTO}>(`${this.API_URL}/animals/create`, animal)
+        .pipe(
+            map(response => response.animal),
+            catchError(this.sharedService.handleError));
+  }
+
+  addAnimalPhoto(photo: AnimalPhotoDTO): Observable<AnimalPhotoDTO> {
+      return this.http
+        .post<AnimalPhotoDTO>(`${this.API_URL}/animal-images/add`, photo)
         .pipe(catchError(this.sharedService.handleError));
+  }
+
+  deleteAnimal(id: number): Observable<any> {
+    return this.http.delete(`${this.API_URL}/animals/delete/${id}`);
   }
 
   getSpeciesAux(): Observable<AuxiliarEntityDTO[]> {

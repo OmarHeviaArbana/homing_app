@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class ShelterEffects {
-  private responseOK = false;
+  private responseOK : boolean;
   private errorResponse: any;
 
   constructor(
@@ -23,7 +23,9 @@ export class ShelterEffects {
     private store: Store<AppState>,
     private router: Router,
     private sharedService: SharedService
-  ) {}
+  ) {
+     this.responseOK = false;
+  }
 
   registerShelterAfterUser$ = createEffect(() =>
     this.actions$.pipe(

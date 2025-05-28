@@ -3,6 +3,7 @@ import * as AnimalActions from '../actions/animal.action'
 import { AnimalDTO } from '../models/animal.dto';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
 import { UserDTO } from '../../Users/models/user.dto';
+import { AnimalPhotoDTO } from '../models/animal-photo.dto';
 
 export interface AnimalState {
   animals: AnimalDTO[];
@@ -13,6 +14,8 @@ export interface AnimalState {
   sizes: AuxiliarEntityDTO[];
   energyLevels: AuxiliarEntityDTO[];
   housingStages: AuxiliarEntityDTO[];
+  photo: AnimalPhotoDTO| null;
+  animalFormData: Partial<AnimalDTO> | null;
   loading: boolean;
   error: any;
 }
@@ -26,6 +29,8 @@ export const initialState: AnimalState = {
   sizes: [],
   energyLevels: [],
   housingStages: [],
+  photo: null,
+  animalFormData: null,
   loading: false,
   error: null,
 };
@@ -69,6 +74,56 @@ export const animalReducer = createReducer(
     error: { payload },
   })),
 
+  on(AnimalActions.saveAnimalFormData, (state, { animalFormData }) => ({
+    ...state,
+    animalFormData,
+  })),
+  on(AnimalActions.clearAnimalFormData, state => ({
+    ...state,
+    animalFormData: null,
+  })),
+
+
+  on(AnimalActions.addAnimalPhotos, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(AnimalActions.addAnimalPhotosSuccess, (state, { photo }) => ({
+    ...state,
+    photo,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+ on(AnimalActions.addAnimalPhotosFailure, (state, { error, animal_id}) => ({
+     ...state,
+     animal_id: animal_id,
+     loading: false,
+     loaded: false,
+     error: error,
+  })),
+
+  on(AnimalActions.deleteAnimal, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(AnimalActions.deleteAnimalSuccess, (state) => ({
+    ...state,
+    animal: null,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(AnimalActions.deleteAnimalFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  })),
 
   on(AnimalActions.getSpeciesAux, state => ({
     ...state,

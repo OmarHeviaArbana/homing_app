@@ -44,6 +44,9 @@ export class CreateAnimalFormComponent {
         vaccines: [false, Validators.required],
         sterilization: [false, Validators.required],
         care: ['', Validators.required],
+        principal_image: ['', Validators.required],
+        optional_image_one: [''],
+        optional_image_two: [''],
       });
 
       this.formReady.emit(this.formPublicAnimal);
@@ -66,6 +69,30 @@ export class CreateAnimalFormComponent {
       this.sizesList$ = this.store.select(state => state.animals.sizes);
       this.energyLevelsList$ = this.store.select(state => state.animals.energyLevels);
 
+    }
+
+    imagePreviews: { [key: string]: string | null } = {
+      principal_image: null,
+      option_image_1: null,
+      option_image_2: null
+    };
+
+    onImageSelected(event: Event, field: string): void {
+      const input = event.target as HTMLInputElement;
+
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          this.imagePreviews[field] = reader.result as string;
+
+          // También puedes guardar directamente en el form si lo necesitas
+          this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]);
+        };
+
+        reader.readAsDataURL(file); // base64 para preview inmediato
+      }
     }
 
     get name() {
@@ -113,6 +140,15 @@ export class CreateAnimalFormComponent {
     }
     get care() {
       return this.formPublicAnimal.get('care');
+    }
+    get principal_image() {
+      return this.formPublicAnimal.get('principal_image');
+    }
+    get optional_image_one() {
+      return this.formPublicAnimal.get('optional_image_one');
+    }
+    get optional_image_two() {
+      return this.formPublicAnimal.get('optional_image_two');
     }
 
 

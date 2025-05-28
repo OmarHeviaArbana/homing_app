@@ -39,7 +39,7 @@ const _userReducer = createReducer(
     error: { payload },
   })),
 
-   on(UserActions.deleteUser, (state) => ({
+  on(UserActions.deleteUser, (state) => ({
     ...state,
     loading: true,
     loaded: false,
