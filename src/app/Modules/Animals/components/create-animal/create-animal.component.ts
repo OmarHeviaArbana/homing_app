@@ -57,7 +57,8 @@ export class CreateAnimalComponent {
       this.dialog.open(DialogComponent, {
         data: {
           title: 'Confirmación',
-          content: '¿Estás seguro de que deseas continuar, se perderan los datos de la mascota?'
+          content: '¿Estás seguro de que deseas continuar, se perderan los datos de la mascota ya cumplimentados?',
+          onConfirm: () => this.cancel()
         }
       });
     }

@@ -1,9 +1,12 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
+<div class="container__dialog">
+<h2 >{{ data.title }}</h2>
 
-<mat-dialog-content>
+<mat-dialog-content class="container__dialog-content">
   {{ data.content }}
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cerrar</button>
+<mat-dialog-actions align="end" class="action-container">
+  <app-button variant="dialog-close" mat-dialog-close>Cerrar</app-button>
+  <app-button variant="dialog-action" (click)="onAccept()">Aceptar</app-button>
 </mat-dialog-actions>
+</div>

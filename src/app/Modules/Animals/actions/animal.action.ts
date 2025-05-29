@@ -64,7 +64,7 @@ export const addAnimalPhotos = createAction(
 
 export const addAnimalPhotosSuccess = createAction(
   '[Photo Add photo Success',
-    props<{ photo: AnimalPhotoDTO}>()
+    props<{ photos: AnimalPhotoDTO[]}>()
 );
 
 export const addAnimalPhotosFailure = createAction(

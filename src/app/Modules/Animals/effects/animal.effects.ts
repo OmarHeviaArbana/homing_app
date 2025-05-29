@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AnimalActions from '../actions/animal.action';
 import { AnimalService } from '../services/animial.service'
-import { catchError, exhaustMap, filter, finalize, map, mergeMap, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { catchError, concatMap, exhaustMap, filter, finalize, map, mergeMap, switchMap, tap, timeout, withLatestFrom } from 'rxjs/operators';
+import { from, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
@@ -62,68 +62,6 @@ getStatusAux$ = createEffect(() =>
     )
   );
 
-/* addAnimalPhotos$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AnimalActions.createAnimalSuccess),
-      withLatestFrom(this.store.select(state => state.animals)),
-      filter(([action, animalFormData]) => !!action.animal.id  && !!animalFormData),
-      switchMap(([action, animalFormData]) => {
-        const dataPhoto = animalFormData.animalFormData;
-
-        const photo = {
-          animal_id: action.animal.id,
-          image_url: dataPhoto?.principal_image,
-          principal: true
-        }
-
-        return this.animalService.addAnimalPhoto(photo).pipe(
-          map((photo) => AnimalActions.addAnimalPhotosSuccess({ photo })),
-          catchError((error, animal) => {
-              this.errorResponse = {
-              message: error.error?.message || 'Error en el registro',
-              errors: error.error?.errors || {}
-            };
-              return of(AnimalActions.addAnimalPhotosFailure({ error, animal}));
-          })
-        );
-      })
-    )
-  );
-
-  addAnimalPhotosSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AnimalActions.createAnimalSuccess),
-        tap(() => {
-          this.responseOK = true;
-           const response = 'Registro a punto de finalizar. Haz login con las credenciales de usuario para finalizarlo'
-          this.sharedService.managementToast('registerAnimalFeedback', this.responseOK, response)
-          this.store.dispatch(AnimalActions.clearAnimalFormData());
-          this.router.navigate(['/login']);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  addAnimalPhotosFailure$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AnimalActions.createAnimalFailure),
-        switchMap(({ payload}) => {
-          const failerAnimal = animal;
-          const id = failerAnimal.animal_id;
-          console.log(id);
-          this.store.dispatch(AnimalActions.deleteAnimal({ id}));
-
-          return of(
-            this.responseOK = false,
-            this.errorResponse = 'El nombre del Refugio ya está en uso. Por favor, elije otro nombre.',
-            this.sharedService.managementToast('registerAnimalFeedback', false, payload)
-          );
-        })
-      ),
-    { dispatch: false }
-  ); */
 createAnimal$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AnimalActions.createAnimal),
@@ -144,11 +82,6 @@ createAnimal$ = createEffect(() =>
               payload: this.errorResponse
             }));
           }),
-          /* finalize(async () => {
-            if (this.responseOK) {
-              this.router.navigateByUrl('/mascotas');
-            }
-          }) */
         )
       )
     )
@@ -160,12 +93,8 @@ createAnimal$ = createEffect(() =>
         ofType(AnimalActions.createAnimalSuccess),
         map((action) => {
           console.log(action);
-
-          //if(action.animal.role_id  === 2) {
           const response = 'Animal creado y publicado con éxito.'
-          this.sharedService.managementToast('createAnimalFeedback', this.responseOK, response);
-         // }
-
+          this.sharedService.managementToast('createAnimalSuccessFeedback', this.responseOK, response);
         })
       ),
     { dispatch: false }
@@ -185,33 +114,41 @@ createAnimal$ = createEffect(() =>
     { dispatch: false }
   );
 
-  addAnimalPhotos$ = createEffect(() =>
+addAnimalPhotos$ = createEffect(() =>
   this.actions$.pipe(
     ofType(AnimalActions.createAnimalSuccess),
     withLatestFrom(this.store.select(state => state.animals)),
-    //filter(([action, animalFormData]) => !!action.animal.id && !!animalFormData),
     switchMap(([action, animalFormData]) => {
-      console.log(action.animal)
       const dataPhoto = animalFormData.animalFormData;
-      const animal = action.animal
+      const animal = action.animal;
 
-      const photo = {
+     const photos: { image_url: string; principal: boolean; }[] = [];
+
+      if (dataPhoto?.principal_image) {
+        photos.push({ image_url: dataPhoto.principal_image, principal: true });
+      }
+
+      if (dataPhoto?.optional_image_one) {
+        photos.push({ image_url: dataPhoto.optional_image_one, principal: false });
+      }
+
+      if (dataPhoto?.optional_image_two) {
+        photos.push({ image_url: dataPhoto.optional_image_two, principal: false });
+      }
+      const payload = {
         animal_id: animal.id,
-        image_url: dataPhoto?.principal_image,
-        principal: true
+        photos
       };
-
-
-      return this.animalService.addAnimalPhoto(photo).pipe(
-        map((photo) => AnimalActions.addAnimalPhotosSuccess({ photo })),
+      return this.animalService.addAnimalPhotos(payload).pipe(
+        map(() => AnimalActions.addAnimalPhotosSuccess({ photos })),
         catchError((error) =>
           of(
             AnimalActions.addAnimalPhotosFailure({
               error: {
-                message: error.error?.message || 'Error en el registro',
+                message: error.error?.message || 'Error al subir imágenes',
                 errors: error.error?.errors || {}
               },
-              animal_id: action.animal.id
+              animal_id: animal.id
             })
           )
         )
@@ -220,29 +157,32 @@ createAnimal$ = createEffect(() =>
   )
 );
 
-// Success: después de subir la imagen correctamente
+
 addAnimalPhotosSuccess$ = createEffect(
   () =>
     this.actions$.pipe(
-      ofType(AnimalActions.addAnimalPhotosSuccess), // ← Cambiado correctamente
+      ofType(AnimalActions.addAnimalPhotosSuccess),
       tap(() => {
         this.responseOK = true;
         const response = 'Se ha creado y publicado la mascota de forma correcta.';
         this.sharedService.managementToast('createAnimalFeedback', this.responseOK, response);
         this.store.dispatch(AnimalActions.clearAnimalFormData());
+      timeout(2000)
         this.router.navigate(['/mascotas']);
       })
     ),
   { dispatch: false }
 );
 
-// Failure: si falla el alta de la imagen
 addAnimalPhotosFailure$ = createEffect(
   () =>
     this.actions$.pipe(
       ofType(AnimalActions.addAnimalPhotosFailure),
       tap(({ error, animal_id }) => {
-        this.store.dispatch(AnimalActions.deleteAnimal({ id: animal_id }));
+        console.log(animal_id);
+        const id = animal_id
+
+        this.store.dispatch(AnimalActions.deleteAnimal({ id }));
 
         this.responseOK = false;
         const message = 'Algo ha fallado.';
@@ -314,5 +254,18 @@ addAnimalPhotosFailure$ = createEffect(
       )
     )
   );
+
+deleteAnimal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AnimalActions.deleteAnimal),
+      switchMap(({ id }) =>
+        this.animalService.deleteAnimal(id).pipe(
+          map(() => AnimalActions.deleteAnimalSuccess()),
+          catchError((error: HttpErrorResponse )=> of(AnimalActions.deleteAnimalFailure({ payload: error.error})))
+        )
+      )
+    )
+  );
+
 }
 

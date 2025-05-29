@@ -59,15 +59,15 @@
 
 }
 
-#createAnimalFeedback.requestOk  {
+#createAnimalFeedback.requestOk , .createAnimalSuccessFeedback.requesOK  {
   background-color: rgb(78, 224, 78);
 }
 
-#createAnimalFeedback.requestKo  {
+#createAnimalFeedback.requestKo, .createAnimalSuccessFeedback.requesko  {
   background-color: rgb(251, 94, 94);
 }
 
-#createAnimalFeedback.show {
+#createAnimalFeedback.show, .createAnimalSuccessFeedback.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;

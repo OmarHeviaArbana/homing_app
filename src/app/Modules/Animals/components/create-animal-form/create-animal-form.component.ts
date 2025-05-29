@@ -77,23 +77,23 @@ export class CreateAnimalFormComponent {
       option_image_2: null
     };
 
-    onImageSelected(event: Event, field: string): void {
-      const input = event.target as HTMLInputElement;
+  onImageSelected(event: Event, field: string): void {
+  const input = event.target as HTMLInputElement;
 
-      if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const reader = new FileReader();
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
 
-        reader.onload = () => {
-          this.imagePreviews[field] = reader.result as string;
+    reader.onload = () => {
+      this.imagePreviews[field] = reader.result as string;
 
-          // También puedes guardar directamente en el form si lo necesitas
-          this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]);
-        };
+      // Opcional: guardar en el form
+     /*  this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]); */
+    };
 
-        reader.readAsDataURL(file); // base64 para preview inmediato
-      }
-    }
+    reader.readAsDataURL(file); // base64 para preview inmediato
+  }
+}
 
     get name() {
       return this.formPublicAnimal.get('name');

@@ -32,13 +32,14 @@ export class AnimalService {
             catchError(this.sharedService.handleError));
   }
 
-  addAnimalPhoto(photo: AnimalPhotoDTO): Observable<AnimalPhotoDTO> {
-      return this.http
-        .post<AnimalPhotoDTO>(`${this.API_URL}/animal-images/add`, photo)
-        .pipe(catchError(this.sharedService.handleError));
-  }
+  addAnimalPhotos(data: { animal_id: number;photos: { image_url: string; principal: boolean }[];
+    }): Observable<{ images: AnimalPhotoDTO[] }> {
+      return this.http.post<{ images: AnimalPhotoDTO[] }>(`${this.API_URL}/animal-images/add`,data);
+    }
 
   deleteAnimal(id: number): Observable<any> {
+    console.log(id);
+
     return this.http.delete(`${this.API_URL}/animals/delete/${id}`);
   }
 

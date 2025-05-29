@@ -14,7 +14,7 @@ export interface AnimalState {
   sizes: AuxiliarEntityDTO[];
   energyLevels: AuxiliarEntityDTO[];
   housingStages: AuxiliarEntityDTO[];
-  photo: AnimalPhotoDTO| null;
+  photos: AnimalPhotoDTO[];
   animalFormData: Partial<AnimalDTO> | null;
   loading: boolean;
   error: any;
@@ -29,7 +29,7 @@ export const initialState: AnimalState = {
   sizes: [],
   energyLevels: [],
   housingStages: [],
-  photo: null,
+  photos: [],
   animalFormData: null,
   loading: false,
   error: null,
@@ -90,9 +90,9 @@ export const animalReducer = createReducer(
     loaded: false,
     error: null,
   })),
-  on(AnimalActions.addAnimalPhotosSuccess, (state, { photo }) => ({
+  on(AnimalActions.addAnimalPhotosSuccess, (state, { photos }) => ({
     ...state,
-    photo,
+    photos,
     loading: false,
     loaded: true,
     error: null,

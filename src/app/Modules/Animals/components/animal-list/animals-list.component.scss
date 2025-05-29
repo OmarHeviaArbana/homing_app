@@ -1,12 +1,33 @@
-#createAnimalFeedback.requestOk  {
+
+
+#createAnimalSuccessFeedback {
+   visibility: hidden;
+  min-width: 250px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 16px;
+  z-index: 1;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  right: 0;
+  width: 80%;
+  max-width: 500px;
+}
+#createAnimalSuccessFeedback.requestOk  {
   background-color: rgb(78, 224, 78);
 }
 
-#createAnimalFeedback.requestKo  {
+#createAnimalSuccessFeedback.requestKo  {
   background-color: rgb(251, 94, 94);
 }
 
-#createAnimalFeedback.show {
+#createAnimalSuccessFeedback.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
