@@ -17,6 +17,7 @@ export interface AnimalState {
   photos: AnimalPhotoDTO[];
   animalFormData: Partial<AnimalDTO> | null;
   loading: boolean;
+  loaded: boolean;
   error: any;
 }
 
@@ -32,6 +33,7 @@ export const initialState: AnimalState = {
   photos: [],
   animalFormData: null,
   loading: false,
+  loaded: false,
   error: null,
 };
 
@@ -39,13 +41,16 @@ export const animalReducer = createReducer(
   initialState,
   on(AnimalActions.getAllAnimals, state => ({
     ...state,
-    loading: true
+    loading: true,
+    loaded: false
   })),
 
   on(AnimalActions.getAllAnimalsSuccess, (state, { animals }) => ({
     ...state,
     animals,
     loading: false,
+    loaded: true,
+    error: null,
   })),
 
   on(AnimalActions.getAllAnimalsFailure, (state, { error }) => ({

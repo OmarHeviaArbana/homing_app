@@ -2,4 +2,30 @@
   <p id="createAnimalFeedback"></p>
   <p id="createAnimalSuccessFeedback"></p>
 </div>
-<p>animals-list works!</p>
+
+<div class="animal">
+  <div class="animal__section">
+    <h2 class="animal__section-title">
+      <img class="animal__section-icon" src="/assets/icons/mascotas.png" alt="Icono Corazón">
+      Mascotas que te esperan
+    </h2>
+  </div>
+  <section class="container-fluid section">
+
+  <div class="card" *ngFor="let animal of animals$ | async">
+        <app-card [animal]="animal"></app-card>
+  </div>
+<!-- <div class="card"> -->
+   <!--  <picture>
+        <source media="(max-width: 600px)" srcset="/src/assets/images/image-card-one/image-card-one.png" >
+          <source media="(min-width: 1200px)" srcset="/src/assets/images/image-card-one/image-card-one-1200w.png" >
+          <img class="card__image" src="/src/assets/images/image-card-one/image-card-one-600w.png" alt="Retrato de Angelica Welch, una de los ponentes del evento">
+    </picture>
+    <div class="card__body">
+      <h5 class="card__title">Angelica Welch</h5>
+      <p class="card__text">Se analizará cómo el uso de inteligencia artificial y machine learning mejora la detección de intrusos y ataques cibernéticos, permitiendo una respuesta más rápida y efectiva.</p>
+    </div> -->
+<!-- </div> -->
+  </section>
+</div>
+

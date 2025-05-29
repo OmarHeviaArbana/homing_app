@@ -1,11 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as AnimalActions from '../../actions';
 import { AnimalDTO } from '../../models/animal.dto';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppState } from 'src/app/app.reducers';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as AnimalSelectors from '../../selectors/animal.selectors';
 import { AuthDTO } from 'src/app/Modules/Auth/models/auth.dto';
 import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
 
@@ -37,7 +36,6 @@ export class HomeComponent implements OnInit {
 
     this.loading$ = this.store.select((state) => state.auth.loading);
     this.loaded$ = this.store.select((state) => state.auth.loaded);
-
 
   }
 

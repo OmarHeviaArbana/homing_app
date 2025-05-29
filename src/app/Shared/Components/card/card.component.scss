@@ -24,6 +24,21 @@
     padding-top: 75%;
   }
 
+  &__location {
+
+  z-index: 3;
+  position: relative;
+  background-color: rgb(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: flex-start;
+  justify-content: left;
+  align-items: center;
+  padding: 4px;
+      @media (min-width: vars.$breakpoint-lg) {
+        justify-content: center;
+      }
+  }
+
   &__image {
     position: absolute;
     top: 0;
@@ -35,12 +50,24 @@
   }
 
   &__location-icon {
-    margin-right: 8px;
+    width: 14px;
+    margin-right: 6px;
+    margin-left: 6px;
+    height: fit-content;
+
+  }
+
+  &__location-text {
+    font-weight: 700;
+    width: 14px;
     font-size: vars.$font-size-14;
+     @media (min-width: vars.$breakpoint-md) {
+      font-size: vars.$font-size-16;
+    }
   }
 
   &__content {
-    padding: 12px 10px;
+    padding: 8px 10px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -59,10 +86,10 @@
   &__type {
     color: vars.$color-text;
     font-weight: 700;
-    font-size: vars.$font-size-14;
+    font-size: vars.$font-size-16;
     margin-bottom: 0;
     @media (min-width: vars.$breakpoint-md) {
-      font-size: vars.$font-size-16;
+      font-size: vars.$font-size-18;
     }
   }
 
