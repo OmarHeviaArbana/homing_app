@@ -2,7 +2,7 @@
 <section class="home">
   <div class="container">
     <div class="home__content">
-      <h1 class="home__title_small_devices">¡Bienvenido a Homing {{this.auth?.name ? this.auth?.name : '' }}!</h1>
+      <h1 class="home__title_small_devices">¡Bienvenido a Homing. {{this.auth?.name ? this.auth?.name : '' }}!</h1>
       <div class="home__image-container">
         <img
           src="/assets/img/dog-287420_1920.jpg"
@@ -11,7 +11,6 @@
         >
       </div>
       <div class="home__text">
-        <h1 class="home__title">¡Bienvenido a Homing!</h1>
         <div class="home__divider"></div>
         <p class="home__description">
           En Homing tenemos el compromiso de dar un hogar a todos aquellos animales que lo necesiten.
@@ -21,17 +20,16 @@
           <app-button variant="primary" (click)="goToLogin()">Iniciar sesión</app-button>
           <app-button variant="secondary" (click)="goToRegister()">Registrate</app-button>
         </div>
+        <div *ngIf="this.auth" class="home__actions">
+          <app-button *ngIf="this.auth.role_id == 2" variant="primary" (click)="goToAnimals()">Ver mascotas</app-button>
+          <app-button *ngIf="this.auth.role_id == 3 || 4"variant="primary" (click)="goToPublicAnimals()">Publicar mascota</app-button>
+          <app-button *ngIf="this.auth.role_id == 3 || 4"variant="outline" (click)="goToAnimals()">Ver mascotas</app-button>
+        </div>
       </div>
     </div>
   </div>
   <div *ngIf="loading$ | async">Cargando...</div>
 </section>
-
-<!--    <mat-grid-list cols="4" rowHeight="350px" gutterSize="16px">
-      <mat-grid-tile *ngFor="let animal of (animals$ | async) as animals">
-      <app-card [animal]="animal"></app-card>
-      </mat-grid-tile>
-    </mat-grid-list> -->
 
 <section class="animal-section">
   <div class="container">

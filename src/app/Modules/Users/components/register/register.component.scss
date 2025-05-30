@@ -67,11 +67,11 @@
 }
 
 #registerFeedback.requestOk,  #registerBreederFeedback.requestOk, #registerShelterFeedback.requestOk {
-  background-color: rgb(78, 224, 78);
+  background-color: vars.$color-primary;
 }
 
 #registerFeedback.requestKo, #registerBreederFeedback.requestKo, #registerShelterFeedback.requestKo {
-  background-color: rgb(251, 94, 94);
+  background-color: vars.$color-warn;
 }
 
 #registerFeedback.show, #registerBreederFeedback.show, #registerShelterFeedback.show {

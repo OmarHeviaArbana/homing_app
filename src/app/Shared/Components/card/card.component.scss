@@ -9,6 +9,12 @@
   flex-direction: column;
   max-width: 340px;
 
+  @media (min-width: vars.$breakpoint-md) {
+    max-width: 500px;
+  }
+  @media (min-width: vars.$breakpoint-md) {
+    max-width: none;
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -34,9 +40,9 @@
   justify-content: left;
   align-items: center;
   padding: 4px;
-      @media (min-width: vars.$breakpoint-lg) {
-        justify-content: center;
-      }
+    @media (min-width: vars.$breakpoint-lg) {
+      justify-content: center;
+    }
   }
 
   &__image {

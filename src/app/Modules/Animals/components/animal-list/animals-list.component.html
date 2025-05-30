@@ -10,22 +10,53 @@
       Mascotas que te esperan
     </h2>
   </div>
-  <section class="container-fluid section">
-
-  <div class="card" *ngFor="let animal of animals$ | async">
-        <app-card [animal]="animal"></app-card>
-  </div>
-<!-- <div class="card"> -->
-   <!--  <picture>
-        <source media="(max-width: 600px)" srcset="/src/assets/images/image-card-one/image-card-one.png" >
-          <source media="(min-width: 1200px)" srcset="/src/assets/images/image-card-one/image-card-one-1200w.png" >
-          <img class="card__image" src="/src/assets/images/image-card-one/image-card-one-600w.png" alt="Retrato de Angelica Welch, una de los ponentes del evento">
-    </picture>
-    <div class="card__body">
-      <h5 class="card__title">Angelica Welch</h5>
-      <p class="card__text">Se analizará cómo el uso de inteligencia artificial y machine learning mejora la detección de intrusos y ataques cibernéticos, permitiendo una respuesta más rápida y efectiva.</p>
-    </div> -->
-<!-- </div> -->
+<section class="animal__filters">
+  <mat-form-field appearance="fill">
+  <mat-label>Epecie</mat-label>
+  <mat-select [(ngModel)]="selectedSpecies" (ngModelChange)="onFilterChange()">
+    <mat-option *ngFor="let item of speciesList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+     <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field >
+  <mat-label>Edad</mat-label>
+  <mat-select [(ngModel)]="selectedAge" (ngModelChange)="onFilterChange()" >
+    <mat-option *ngFor="let item of ageCategoriesList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+     <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Sexo</mat-label>
+  <mat-select [(ngModel)]="selectedGenre"  (ngModelChange)="onFilterChange()" >
+    <mat-option *ngFor="let item of genresList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+    <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Situación actúal</mat-label>
+  <mat-select  [(ngModel)]="selectedStatus"  (ngModelChange)="onFilterChange()">
+    <mat-option *ngFor="let item of statusList$ | async" [value]="item.id">
+      {{ item.name }}
+    </mat-option>
+     <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+  </mat-select>
+</mat-form-field>
+</section>
+<section  *ngIf="filteredAnimals$ | async as animals" class="container-fluid section" >
+    <div class="card" *ngFor="let animal of animals">
+      <app-card [animal]="animal"></app-card>
+    </div>
+    <app-no-data
+      *ngIf="animals.length === 0"
+      [title]="'Sin resultados'"
+      [content]="'En estos momentos no hemos encontrado una mascota con los filtros seleccionados. ¡Sigue buscando, muchas te están esperando!'"
+    ></app-no-data>
   </section>
 </div>
 

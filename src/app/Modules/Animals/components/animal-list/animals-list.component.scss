@@ -1,42 +1,48 @@
 @use '/src/assets/styles/variables' as vars;
 
 .animal{
-
    margin: 32px;
+    &__filters {
+    display: grid;
+    gap: 10px;
+      grid-template-columns: 1fr;
+      padding: 0px 4px 30px;
 
-/*   @media (min-width: vars.$breakpoint-md) {
-    padding: 48px 0;
-
-  } */
-  &__section {
-
-
-
-  &-title {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: vars.$font-size-18;
-    font-weight: 700;
-    color: vars.$color-text;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-     @media (min-width: vars.$breakpoint-lg) {
-      font-size: vars.$font-size-26;
-      justify-content: center;
-      margin-top: 50px;
-      margin-bottom: 50px;
-     }
-  }
-  &-icon {
-    width: 16px;
-    margin-right: 8px;
     @media (min-width: vars.$breakpoint-md) {
-      width: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      padding: 20px 6px 30px;
+    }
+    @media (min-width: vars.$breakpoint-lg) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 30px;
+      padding: 10px 0px 30px;
+    }
+    }
+  &__section {
+    &-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: vars.$font-size-18;
+      font-weight: 700;
+      color: vars.$color-text;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (min-width: vars.$breakpoint-lg) {
+        font-size: vars.$font-size-26;
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+    }
+    &-icon {
+      width: 16px;
+      margin-right: 8px;
+      @media (min-width: vars.$breakpoint-md) {
+        width: 24px;
+      }
     }
   }
-}
-
 }
 
 .section {
@@ -48,7 +54,7 @@
 
     @media  (min-width: vars.$breakpoint-md ) {
       gap: 40px;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     .card {
@@ -95,11 +101,11 @@
   max-width: 500px;
 }
 #createAnimalSuccessFeedback.requestOk , #createAnimalFeedback.requestOk {
-  background-color: rgb(78, 224, 78);
+  background-color: vars.$color-primary;
 }
 
 #createAnimalSuccessFeedback.requestKo  , #createAnimalFeedback.requestKo {
-  background-color: rgb(251, 94, 94);
+  background-color: vars.$color-warn
 }
 
 #createAnimalSuccessFeedback.show , #createAnimalFeedback.show{

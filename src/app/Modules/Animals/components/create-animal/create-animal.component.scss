@@ -66,11 +66,11 @@
 }
 
 #createAnimalFeedback.requestOk , #createAnimalSuccessFeedback.requesOK  {
-  background-color: rgb(78, 224, 78);
+  background-color: vars.$color-primary;
 }
 
 #createAnimalFeedback.requestKo, #createAnimalSuccessFeedback.requesko  {
-  background-color: rgb(251, 94, 94);
+  background-color: vars.$color-warn;
 }
 
 #createAnimalFeedback.show, #createAnimalSuccessFeedback.show {

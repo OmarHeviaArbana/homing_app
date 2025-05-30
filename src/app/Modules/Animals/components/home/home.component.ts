@@ -53,6 +53,12 @@ export class HomeComponent implements OnInit {
   goToRegister() {
     this.router.navigateByUrl('register');
   }
+  goToAnimals() {
+    this.router.navigateByUrl('mascotas');
+  }
+  goToPublicAnimals() {
+    this.router.navigateByUrl('publicar-mascota');
+  }
 
   prevSlide(): void {
     this.currentSlide = this.currentSlide > 0 ? this.currentSlide - 1 : this.animals.length - 1;

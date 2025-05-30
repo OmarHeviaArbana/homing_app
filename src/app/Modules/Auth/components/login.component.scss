@@ -55,11 +55,11 @@
 }
 
 #loginFeedback.requestOk {
-    background-color: rgb(78, 224, 78);
+    background-color: vars.$color-primary;
 }
 
 #loginFeedback.requestKo {
-   background-color: rgb(251, 94, 94);
+   background-color: vars.$color-warn;
 }
 
 #loginFeedback.show {

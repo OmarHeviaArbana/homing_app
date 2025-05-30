@@ -1,0 +1,14 @@
+
+@use '/src/assets/styles/variables' as vars;
+.container {
+  padding: 20px;
+  background-color: vars.$color-white;
+  border: 1px solid vars.$color-primary;
+  &__title {
+    color: vars.$color-primary;
+  }
+  &__content {
+    font-size: vars.$font-size-16;
+    line-height: normal;
+  }
+}
