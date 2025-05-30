@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { act, Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, withLatestFrom, filter, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom, filter, tap, mergeMap } from 'rxjs/operators';
 
 import { AppState } from 'src/app/app.reducers';
 import { ShelterService } from '../services/shelter.service';
@@ -27,11 +27,24 @@ export class ShelterEffects {
      this.responseOK = false;
   }
 
+  getAllShelter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ShelterActions.getAllShelters),
+      mergeMap(() =>
+        this.shelterService.getAllShelters().pipe(
+          map((shelters) => ShelterActions.getAllSheltersSuccess({ shelters })),
+          catchError((error) => of(ShelterActions.getAllSheltersFailure({ error })))
+        )
+      )
+    )
+  );
+
+
   registerShelterAfterUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.registerSuccess),
       withLatestFrom(this.store.select(state => state.shelter.shelterFormData)),
-        filter(([action, shelterFormData]) => action.user.user?.role_id == 3 && !!shelterFormData),
+      filter(([action, shelterFormData]) => action.user.user?.role_id == 3 && !!shelterFormData),
       switchMap(([action, shelterFormData]) => {
         const user = action.user.user
         const shelterToRegister = {

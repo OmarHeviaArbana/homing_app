@@ -7,6 +7,8 @@ import { AuthGuard } from './Shared/Guards/auth.guard';
 import { CreateAnimalComponent } from './Modules/Animals/components/create-animal/create-animal.component';
 import { RoleGuard } from './Shared/Guards/role.guard';
 import { AnimalsListComponent } from './Modules/Animals/components/animal-list/animals-list.component'
+import { ShelterListComponent } from './Modules/Shelters/components/shelter-list/shelter-list.component';
+import { DetailShelterComponent } from './Modules/Shelters/components/detail-shelter/detail-shelter.component';
 
 
 const routes: Routes = [
@@ -34,6 +36,14 @@ const routes: Routes = [
   {
     path: 'mascotas',
     component: AnimalsListComponent,
+  },
+  {
+    path: 'refugios',
+    component: ShelterListComponent,
+  },
+  {
+    path: 'detelle-shelter',
+    component: DetailShelterComponent,
   },
 ];
 

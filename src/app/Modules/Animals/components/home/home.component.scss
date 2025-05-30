@@ -171,6 +171,7 @@
   &__track {
     display: flex;
     transition: transform 300ms ease;
+    gap: 30px;
   }
 
   &__item {
@@ -178,7 +179,7 @@
 
 
     @media (min-width: vars.$breakpoint-md) {
-      flex: 0 0 50%;
+      flex: 0 0 47%;
     }
 
     @media (min-width: vars.$breakpoint-lg) {

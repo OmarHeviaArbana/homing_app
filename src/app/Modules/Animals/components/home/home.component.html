@@ -11,6 +11,7 @@
         >
       </div>
       <div class="home__text">
+        <h1 class="home__title">¡Bienvenido a Homing!</h1>
         <div class="home__divider"></div>
         <p class="home__description">
           En Homing tenemos el compromiso de dar un hogar a todos aquellos animales que lo necesiten.
@@ -22,7 +23,7 @@
         </div>
         <div *ngIf="this.auth" class="home__actions">
           <app-button *ngIf="this.auth.role_id == 2" variant="primary" (click)="goToAnimals()">Ver mascotas</app-button>
-          <app-button *ngIf="this.auth.role_id == 3 || 4"variant="primary" (click)="goToPublicAnimals()">Publicar mascota</app-button>
+          <app-button *ngIf="this.auth.role_id == 3 || 4"variant="primary" (click)="goToPublicAnimals()">Publicar mascotas</app-button>
           <app-button *ngIf="this.auth.role_id == 3 || 4"variant="outline" (click)="goToAnimals()">Ver mascotas</app-button>
         </div>
       </div>

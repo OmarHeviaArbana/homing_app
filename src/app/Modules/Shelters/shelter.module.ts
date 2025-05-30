@@ -7,12 +7,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from 'src/app/Shared/shared.module';
+import { ShelterListComponent } from './components/shelter-list/shelter-list.component';
+import { DetailShelterComponent } from './components/detail-shelter/detail-shelter.component';
 
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ShelterListComponent,
+    DetailShelterComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -22,9 +27,6 @@ import { SharedModule } from 'src/app/Shared/shared.module';
     MatProgressSpinnerModule,
     MatSelectModule,
     SharedModule
-
-
-
   ],
 })
 export class ShelterModule {}

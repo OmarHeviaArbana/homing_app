@@ -10,6 +10,7 @@
       Mascotas que te esperan
     </h2>
   </div>
+<h1 class="animal__title">Estas son nuestras mascotas y están deseando conocerte</h1>
 <section class="animal__filters">
   <mat-form-field appearance="fill">
   <mat-label>Epecie</mat-label>
@@ -48,8 +49,8 @@
   </mat-select>
 </mat-form-field>
 </section>
-<section  *ngIf="filteredAnimals$ | async as animals" class="container-fluid section" >
-    <div class="card" *ngFor="let animal of animals">
+<section  *ngIf="filteredAnimals$ | async as animals" class="section" >
+    <div class="section__card" *ngFor="let animal of animals">
       <app-card [animal]="animal"></app-card>
     </div>
     <app-no-data

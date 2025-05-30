@@ -16,23 +16,37 @@
     @media (min-width: vars.$breakpoint-lg) {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 30px;
-      padding: 10px 0px 30px;
+      padding: 0px 0px 30px;
     }
     }
+
+    &__title {
+    margin: 10px 0 20px 0;
+    font-weight: 500;
+    font-size: vars.$font-size-18;
+    color: vars.$color-primary;
+    text-align: center;
+    @media (min-width: vars.$breakpoint-md) {
+    margin: 10px 0 40px 0;
+      font-size: vars.$font-size-26;
+
+    }
+  }
+
   &__section {
     &-title {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 0px;
       font-size: vars.$font-size-18;
       font-weight: 700;
       color: vars.$color-text;
       display: flex;
       align-items: center;
       justify-content: center;
-      @media (min-width: vars.$breakpoint-lg) {
+      @media (min-width: vars.$breakpoint-md) {
         font-size: vars.$font-size-26;
         margin-top: 50px;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
       }
     }
     &-icon {
@@ -57,7 +71,7 @@
       justify-content: center;
     }
 
-    .card {
+    &__card {
       flex: 1 1 100%;
       max-width: 100%;
       border: none !important;

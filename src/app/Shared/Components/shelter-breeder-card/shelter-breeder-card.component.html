@@ -1,0 +1,14 @@
+<div class="item-card">
+
+      <img class="item-card__image" src="/assets/img/shelter.jpg" [alt]="item.name">
+
+    <div class="item-card__body">
+      <h5 class="item-card__title">{{item.name}}</h5>
+      <div class="item-card__location">
+     <img src="/assets/icons/location.png" [alt]="item.location" class="item-card__location-icon">
+      <span class="item-card__location-text">{{ item.location }}
+    </span>
+    </div>
+    </div>
+    <app-button variant="card-shelter-breeder" (click)="onDetailAnimal()">Ver más</app-button>
+</div>

@@ -50,7 +50,8 @@ export class AnimalEffects {
       )
     )
   );
-getStatusAux$ = createEffect(() =>
+
+  getStatusAux$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AnimalActions.getStatusAux),
       mergeMap(() =>
@@ -62,7 +63,7 @@ getStatusAux$ = createEffect(() =>
     )
   );
 
-createAnimal$ = createEffect(() =>
+  createAnimal$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AnimalActions.createAnimal),
       exhaustMap(({ animal }) =>
@@ -114,7 +115,8 @@ createAnimal$ = createEffect(() =>
     { dispatch: false }
   );
 
-addAnimalPhotos$ = createEffect(() =>
+
+  addAnimalPhotos$ = createEffect(() =>
   this.actions$.pipe(
     ofType(AnimalActions.createAnimalSuccess),
     withLatestFrom(this.store.select(state => state.animals)),

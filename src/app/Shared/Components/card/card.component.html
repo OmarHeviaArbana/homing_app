@@ -3,7 +3,7 @@
     <img src="/assets/img/animals-3982204_1920.jpg" [alt]="animal.name" class="animal-card__image">
     <div class="animal-card__location">
 
-     <img src="/assets/icons/location.png" :alt="animal.location" class="animal-card__location-icon">
+     <img src="/assets/icons/location.png" [alt]="animal.location" class="animal-card__location-icon">
       <span class="animal-card__location-text">{{ animal.location }}
     </span>
     </div>
@@ -14,6 +14,6 @@
     <p class="animal-card__type">{{ animal.species.name }}</p>
   </div>
   <div class="animal-card__action">
-    <app-button [variant]="animal.status.name == 'En adopción' ? 'enAdopcion' : animal.status.name"  size="md" [fullWidth]="true">{{ animal.status.name }}</app-button>
+    <app-button [variant]="animal.status.name == 'En adopción' ? 'enAdopcion' : animal.status.name"  size="md" [fullWidth]="true" >{{ animal.status.name }}</app-button>
   </div>
 </div>

@@ -1,0 +1,37 @@
+<div class="shelter">
+  <div class="shelter__section">
+    <h2 class="shelter__section-title">
+      <img class="shelter__section-icon" src="/assets/icons/refugios.png" alt="Icono Refugio">
+      Refugios y Protectoras
+    </h2>
+  </div>
+  <article class="section">
+    <section class="section__introduction-container">
+      <div class="section__introduction">
+      <h1 class="section__title">¿Por qué elegir un refugio o protectora</h1>
+        <p class="section__introduction-text"> En cada rincón de nuestros refugios hay una historia esperando ser contada y un corazón listo para dar amor. Miles de animales rescatados aguardan una segunda oportunidad, y tú podrías ser quien cambie su vida para siempre. Adoptar no solo transforma la realidad de un animal, también llena de propósito y ternura tu día a día. </p>
+        <p class="section__introduction-text"> Aquí encontrarás perros y gatos de todas las edades, personalidades y tamaños, cada uno con una mirada que anhela un hogar. Nuestra plataforma te conecta con refugios comprometidos, que cuidan y preparan a cada mascota para su nueva familia. Explora, conoce y enamórate de quienes solo saben dar amor incondicional. Porque cuando adoptas, no solo salvas una vida... también ganas un amigo fiel. Da el primer paso. Tu compañero ideal te está esperando justo aquí.</p>
+    </div>
+    <div class="section__introduction-img">
+
+    <div class="section__introduction-decoration"></div>
+    <picture>
+        <img class="section__introduction-image " src="/assets/img/shelter.jpg" alt="Imagen donde se observa un animal detras del cercado en un refugio">
+        <span class="section__introduction-image__author">Image by <a href="https://pixabay.com/users/mimzy-19397/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2755489">Mimzy</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2755489">Pixabay</a></span>
+    </picture>
+
+    </div>
+  </section>
+</article>
+<h1 class="shelter__title">Listado de colaboradores</h1>
+<section  *ngIf="shelters$ | async as shelters" class="shelter__list" >
+    <div class="shelter__list-card" *ngFor="let shelter of shelters">
+      <app-shelter-breeder-card [item]="shelter"></app-shelter-breeder-card>
+    </div>
+    <app-no-data
+      *ngIf="shelters.length === 0"
+      [title]="'No tenemos registros de refugios o protectoras en estos momentos'"
+      [content]="'Esperemos que en un muy poco tiempo puedas encontrar un espacio donde contactar con colaboradoes que quieran atajar el problema de la adopción'"
+    ></app-no-data>
+  </section>
+</div>

@@ -30,7 +30,7 @@ import { map, startWith } from 'rxjs/operators';
   selectedAge: number | null = null;
   selectedGenre: number | null = null;
   selectedStatus: number | null = null;
-filteredAnimals$!: Observable<AnimalDTO[]>;
+  filteredAnimals$!: Observable<AnimalDTO[]>;
 
   private filtersChanged$ = new Subject<void>();
   private destroy$ = new Subject<void>();
@@ -53,9 +53,9 @@ filteredAnimals$!: Observable<AnimalDTO[]>;
     this.filteredAnimals$ = combineLatest([
     this.animals$,
     this.filtersChanged$.pipe(startWith([]))
-  ]).pipe(
-    map(([animals]) => this.applyFilters(animals))
-  );
+    ]).pipe(
+      map(([animals]) => this.applyFilters(animals))
+    );
   }
 
   loadAnimals(): void {

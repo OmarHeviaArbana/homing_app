@@ -25,8 +25,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private store: Store<AppState>) {
     this.animals = new Array<AnimalDTO>();
 
-
-
     this.store.select('animals').subscribe((animals) => {
       this.animals = animals.animals;
     });

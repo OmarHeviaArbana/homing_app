@@ -10,9 +10,17 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ShelterService {
-   private readonly API_URL = environment.apiUrl
+  private readonly API_URL = environment.apiUrl
 
-   constructor(private http: HttpClient, private sharedService: SharedService ) {}
+  constructor(private http: HttpClient, private sharedService: SharedService ) {}
+
+
+  getAllShelters(): Observable<ShelterDTO[]> {
+    return this.http
+    .get<ShelterDTO[]>(`${this.API_URL}/shelters/getAll`)
+    .pipe(catchError(this.sharedService.handleError));
+    ;
+  }
 
   createShelter(shelter: ShelterDTO): Observable<ShelterDTO> {
     return this.http

@@ -31,15 +31,14 @@
   }
 
   &__location {
-
-  z-index: 3;
-  position: relative;
-  background-color: rgb(255, 255, 255, 0.5);
-  display: flex;
-  justify-content: flex-start;
-  justify-content: left;
-  align-items: center;
-  padding: 4px;
+    z-index: 3;
+    position: relative;
+    background-color: rgb(255, 255, 255, 0.5);
+    display: flex;
+    justify-content: flex-start;
+    justify-content: left;
+    align-items: center;
+    padding: 4px;
     @media (min-width: vars.$breakpoint-lg) {
       justify-content: center;
     }

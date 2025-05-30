@@ -23,8 +23,10 @@
   &--primary {
     background-color: vars.$color-primary;
     color: vars.$color-text;
-    font-size:  vars.$font-size-18;;
+    font-size:  vars.$font-size-18;
+    border: 2px solid vars.$color-primary;
     font-weight: 600;
+     box-shadow: 0px 2px 4px 2.5px rgb(225, 225, 225, 1) ;
     &:active:not(:disabled) {
       transform: translateY(1px);
     }
@@ -34,7 +36,24 @@
     background-color: vars.$color-primary;
     color: vars.$color-text;
     font-size:  vars.$font-size-16;
+    border: 1px solid vars.$color-primary;
     padding: 8px 16px;
+    box-shadow: 0px 2px 4px 2.5px rgb(225, 225, 225, 1) ;
+    font-weight: 600;
+    min-width: 80px;
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+
+  &--card-shelter-breeder {
+    background-color: vars.$color-primary;
+    color: vars.$color-text;
+    font-size:  vars.$font-size-16;
+    border: 1px solid vars.$color-primary;
+    border-radius: 0 0 8px 8px;
+    padding: 8px 16px;
+    box-shadow: 0px 2px 4px 2.5px rgb(225, 225, 225, 1) ;
     font-weight: 600;
     min-width: 80px;
     &:active:not(:disabled) {
@@ -43,9 +62,10 @@
   }
 
   &--secondary {
-    background-color: vars.$color-text;;
+    background-color: vars.$color-text;
     color: vars.$color-white;
-     font-size:  vars.$font-size-18;;
+     font-size:  vars.$font-size-18;
+      border: 2px solid vars.$color-text;
     font-weight: 500;
     &:active:not(:disabled) {
       transform: translateY(1px);
@@ -77,9 +97,6 @@
   }
 
   &--Disponible {
-    white-space: nowrap;         // No hacer saltos de línea
-  overflow: hidden;            // Oculta el contenido que se desborda
-  text-overflow: ellipsis;
     background-color: vars.$color-primary;
     color: vars.$color-text;
     font-size:  vars.$font-size-18;
