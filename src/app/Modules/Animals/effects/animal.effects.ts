@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AnimalActions from '../actions/animal.action';
 import { AnimalService } from '../services/animial.service'
-import { catchError, concatMap, exhaustMap, filter, finalize, map, mergeMap, switchMap, tap, timeout, withLatestFrom } from 'rxjs/operators';
-import { from, of } from 'rxjs';
+import { catchError, exhaustMap, map, mergeMap, switchMap, tap, timeout, withLatestFrom } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Shared/Services/shared.service';

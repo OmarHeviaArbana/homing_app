@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { act, Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, withLatestFrom, filter, tap } from 'rxjs/operators';
-
+import { catchError, map, switchMap, withLatestFrom, filter, tap, mergeMap } from 'rxjs/operators';
 import { AppState } from 'src/app/app.reducers';
 import { BreederService } from '../services//breeder.service';
 import * as BreederActions from './../actions';
 import * as UserActions from '../../Users/actions';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Injectable()
 export class BreederEffects {
@@ -24,6 +23,19 @@ export class BreederEffects {
     private router: Router,
     private sharedService: SharedService
   ) {}
+
+   getAllBreeder$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(BreederActions.getAllBreeders),
+        mergeMap(() =>
+          this.breederService.getAllBreeders().pipe(
+            map((breeders) => BreederActions.getAllBreedersSuccess({ breeders })),
+            catchError((error) => of(BreederActions.getAllBreedersFailure({ error })))
+          )
+        )
+      )
+    );
+
 
   registerBreederAfterUser$ = createEffect(() =>
     this.actions$.pipe(

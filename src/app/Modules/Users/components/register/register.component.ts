@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup  } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
@@ -37,7 +37,8 @@ export class RegisterComponent {
       breeder: this.formBreeder,
     });
   }
-
+  ngOnInit(): void {
+  }
   onUserFormReady(form: FormGroup) {
     this.formUser = form;
   }

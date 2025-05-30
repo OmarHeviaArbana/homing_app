@@ -19,4 +19,11 @@ export class BreederService {
       .post<BreederDTO>(`${this.API_URL}/breeders/create`, breeder)
       .pipe(catchError(this.sharedService.handleError));
   }
+
+   getAllBreeders(): Observable<BreederDTO[]> {
+      return this.http
+      .get<BreederDTO[]>(`${this.API_URL}/breeders/getAll`)
+      .pipe(catchError(this.sharedService.handleError));
+      ;
+    }
 }

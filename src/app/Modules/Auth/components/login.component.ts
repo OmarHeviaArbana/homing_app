@@ -50,7 +50,9 @@ export class LoginComponent implements OnInit {
     this.loaded$ = this.store.select((state) => state.auth.loaded);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   login(): void {
     const credentials: LoginDTO = {

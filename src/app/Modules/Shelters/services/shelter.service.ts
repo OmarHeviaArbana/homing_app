@@ -14,7 +14,6 @@ export class ShelterService {
 
   constructor(private http: HttpClient, private sharedService: SharedService ) {}
 
-
   getAllShelters(): Observable<ShelterDTO[]> {
     return this.http
     .get<ShelterDTO[]>(`${this.API_URL}/shelters/getAll`)

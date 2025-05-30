@@ -2,7 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 import * as AnimalActions from '../actions/animal.action'
 import { AnimalDTO } from '../models/animal.dto';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
-import { UserDTO } from '../../Users/models/user.dto';
 import { AnimalPhotoDTO } from '../models/animal-photo.dto';
 
 export interface AnimalState {

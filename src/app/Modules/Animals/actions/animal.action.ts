@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { AnimalDTO } from '../models/animal.dto';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
-import { UserDTO } from '../../Users/models/user.dto';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AnimalPhotoDTO } from '../models/animal-photo.dto';
 

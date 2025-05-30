@@ -9,6 +9,7 @@ import { RoleGuard } from './Shared/Guards/role.guard';
 import { AnimalsListComponent } from './Modules/Animals/components/animal-list/animals-list.component'
 import { ShelterListComponent } from './Modules/Shelters/components/shelter-list/shelter-list.component';
 import { DetailShelterComponent } from './Modules/Shelters/components/detail-shelter/detail-shelter.component';
+import { BreederListComponent } from './Modules/Breeders/component/breeder-list/breeder-list.component';
 
 
 const routes: Routes = [
@@ -42,8 +43,12 @@ const routes: Routes = [
     component: ShelterListComponent,
   },
   {
-    path: 'detelle-shelter',
+    path: 'detelle-refugio',
     component: DetailShelterComponent,
+  },
+  {
+    path: 'criaderos',
+    component: BreederListComponent,
   },
 ];
 

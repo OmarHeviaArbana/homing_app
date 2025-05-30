@@ -1,0 +1,38 @@
+<div class="breeder">
+  <div class="breeder__section">
+    <h2 class="breeder__section-title">
+      <img class="breeder__section-icon" src="/assets/icons/criadores.png" alt="Icono Criaderos">
+      Criaderos responsables
+    </h2>
+  </div>
+  <article class="section">
+    <section class="section__introduction-container">
+      <div class="section__introduction">
+      <h1 class="section__title">¿Por qué elegir un criadero responsable?</h1>
+        <p class="section__introduction-text"> Si estás pensando en sumar un nuevo integrante a tu familia, los criaderos registrados son una opción segura y responsable para hacerlo. En esta sección te presentamos criaderos certificados que trabajan con estándares éticos y de bienestar animal, priorizando la salud, socialización y buen trato desde los primeros días de vida. </p>
+        <p class="section__introduction-text"> En alguno de los criaderos colaboradores, podrás conocer sus instalaciones, razas disponibles, y recibir orientación directa de profesionales comprometidos con la crianza responsable. Adoptar desde un criadero autorizado garantiza transparencia, seguimiento veterinario y acompañamiento durante todo el proceso. Además, fomenta prácticas sostenibles que respetan la vida y el desarrollo adecuado de cada animal. Explora esta vista, haz preguntas, infórmate, y da el paso con confianza. Porque traer un nuevo amigo a casa merece hacerse con el corazón... y con responsabilidad.</p>
+    </div>
+    <div class="section__introduction-img">
+
+    <div class="section__introduction-decoration"></div>
+    <picture>
+        <img class="section__introduction-image " src="/assets/img/breeder.jpg" alt="Imagen donde se observa un animal detras del cercado en un criadero de perros">
+        <span class="section__introduction-image__author">Image by <a href="https://pixabay.com/users/alešháva-5318775/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4419763">Aleš Háva</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4419763">Pixabay</a></span>
+    </picture>
+
+    </div>
+  </section>
+</article>
+<h1 class="breeder__title">Listado de colaboradores</h1>
+<section  *ngIf="breeders$ | async as breeders" class="breeder__list" >
+    <div class="breeder__list-card" *ngFor="let breeder of breeders">
+      <app-shelter-breeder-card [item]="breeder"></app-shelter-breeder-card>
+    </div>
+    <app-no-data
+      *ngIf="breeders.length === 0"
+      [title]="'No tenemos registros criaderos en estos momentos'"
+      [content]="'Esperemos que en un muy poco tiempo puedas encontrar un espacio donde contactar con criaderos responsables'"
+    ></app-no-data>
+  </section>
+</div>
+

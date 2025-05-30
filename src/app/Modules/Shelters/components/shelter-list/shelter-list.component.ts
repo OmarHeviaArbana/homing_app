@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.reducers';
-import { AnimalDTO } from 'src/app/Modules/Animals/models/animal.dto';
 import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
-  import * as ShelterActions from './../../actions';
+import * as ShelterActions from './../../actions';
 import { ShelterDTO } from '../../models/shelter.dto';
 
 @Component({

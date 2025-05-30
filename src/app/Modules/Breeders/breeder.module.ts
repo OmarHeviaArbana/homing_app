@@ -7,12 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { SharedModule } from 'src/app/Shared/shared.module';
+import { BreederListComponent } from './component/breeder-list/breeder-list.component';
 
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    BreederListComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
