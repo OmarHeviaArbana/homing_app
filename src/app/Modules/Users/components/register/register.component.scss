@@ -3,11 +3,6 @@
 
 .register {
   margin: 32px;
-
-  @media (min-width: vars.$breakpoint-md) {
-    padding: 48px 0;
-
-  }
   &__title {
   font-size: vars.$font-size-26;
   font-weight: 700;

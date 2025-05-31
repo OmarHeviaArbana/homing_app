@@ -5,7 +5,7 @@
   <div class="login__container">
     <h1 class="login__title">Login</h1>
     <div *ngIf="(loaded$ | async) || !(loading$ | async) ">
-      <form [formGroup]="loginForm" (ngSubmit)="login()" class="container-form">
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="login__container-form">
         <mat-form-field appearance="fill" >
           <mat-label>Email:</mat-label>
           <input

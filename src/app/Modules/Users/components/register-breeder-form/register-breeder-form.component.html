@@ -1,5 +1,6 @@
-<form [formGroup]="formBreeder"  class="register__container-form">
-  <h2>Datos del Criadero</h2>
+<form [formGroup]="formBreeder"  class="form">
+  <fieldset class="form__fieldset">
+  <legend class="form__legend">Datos del Criadero</legend>
 
   <mat-form-field appearance="fill">
     <mat-label>Nombre del Criadero</mat-label>
@@ -44,10 +45,14 @@
     <mat-error *ngIf="description?.invalid">{{ getErrorMessage('description') }}</mat-error>
   </mat-form-field>
 
-  <div>
-    <label for="logo-upload">Logo o imagen representativa:</label>
-    <input type="file" id="logo-upload" formControlName="logo_url" accept="image/*" />
-    <mat-error *ngIf="logo_url?.invalid">{{ getErrorMessage('logo_url') }}</mat-error>
-  </div>
+
+  <div class="form__input-upload">
+      <label for="logo-upload">Logo o imagen representativa*:</label>
+      <div class="form__input-container">
+        <input type="file" id="logo-upload" formControlName="logo_url" accept="image/*" (change)="onImageSelected($event, 'logo_url')" />
+        <img *ngIf="imagePreviews.logo_url" [src]="imagePreviews.logo_url" width="150" />
+      </div>
+    </div>
+</fieldset>
 </form>
 

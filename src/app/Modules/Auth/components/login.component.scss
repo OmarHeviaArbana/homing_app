@@ -19,21 +19,29 @@
     @media (min-width: vars.$breakpoint-md) {
       flex-direction: row-reverse;
        justify-content: center;
-
     }
   }
   &__container {
-    margin-top: 40px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 75vh;
     &-form {
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: vars.$color-gray;
+        gap: 20px;
+
         padding: 20px;
-    }
+      }
   }
 }
 
+.mat-mdc-form-field {
+   min-width: 300px;
+}
 #loginFeedback {
    visibility: hidden;
   min-width: 250px;

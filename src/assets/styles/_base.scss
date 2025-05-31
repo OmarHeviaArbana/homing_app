@@ -9,7 +9,7 @@ html, .mat-typography, .mat-typography h1 , .mat-typography h2, .mat-typography 
 }
 
 
-html, body { height: 100%; background-color: vars.$color-white }
+html, body { height: 100vh; background-color: vars.$color-white }
 body { margin: 0 }
 /*   width: 100%;
   max-width: 1200px;

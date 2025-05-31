@@ -1,5 +1,6 @@
-<form [formGroup]="formUser" class="register__container-form">
-  <h2>Datos de la cuenta de usuario</h2>
+<form [formGroup]="formUser" class="form">
+  <fieldset class="form__fieldset">
+  <legend class="form__legend">Datos de acceso a Homing.</legend>
   <mat-form-field appearance="fill">
     <mat-label>Nombre</mat-label>
     <input matInput formControlName="name" />
@@ -32,5 +33,5 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-
+ </fieldset>
 </form>

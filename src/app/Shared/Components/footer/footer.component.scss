@@ -7,8 +7,8 @@
   justify-content:  center;
   padding:          32px;
   margin-top:       50px;
-  position: relative;
-  bottom: 0;
+  /* position: absolute;
+  bottom: 0px; */
   width: calc(100% - 64px);
 
   background-color: vars.$color-primary;

@@ -1,12 +1,38 @@
-.register{
-  &__container-form {
+@use '/src/assets/styles/variables' as vars;
+.form {
+  border-radius: 8px;
+
+  &__fieldset {
+    padding:          30px;
+    margin-bottom:    30px;
+    background-color: vars.$color-gray;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    @media  (min-width: vars.$breakpoint-md ) {
+      grid-template-columns: 1fr 1fr;
+      }
+    }
+  &__legend {
+    font-size: vars.$font-size-18;
+    color: vars.$color-primary;
+  }
+  &__input-upload {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    width: calc(100% - 20px);
-    margin: auto;
+    gap: 20px;
+    & label {
+      color: vars.$color-primary;
+      font-size: vars.$font-size-16;
+    }
+  }
+  &__input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
   }
 }
-

@@ -70,4 +70,27 @@ export class RegisterShelterFormComponent implements OnInit {
     if (controlName === 'cif' && control?.hasError('pattern')) return 'CIF no valido';
     return '';
   }
+
+  imagePreviews: { [key: string]: string | null } = {
+    logo_url: null,
+
+  };
+
+  onImageSelected(event: Event, field: string): void {
+  const input = event.target as HTMLInputElement;
+
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imagePreviews[field] = reader.result as string;
+
+      // Opcional: guardar en el form
+    /*  this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]); */
+    };
+
+      reader.readAsDataURL(file); // base64 para preview inmediato
+    }
+  }
 }
