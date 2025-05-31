@@ -12,6 +12,7 @@ import { DetailShelterComponent } from './Modules/Shelters/components/detail-she
 import { BreederListComponent } from './Modules/Breeders/component/breeder-list/breeder-list.component';
 import { DetailAnimalComponent } from './Modules/Animals/components/detail-animal/detail-animal.component';
 import { DetailBreederComponent } from './Modules/Breeders/component/detail-breeder/detail-breeder.component';
+import { ApplicationAnimalComponent } from './Modules/Animals/components/application-animal/application-animal.component';
 
 
 const routes: Routes = [
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: 'detalle-criadero/:id',
     component: DetailBreederComponent,
+  },
+  {
+    path: 'solicitud-mascota',
+    component: ApplicationAnimalComponent,
   },
 ];
 

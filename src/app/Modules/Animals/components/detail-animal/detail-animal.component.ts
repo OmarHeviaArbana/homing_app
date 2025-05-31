@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AnimalDTO } from '../../models/animal.dto';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from 'src/app/app.reducers';
 import { Store } from '@ngrx/store';
 import * as AnimalActions from './../../actions';
@@ -21,11 +21,15 @@ export class DetailAnimalComponent {
   currentIndex = 0;
   mainData!: Observable<{ label: string; value: string | number | boolean }[]>;
   healthData!: Observable<{ label: string; value: string | number | boolean}[]>;
+  auth: any | null = null;
+  user: any;
+  role: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private store: Store<AppState>,
     private location: Location,
+    private router: Router
   ) {
     this.animalId = this.activatedRoute.snapshot.paramMap.get('id') ?? '';
     this.animalDetail$ = this.store.select(state => state.animals.animalDetail);
@@ -49,7 +53,16 @@ export class DetailAnimalComponent {
       { label: 'Cuidados especiales', value: animal.care  }
       ] : [])
   );
+
+  this.store.select('auth').subscribe((auth) => {
+    this.auth = auth;
+    this.user = this.auth.user !== null ? this.auth.user : null
+    this.role = this.user !== null ? this.user.role_id : null
+
+  });
   this.loadDetailAnimal()
+  console.log(this.user);
+
   }
 
   loadDetailAnimal(): void {
@@ -68,6 +81,15 @@ export class DetailAnimalComponent {
 
   goToBack() :void {
     this.location.back();
+  }
+
+  goToApplicationAnimal(animal: any) :void {
+    if (this.user == null) {
+      this.router.navigateByUrl('login');
+    } else {
+      this.router.navigateByUrl('solicitud-mascota' , {state: { animal: animal} });
+
+    }
   }
 
 }

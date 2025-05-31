@@ -18,14 +18,17 @@
           En Homing tenemos el compromiso de dar un hogar a todos aquellos animales que lo necesiten.
         </p>
         <p class="home__question">¿Nos ayudas a conseguirlo?</p>
-        <div *ngIf="!this.auth" class="home__actions">
+        <div *ngIf="!user" class="home__actions">
           <app-button variant="primary" (click)="goToLogin()">Iniciar sesión</app-button>
           <app-button variant="secondary" (click)="goToRegister()">Registrate</app-button>
         </div>
-        <div *ngIf="this.auth" class="home__actions">
-          <app-button *ngIf="this.auth.role_id == 2" variant="primary" (click)="goToAnimals()">Ver mascotas</app-button>
-          <app-button *ngIf="this.auth.role_id == 3 || 4"variant="primary" (click)="goToPublicAnimals()">Publicar mascotas</app-button>
-          <app-button *ngIf="this.auth.role_id == 3 || 4"variant="outline" (click)="goToAnimals()">Ver mascotas</app-button>
+        <div *ngIf="user" class="home__actions">
+          <app-button *ngIf="role == 2" variant="primary" (click)="goToAnimals()">Ver mascotas</app-button>
+          <app-button *ngIf="role == 3 || role == 4" variant="primary" (click)="goToPublicAnimals()">Publicar mascotas</app-button>
+          <app-button *ngIf="role == 3 || role == 4" variant="outline" (click)="goToAnimals()">Ver mascotas</app-button>
+          {{user}}
+          {{role}}
+
         </div>
       </div>
     </div>

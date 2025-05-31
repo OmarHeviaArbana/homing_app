@@ -8,8 +8,6 @@ import { Location } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/Shared/Components/dialog/dialog.component';
 import * as AnimalActions from '../../actions';
-import { Observable } from 'rxjs';
-import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
 
 @Component({
   selector: 'app-create-animal',
@@ -38,9 +36,7 @@ export class CreateAnimalComponent {
     this.store.select('auth').subscribe((auth) => {
       this.auth = auth?.user;
       this.user = this.auth
-      console.log(this.user.shelter.id);
-
-    });
+     });
     }
 
     onAnimalFormReady(form: FormGroup) {
@@ -70,8 +66,8 @@ export class CreateAnimalComponent {
     openDialog(): void {
       this.dialog.open(DialogComponent, {
         data: {
-          title: 'Confirmación',
-          content: '¿Estás seguro de que deseas continuar, se perderan los datos de la mascota ya cumplimentados?',
+          title: 'Atención',
+          content: '¿Estás seguro/a de que deseas continuar, ya que se perderan los datos de la mascota ya cumplimentados?',
           onConfirm: () => this.cancel()
         }
       });
@@ -79,6 +75,6 @@ export class CreateAnimalComponent {
     cancel() {
       this.formPublicAnimal.reset();
       this.location.back();
-  }
+    }
 
 }

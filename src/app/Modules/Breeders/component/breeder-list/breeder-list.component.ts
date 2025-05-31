@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BreederDTO } from '../../models/breeder.dto';
 import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './breeder-list.component.html',
   styleUrls: ['./breeder-list.component.scss']
 })
-export class BreederListComponent {
+export class BreederListComponent implements OnInit{
   breeders$: Observable<BreederDTO[]>;
   user$: Observable<UserDTO | null> = null!;
   loading$: Observable<boolean>;

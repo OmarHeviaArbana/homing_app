@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AnimalActions from '../actions/animal.action';
 import { AnimalService } from '../services/animial.service'
-import { catchError, exhaustMap, map, mergeMap, switchMap, tap, timeout, withLatestFrom } from 'rxjs/operators';
+import { catchError, exhaustMap, finalize, map, mergeMap, switchMap, tap, timeout, withLatestFrom } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -280,6 +280,63 @@ deleteAnimal$ = createEffect(() =>
         )
       )
     )
+  );
+
+applicationAnimal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AnimalActions.applicationAnimal),
+      exhaustMap(({ application }) =>
+        this.animalService.applicationAnimal(application).pipe(
+          map(application => {
+            this.responseOK = true;
+            return AnimalActions.applicationAnimalSuccess({ application: application });
+          }),
+          catchError((error: HttpErrorResponse) => {
+
+             this.errorResponse = {
+              message: error.error?.message || 'Error en el registro',
+              errors: error.error?.errors || {}
+            };
+
+            return of(AnimalActions.applicationAnimalFailure({
+              payload: this.errorResponse
+            }));
+          }),
+          finalize(async () => {
+            if (this.responseOK) {
+              const response = 'Solicitud de adopción enviada con éxito. Pronto nos podremos en contacto contigo a través de correo electrónico'
+              this.sharedService.managementToast('applicationAnimalSuccessFeedback', this.responseOK, response);
+              this.router.navigateByUrl('/mascotas');
+            }
+          })
+        )
+      )
+    )
+  );
+
+  applicationAnimalSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AnimalActions.applicationAnimalSuccess),
+        map((action) => {
+          const response = 'Solicitud de adopción enviada con éxito. Pronto nos podremos en contacto contigo a través de correo electrónico'
+          this.sharedService.managementToast('applicationAnimalSuccessFeedback', this.responseOK, response);
+        })
+      ),
+    { dispatch: false }
+  );
+
+  applicationAnimalFailure$ = createEffect(() =>
+    this.actions$.pipe(
+    ofType(AnimalActions.applicationAnimalFailure),
+    tap(({ payload }) => {
+          this.responseOK = false;
+
+          this.errorResponse =  payload ? payload.message : "Se ha producido un problema y no se creado lal solicitud. Vuelve a intentarlo"
+          this.sharedService.managementToast('applicationAnimalFeedback', this.responseOK, this.errorResponse);
+        })
+    ),
+    { dispatch: false }
   );
 
 }

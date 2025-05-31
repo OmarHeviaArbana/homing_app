@@ -1,4 +1,4 @@
-  import { Component } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
   import { combineLatest, Observable, of, Subject } from 'rxjs';
   import { AnimalDTO } from '../../models/animal.dto';
   import { AppState } from 'src/app/app.reducers';
@@ -14,7 +14,7 @@
     templateUrl: './animals-list.component.html',
     styleUrls: ['./animals-list.component.scss']
   })
-  export class AnimalsListComponent {
+  export class AnimalsListComponent implements OnInit{
 
   animals$: Observable<AnimalDTO[]>;
   user$: Observable<UserDTO | null> = null!;

@@ -3,10 +3,12 @@ import * as AnimalActions from '../actions/animal.action'
 import { AnimalDTO } from '../models/animal.dto';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
 import { AnimalPhotoDTO } from '../models/animal-photo.dto';
+import { AnimalApplicationDTO } from '../models/animal-application';
 
 export interface AnimalState {
   animals: AnimalDTO[];
   animalDetail: AnimalDTO[];
+  application: AnimalApplicationDTO | null;
   species: AuxiliarEntityDTO[],
   status: AuxiliarEntityDTO[];
   ageCategories: AuxiliarEntityDTO[];
@@ -24,6 +26,7 @@ export interface AnimalState {
 export const initialState: AnimalState = {
   animals: [],
   animalDetail: [],
+  application: null,
   species:[],
   status: [],
   ageCategories: [],
@@ -292,6 +295,26 @@ export const animalReducer = createReducer(
     ...state,
     error,
     loading: false,
+  })),
+
+   on(AnimalActions.applicationAnimal, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(AnimalActions.applicationAnimalSuccess, (state,  {application} ) => ({
+    ...state,
+    application,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(AnimalActions.applicationAnimalFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
   })),
 
 );

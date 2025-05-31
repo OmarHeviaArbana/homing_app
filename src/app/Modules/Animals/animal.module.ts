@@ -16,6 +16,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AnimalsListComponent } from './components/animal-list//animals-list.component';
 import { DetailAnimalComponent } from './components/detail-animal/detail-animal.component';
 import { AnimalDataTableComponent } from './components/animal-data-table/animal-data-table.component';
+import { ApplicationAnimalComponent } from './components/application-animal/application-animal.component';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { AnimalDataTableComponent } from './components/animal-data-table/animal-
     AnimalsListComponent,
     DetailAnimalComponent,
     AnimalDataTableComponent,
+    ApplicationAnimalComponent,
+
   ],
   imports: [
     CommonModule,
@@ -38,7 +42,7 @@ import { AnimalDataTableComponent } from './components/animal-data-table/animal-
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
 })
 export class AnimalModule {}

@@ -17,7 +17,9 @@ import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
 
 export class HomeComponent implements OnInit {
   animals: AnimalDTO[];
-  auth: UserDTO | null = null;
+  auth: any | null = null;
+  user: any;
+  role: any;
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
   currentSlide = 0;
@@ -29,8 +31,13 @@ export class HomeComponent implements OnInit {
       this.animals = animals.animals;
     });
     this.store.select('auth').subscribe((auth) => {
-      this.auth = auth?.user;
-    });
+      this.auth = auth;
+      this.user = this.auth.user !== null ? this.auth.user : null
+      this.role = this.user !== null ? this.user.role_id : null
+     });
+
+     console.log(this.user)
+     console.log(this.role)
 
     this.loading$ = this.store.select((state) => state.auth.loading);
     this.loaded$ = this.store.select((state) => state.auth.loaded);

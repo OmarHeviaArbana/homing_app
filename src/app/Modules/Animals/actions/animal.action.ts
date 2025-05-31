@@ -3,6 +3,7 @@ import { AnimalDTO } from '../models/animal.dto';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AnimalPhotoDTO } from '../models/animal-photo.dto';
+import { AnimalApplicationDTO } from '../models/animal-application';
 
 export const getAllAnimals = createAction(
   '[Animals] Load Animals',
@@ -190,6 +191,21 @@ export const getHousingStagesAuxSuccess = createAction(
 export const getHousingStagesAuxFailure = createAction(
   '[HousingStages] Load Housing Stages Failure',
   props<{ error: any }>()
+);
+
+export const applicationAnimal = createAction(
+  '[Application Page] Application',
+  props<{ application: AnimalApplicationDTO }>()
+);
+
+export const applicationAnimalSuccess = createAction(
+  '[Application Page] Application Success',
+  props<{ application: AnimalApplicationDTO;  }>()
+);
+
+export const applicationAnimalFailure = createAction(
+  '[Application Page] Application Failure',
+  props<{ payload: HttpErrorResponse }>()
 );
 
 

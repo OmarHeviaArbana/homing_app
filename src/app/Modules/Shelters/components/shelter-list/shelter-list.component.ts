@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/app.reducers';
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   templateUrl: './shelter-list.component.html',
   styleUrls: ['./shelter-list.component.scss']
 })
-export class ShelterListComponent {
+export class ShelterListComponent implements OnInit {
 
   shelters$: Observable<ShelterDTO[]>;
   user$: Observable<UserDTO | null> = null!;

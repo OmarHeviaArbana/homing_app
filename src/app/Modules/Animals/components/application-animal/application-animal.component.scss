@@ -1,10 +1,32 @@
 @use '/src/assets/styles/variables' as vars;
-.public {
-  margin: 32px;
+
+.application {
+  &__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 75vh;
+    width: 100%;
+    margin: auto;
+    max-width: 600px;
+  }
+ &__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  max-width: 600px;
+  gap: 20px;
+  margin: 0;
+
+}
+
   &__title {
   font-size: vars.$font-size-26;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
   &__actions {
@@ -21,23 +43,14 @@
        justify-content: center;
     }
   }
-  &__container {
-    margin-top: 40px;
-    &-form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
-  }
+
 }
 
-.error {
-  color: red;
+.mat-mdc-form-field {
+   min-width: 300px;
 }
-
-#createAnimalFeedback , #registerBreederFeedback, #registerShelterFeedback {
-  visibility: hidden;
+#applicationAnimalSuccessFeedback, #applicationAnimalFeedback {
+   visibility: hidden;
   min-width: 250px;
   color: #fff;
   text-align: center;
@@ -54,18 +67,17 @@
   right: 0;
   width: 80%;
   max-width: 500px;
-
 }
 
-#createAnimalFeedback.requestOk , #createAnimalSuccessFeedback.requestOk  {
-  background-color: vars.$color-primary;
+#applicationAnimalSuccessFeedback.requestOk , #applicationAnimalFeedback.requestOk{
+    background-color: vars.$color-primary;
 }
 
-#createAnimalFeedback.requestKo, #createAnimalSuccessFeedback.requestKo  {
-  background-color: vars.$color-warn;
+#applicationAnimalSuccessFeedback.requestKo , #applicationAnimalFeedback.requestKo{
+   background-color: vars.$color-warn;
 }
 
-#createAnimalFeedback.show, #createAnimalSuccessFeedback.show {
+#applicationAnimalSuccessFeedback.show , #applicationAnimalFeedback.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;

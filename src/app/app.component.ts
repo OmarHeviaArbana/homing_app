@@ -10,7 +10,7 @@ import { ApiAuthService } from './Shared/Services/api-auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'homing-app';
   constructor(private store: Store<AppState>,private apiAuthService: ApiAuthService ) {}
 

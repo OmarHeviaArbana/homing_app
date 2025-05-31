@@ -97,7 +97,7 @@
 }
 
 
-#createAnimalSuccessFeedback, #createAnimalFeedback {
+#createAnimalSuccessFeedback, #createAnimalFeedback  , #applicationAnimalSuccessFeedback{
    visibility: hidden;
   min-width: 250px;
   color: #fff;
@@ -116,15 +116,15 @@
   width: 80%;
   max-width: 500px;
 }
-#createAnimalSuccessFeedback.requestOk , #createAnimalFeedback.requestOk {
+#createAnimalSuccessFeedback.requestOk , #createAnimalFeedback.requestOk, #applicationAnimalSuccessFeedbackOk {
   background-color: vars.$color-primary;
 }
 
-#createAnimalSuccessFeedback.requestKo  , #createAnimalFeedback.requestKo {
+#createAnimalSuccessFeedback.requestKo  , #createAnimalFeedback.requestKo , #applicationAnimalSuccessFeedback.requestKo {
   background-color: vars.$color-warn
 }
 
-#createAnimalSuccessFeedback.show , #createAnimalFeedback.show{
+#createAnimalSuccessFeedback.show , #createAnimalFeedback.show , #applicationAnimalSuccessFeedback{
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;

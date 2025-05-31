@@ -12,7 +12,7 @@ import { AppState } from 'src/app/app.reducers';
   styleUrls: ['./create-animal-form.component.scss']
 })
 
-export class CreateAnimalFormComponent {
+export class CreateAnimalFormComponent implements OnInit{
    @Output() formReady = new EventEmitter<FormGroup>();
 
     formPublicAnimal!: FormGroup;

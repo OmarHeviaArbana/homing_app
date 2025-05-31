@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   form!: FormGroup;
   formUser!: FormGroup;
   formShelter!: FormGroup;

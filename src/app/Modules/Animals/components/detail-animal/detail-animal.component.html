@@ -13,11 +13,6 @@
           </button>
 
           <div class="carousel__container" >
-           <!--  <img
-              [src]="images[currentIndex]"
-              [alt]="'Imagen ' + (currentIndex + 1)"
-              class="carousel__image"
-            > -->
             <img
               src="/assets/img/dog-287420_1920.jpg"
               [alt]="'Imagenes de la mascota'"
@@ -51,9 +46,14 @@
           <app-button variant="outline" (click)="goToBack()" [fullWidth]="true">
             Volver a listado
           </app-button>
-          <app-button variant="primary" [fullWidth]="true">
+          <app-button *ngIf="role == 2" variant="primary" (click)="goToApplicationAnimal(animal)" [fullWidth]="true">
             Solicitar adopción
           </app-button>
+          <app-button *ngIf="role == 3 || role == 4" variant="terciary" (click)="goToApplicationAnimal(animal.id)" [fullWidth]="true">
+            Editar mascota
+          </app-button>
+
+          {{role}}
         </div>
       </div>
     </section>

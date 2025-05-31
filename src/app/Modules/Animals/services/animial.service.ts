@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
 import { addAnimalPhotos } from '../actions/animal.action';
 import { AnimalPhotoDTO } from '../models/animal-photo.dto';
+import { AnimalApplicationDTO } from '../models/animal-application';
 
 @Injectable({
   providedIn: 'root',
@@ -83,6 +84,12 @@ export class AnimalService {
     return this.http
     .get<AuxiliarEntityDTO[]>(`${this.API_URL}/housing-stages`)
     .pipe(catchError(this.sharedService.handleError));
+  }
+
+  applicationAnimal(application: AnimalApplicationDTO): Observable<AnimalApplicationDTO> {
+  return this.http
+    .post<{message: string; application: AnimalApplicationDTO}>(`${this.API_URL}/applications/create`, application)
+    .pipe( map(response => response.application), catchError(this.sharedService.handleError));
   }
 
 
