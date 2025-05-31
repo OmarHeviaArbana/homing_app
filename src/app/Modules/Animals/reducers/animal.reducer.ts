@@ -6,6 +6,7 @@ import { AnimalPhotoDTO } from '../models/animal-photo.dto';
 
 export interface AnimalState {
   animals: AnimalDTO[];
+  animalDetail: AnimalDTO[];
   species: AuxiliarEntityDTO[],
   status: AuxiliarEntityDTO[];
   ageCategories: AuxiliarEntityDTO[];
@@ -22,6 +23,7 @@ export interface AnimalState {
 
 export const initialState: AnimalState = {
   animals: [],
+  animalDetail: [],
   species:[],
   status: [],
   ageCategories: [],
@@ -56,6 +58,27 @@ export const animalReducer = createReducer(
     ...state,
     error,
     loading: false,
+  })),
+
+
+   on(AnimalActions.getAnimalById, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(AnimalActions.getAnimalByIdSuccess, (state,  {animalDetail} ) => ({
+    ...state,
+    animalDetail,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(AnimalActions.getAnimalByIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
   })),
 
   on(AnimalActions.createAnimal, (state) => ({

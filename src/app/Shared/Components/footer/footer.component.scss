@@ -7,6 +7,10 @@
   justify-content:  center;
   padding:          32px;
   margin-top:       50px;
+  position: relative;
+  bottom: 0;
+  width: calc(100% - 64px);
+
   background-color: vars.$color-primary;
   @media (min-width:vars.$breakpoint-md) {
     flex-direction: column;

@@ -1,0 +1,65 @@
+import { Component } from '@angular/core';
+import { AnimalDTO } from '../../models/animal.dto';
+import { ActivatedRoute } from '@angular/router';
+import { AppState } from 'src/app/app.reducers';
+import { Store } from '@ngrx/store';
+import * as AnimalActions from './../../actions';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-detail-animal',
+  templateUrl: './detail-animal.component.html',
+  styleUrls: ['./detail-animal.component.scss']
+})
+export class DetailAnimalComponent {
+
+  animalDetail$: Observable<any| null>;
+  animalId: string;
+  imageList$!: Observable<string[]>;
+  currentIndex = 0;
+  mainData!: Observable<{ label: string; value: string | number | boolean }[]>;
+  healthData!: Observable<{ label: string; value: string | number | boolean}[]>;
+
+   constructor( private activatedRoute: ActivatedRoute, private store: Store<AppState>
+  ) {
+    this.animalId = this.activatedRoute.snapshot.paramMap.get('id') ?? '';
+    this.animalDetail$ = this.store.select(state => state.animals.animalDetail);
+
+this.mainData = this.animalDetail$.pipe(
+  map(animal => animal ? [
+    { label: 'Sexo', value: animal.genre?.name || 'N/D' },
+    { label: 'Edad', value: animal.age_category?.name || 'N/D' },
+    { label: 'Peso', value: animal.weight ? `${animal.weight} Kg` : 'N/D' },
+    { label: 'Cruz', value: animal.height ? `${animal.height} cm` : 'N/D' },
+    { label: 'Tamaño', value: animal.size?.name || 'N/D' },
+    { label: 'Energía', value: animal.energy_level?.name || 'N/D' }
+  ] : [])
+);
+
+  this.healthData = this.animalDetail$.pipe(
+    map(animal => animal ? [
+      { label: 'Identificador', value: animal.identifier},
+      { label: 'Vacunas', value: animal.vaccines },
+      { label: 'Esterilizada', value: animal.sterilization },
+      { label: 'Cuidados especiales', value: animal.care  }
+      ] : [])
+  );
+  this.loadDetailAnimal()
+  }
+
+  loadDetailAnimal(): void {
+    if (this.animalId) {
+      this.store.dispatch(AnimalActions.getAnimalById({ animalId: this.animalId }));
+    }
+  }
+
+  nextImage(length: number): void {
+    this.currentIndex = (this.currentIndex + 1) % length;
+  }
+
+  prevImage(length: number): void {
+    this.currentIndex = (this.currentIndex - 1 + length) % length;
+  }
+
+}

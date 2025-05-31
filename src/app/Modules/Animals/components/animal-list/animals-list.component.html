@@ -49,12 +49,12 @@
   </mat-select>
 </mat-form-field>
 </section>
-<section  *ngIf="filteredAnimals$ | async as animals" class="section" >
-    <div class="section__card" *ngFor="let animal of animals">
-      <app-card [animal]="animal"></app-card>
+<section class="section" >
+    <div class="section__card" *ngFor="let animal of filteredAnimals$ | async">
+      <app-card [animal]="animal" (click)="goToAnimalDetail(animal.id)" ></app-card>
     </div>
     <app-no-data
-      *ngIf="animals.length === 0"
+     *ngIf="(filteredAnimals$ | async)?.length === 0"
       [title]="'Sin resultados'"
       [content]="'En estos momentos no hemos encontrado una mascota con los filtros seleccionados. ¡Sigue buscando, muchas te están esperando!'"
     ></app-no-data>

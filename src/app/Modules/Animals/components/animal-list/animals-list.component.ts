@@ -1,13 +1,13 @@
   import { Component } from '@angular/core';
   import { combineLatest, Observable, of, Subject } from 'rxjs';
-  import { AuthDTO } from 'src/app/Modules/Auth/models/auth.dto';
   import { AnimalDTO } from '../../models/animal.dto';
   import { AppState } from 'src/app/app.reducers';
   import { Store } from '@ngrx/store';
   import * as AnimalActions from './../../actions';
   import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
-import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
-import { map, startWith } from 'rxjs/operators';
+  import { AuxiliarEntityDTO } from 'src/app/Shared/Models/auxiliar-entity.dto';
+  import { map, startWith } from 'rxjs/operators';
+  import { Router } from '@angular/router';
 
   @Component({
     selector: 'app-animals-list',
@@ -15,7 +15,6 @@ import { map, startWith } from 'rxjs/operators';
     styleUrls: ['./animals-list.component.scss']
   })
   export class AnimalsListComponent {
-
 
   animals$: Observable<AnimalDTO[]>;
   user$: Observable<UserDTO | null> = null!;
@@ -35,7 +34,7 @@ import { map, startWith } from 'rxjs/operators';
   private filtersChanged$ = new Subject<void>();
   private destroy$ = new Subject<void>();
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router,) {
     this.animals$ = this.store.select(state => state.animals.animals);
     this.user$ = this.store.select(state => state.user.user);
     this.loading$ = this.store.select(state => state.animals.loading);
@@ -69,7 +68,6 @@ import { map, startWith } from 'rxjs/operators';
     this.store.dispatch(AnimalActions.getGenresAux());
   }
 
-
   onFilterChange(): void {
     this.filtersChanged$.next();
   }
@@ -82,6 +80,10 @@ import { map, startWith } from 'rxjs/operators';
       (!this.selectedGenre || animal.genre_id === this.selectedGenre) &&
       (!this.selectedStatus || animal.status_id === this.selectedStatus)
     );
+  }
+
+  goToAnimalDetail(animalId: number) {
+    this.router.navigateByUrl('/detalle-mascota/' + animalId);
   }
 
   ngOnDestroy(): void {

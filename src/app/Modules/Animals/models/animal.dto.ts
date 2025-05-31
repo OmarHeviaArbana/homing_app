@@ -13,6 +13,7 @@ export interface AnimalDTO {
   care: string;
   created_at: string;
   updated_at: string;
+  images: [];
   principal_image: string,
   optional_image_one: string,
   optional_image_two: string,

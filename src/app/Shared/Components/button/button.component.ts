@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'text' | 'card' | 'dialog-close' | 'dialog-action' | 'Disponible' | 'enAdopcion'  | 'Urgente' | 'card-shelter-breeder';
+export type ButtonVariant = 'primary' | 'secondary' | 'accent'| 'terciary' | 'outline' | 'text' | 'card' | 'dialog-close' | 'dialog-action' | 'Disponible' | 'enAdopcion'  | 'Urgente' | 'card-shelter-breeder';
 
 @Component({
   selector: 'app-button',

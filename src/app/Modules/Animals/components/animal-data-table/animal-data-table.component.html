@@ -1,0 +1,18 @@
+<div class="data-table">
+  <h2 class="data-table__title">{{ title }}</h2>
+  <div class="data-table__content">
+    <div class="data-table__row" *ngFor="let data of item">
+      <div class="data-table__label">{{ data.label }}</div>
+
+      <div class="data-table__value">
+        <ng-container *ngIf="!isBoolean(data.value); else checkboxTpl">
+          {{ data.value }}
+        </ng-container>
+        <ng-template #checkboxTpl>
+          <mat-checkbox [checked]="data.value" class="input-checkbox" disabled></mat-checkbox>
+        </ng-template>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,8 +1,6 @@
 @use '/src/assets/styles/variables' as vars;
 .public {
   margin: 32px;
-
-
   @media (min-width: vars.$breakpoint-md) {
     padding: 48px 0;
 
@@ -25,7 +23,6 @@
     @media (min-width: vars.$breakpoint-md) {
       flex-direction: row-reverse;
        justify-content: center;
-
     }
   }
   &__container {
@@ -34,7 +31,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-     /*    background-color: vars.$color-gray; */
         padding: 20px;
     }
   }

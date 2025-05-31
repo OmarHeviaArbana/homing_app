@@ -18,6 +18,21 @@ export const getAllAnimalsFailure = createAction(
   props<{ error: any }>()
 );
 
+export const getAnimalById = createAction(
+  '[AnimalForm Page] Get Animal',
+  props<{ animalId: string }>()
+);
+export const getAnimalByIdSuccess = createAction(
+  '[AnimalForm Page] Get Animal Success',
+  props<{ animalDetail: AnimalDTO[] }>()
+);
+
+export const getAnimalByIdFailure = createAction(
+  '[AnimalForm Page] Get Animal Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+
 export const createAnimal = createAction(
   '[Create Animal Page] Create Animal ',
   props<{ animal: AnimalDTO}>()

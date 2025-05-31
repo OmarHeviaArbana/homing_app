@@ -107,7 +107,7 @@
       z-index:          1;
       width:            97%;
       height:           100%;
-      background-color: vars.$color-gray;
+      background-color: vars.$color-primary;
       @media (min-width: vars.$breakpoint-md) { bottom: -3%; }
     }
   }
@@ -116,7 +116,6 @@
   &__list {
       gap: 30px;
       padding: 30px;
-      border-radius: 8px;
       background-color: vars.$color-gray;
       display: grid;
       grid-template-columns: 1fr;

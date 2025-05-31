@@ -62,7 +62,6 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserActions.registerSuccess),
         map((action) => {
-          console.log(action);
           if(action.user.role_id  === 2) {
           const response = 'Registro a punto de finalizar. Haz login con las credenciales de usuario para finalizarlo.'
           this.sharedService.managementToast('registerFeedback', this.responseOK, response);

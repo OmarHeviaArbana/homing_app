@@ -6,14 +6,11 @@
   <div class="public__container">
     <h1 class="public__title">Publicar mascota</h1>
 
-
       <form [formGroup]="form" (ngSubmit)="publicAnimal()" class="public__form">
 
       <app-create-animal-form
         (formReady)="onAnimalFormReady($event)">
       </app-create-animal-form>
-
-
 
         <div class="public__actions">
          <app-button
@@ -27,7 +24,6 @@
       <app-button variant="outline" (click)="openDialog()">Cancelar</app-button>
       </div>
       </form>
-      <!-- <app-dialog></app-dialog> -->
     </div>
 </section>
 

@@ -1,0 +1,45 @@
+@use '/src/assets/styles/variables' as vars;
+
+.data-table {
+  background-color: vars.$color-white;
+  border-radius: 0px;
+  overflow: hidden;
+
+  &__title {
+    background-color: vars.$color-primary;
+    color: vars.$color-text;
+    padding: 8px;
+    margin: 0;
+    font-size: vars.$font-size-16;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &__content {
+    padding: 0px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 0.5px solid vars.$color-primary;
+    align-items: center;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__label {
+    color: vars.$color-text;
+    font-weight: 600;
+    font-size: vars.$font-size-16;
+  }
+
+  &__value {
+    color: vars.$color-text;
+    font-weight: 400;
+    text-align: right;
+    font-size: vars.$font-size-16;
+  }
+}

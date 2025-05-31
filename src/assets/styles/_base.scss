@@ -9,7 +9,7 @@ html, .mat-typography, .mat-typography h1 , .mat-typography h2, .mat-typography 
 }
 
 
-html, body { height: 100%; background-color: rgb(238, 238, 238) }
+html, body { height: 100%; background-color: vars.$color-white }
 body { margin: 0 }
 a {
   color: vars.$color-text;

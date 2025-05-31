@@ -10,6 +10,7 @@ import { AnimalsListComponent } from './Modules/Animals/components/animal-list/a
 import { ShelterListComponent } from './Modules/Shelters/components/shelter-list/shelter-list.component';
 import { DetailShelterComponent } from './Modules/Shelters/components/detail-shelter/detail-shelter.component';
 import { BreederListComponent } from './Modules/Breeders/component/breeder-list/breeder-list.component';
+import { DetailAnimalComponent } from './Modules/Animals/components/detail-animal/detail-animal.component';
 
 
 const routes: Routes = [
@@ -39,11 +40,15 @@ const routes: Routes = [
     component: AnimalsListComponent,
   },
   {
+    path: 'detalle-mascota/:id',
+    component: DetailAnimalComponent,
+  },
+  {
     path: 'refugios',
     component: ShelterListComponent,
   },
   {
-    path: 'detelle-refugio',
+    path: 'detalle-refugio',
     component: DetailShelterComponent,
   },
   {

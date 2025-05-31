@@ -1,0 +1,61 @@
+<div class="animal-detail">
+  <div class="container" *ngIf="animalDetail$ | async as animal" >
+    <header class="animal-detail__header">
+      <h1 class="animal-detail__title">{{animal.name}}</h1>
+      <app-badge [variant]="animal.status?.name == 'En adopción' ? 'enAdopcion' : animal.status?.name">{{ animal.status?.name }}</app-badge>
+    </header>
+
+    <div class="animal-detail__content" >
+      <div class="animal-detail__main">
+        <div class="carousel">
+          <button class="carousel__arrow carousel__arrow--prev" (click)="prevImage(1)" [attr.aria-label]="'Imagen anterior'">
+            <mat-icon>arrow_back_ios</mat-icon>
+          </button>
+
+          <div class="carousel__container" >
+           <!--  <img
+              [src]="images[currentIndex]"
+              [alt]="'Imagen ' + (currentIndex + 1)"
+              class="carousel__image"
+            > -->
+            <img
+               src="/assets/img/dog-287420_1920.jpg"
+              [alt]="'Imagen ' "
+              class="carousel__image"
+            >
+          </div>
+        <button class="carousel__arrow carousel__arrow--next" (click)="nextImage(2)" [attr.aria-label]="'Imagen siguiente'">
+          <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+        </div>
+        <div class="animal-detail__location">
+          <img src="/assets/icons/location.png" [alt]="animal.location" class="animal-detail__location-icon">
+            <span class="animal-detail__location-text">{{ animal.location }}
+          </span>
+        </div>
+        <p class="animal-detail__description">
+         {{animal.description}} La raza labrador retriever es una de las razas favoritas en Inglaterra y Estados Unidos. Pero también es uno de los cachorros más éxito en muchos países europeos. Esto se debe a que, además de tener un vínculo especial con las personas, es muy obediente. La agresividad, la timidez, el miedo o la inseguridad son desconocidos en esta raza tan sociable.
+        </p>
+      </div>
+      <div class="animal-detail__data">
+        <app-animal-data-table
+          title="Datos principales"
+              [item]="mainData | async"
+        ></app-animal-data-table>
+
+        <app-animal-data-table
+          title="Datos del animal"
+          [item]="healthData | async"
+        ></app-animal-data-table>
+        <div class="animal-detail__actions">
+          <app-button variant="primary" [fullWidth]="true">
+            Solicitar adopción
+          </app-button>
+          <app-button variant="terciary" [fullWidth]="true">
+            Guardar
+          </app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

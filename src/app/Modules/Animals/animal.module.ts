@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AnimalsListComponent } from './components/animal-list//animals-list.component';
+import { DetailAnimalComponent } from './components/detail-animal/detail-animal.component';
+import { AnimalDataTableComponent } from './components/animal-data-table/animal-data-table.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { AnimalsListComponent } from './components/animal-list//animals-list.com
     CreateAnimalComponent,
     CreateAnimalFormComponent,
     AnimalsListComponent,
+    DetailAnimalComponent,
+    AnimalDataTableComponent,
   ],
   imports: [
     CommonModule,

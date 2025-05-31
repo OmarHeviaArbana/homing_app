@@ -12,6 +12,6 @@ export class ShelterBreederCardComponent {
  constructor(private router: Router) {}
 
  onDetailAnimal(): void {
-  this.router.navigateByUrl('detelle-shelter');
+  this.router.navigateByUrl('detalle-shelter');
   }
 }

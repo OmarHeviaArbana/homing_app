@@ -5,12 +5,13 @@ import { CardComponent } from './Components/card/card.component';
 import { DialogComponent } from './Components/dialog/dialog.component';
 import { MatDialogModule} from '@angular/material/dialog';
 import { NoDataComponent } from './Components/no-data/no-data.component';
-import { ShelterBreederCardComponent } from './Components/shelter-breeder-card/shelter-breeder-card.component'
+import { ShelterBreederCardComponent } from './Components/shelter-breeder-card/shelter-breeder-card.component';
+import { BadgeComponent } from './Components/badge/badge.component'
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent],
+  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent],
   imports: [
   CommonModule,
   MatDialogModule
@@ -21,7 +22,8 @@ import { ShelterBreederCardComponent } from './Components/shelter-breeder-card/s
     CardComponent,
     DialogComponent,
     NoDataComponent,
-    ShelterBreederCardComponent
+    ShelterBreederCardComponent,
+    BadgeComponent
   ]
 })
 export class SharedModule { }

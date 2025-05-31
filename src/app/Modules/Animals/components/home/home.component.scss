@@ -162,7 +162,6 @@
   display: flex;
   align-items: center;
   padding: 30px;
-
   &__container {
     width: 100%;
     overflow: hidden;
@@ -181,12 +180,10 @@
     @media (min-width: vars.$breakpoint-md) {
       flex: 0 0 47%;
     }
-
     @media (min-width: vars.$breakpoint-lg) {
       flex: 0 0 25%;
     }
   }
-
   &__arrow {
     border: none;
     background-color: transparent;

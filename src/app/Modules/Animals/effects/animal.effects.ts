@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { AppState } from 'src/app/app.reducers';
 import { Store } from '@ngrx/store';
+import { AnimalDTO } from '../models/animal.dto';
 
 @Injectable()
 export class AnimalEffects {
@@ -38,6 +39,41 @@ export class AnimalEffects {
       )
     )
   );
+
+ getAnimalById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AnimalActions.getAnimalById),
+         switchMap(({ animalId }) =>
+        this.animalService.getAnimalById(animalId).pipe(
+          map((animalDetail) => AnimalActions.getAnimalByIdSuccess({ animalDetail })),
+          catchError((error) => of(AnimalActions.getAnimalByIdFailure({ payload: error })))
+        )
+      )
+      /* exhaustMap(({ animalId }) =>
+        this.animalService.getAnimalById(animalId).pipe(
+          map((animal: AnimalDTO) =>
+            AnimalActions.getAnimalByIdSuccess({ animal })
+          ),
+          catchError((error) =>
+            of(AnimalActions.getAnimalByIdSuccess({ payload: error }))
+          )
+        )
+      ) */
+    )
+  );
+
+ /*  getAnimalByIdFailure$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AnimalActions.getAnimalByIdFailure),
+        map((error) => {
+          this.errorResponse = error.payload.error;
+          this.sharedService.errorLog(error.payload.error);
+        })
+      ),
+    { dispatch: false }
+  ); */
+
 
   getSpeciesAux$ = createEffect(() =>
     this.actions$.pipe(

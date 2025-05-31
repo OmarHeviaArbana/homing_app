@@ -29,9 +29,6 @@ export class CreateAnimalComponent {
       this.form = this.formBuilder.group({
         animal: this.formPublicAnimal,
       });
-
-      console.log(this.form);
-
     }
 
     onAnimalFormReady(form: FormGroup) {
@@ -44,13 +41,10 @@ export class CreateAnimalComponent {
 
       const animal: AnimalDTO = this.formPublicAnimal.value;
 
-      console.log(animal);
-
-
-        if (this.formPublicAnimal.invalid) return;
-        const animalData: Partial<AnimalDTO> = this.formPublicAnimal.value;
-        this.store.dispatch(AnimalActions.saveAnimalFormData({ animalFormData: animalData }));
-        this.store.dispatch(AnimalActions.createAnimal({ animal }));
+      if (this.formPublicAnimal.invalid) return;
+      const animalData: Partial<AnimalDTO> = this.formPublicAnimal.value;
+      this.store.dispatch(AnimalActions.saveAnimalFormData({ animalFormData: animalData }));
+      this.store.dispatch(AnimalActions.createAnimal({ animal }));
     }
 
     openDialog(): void {
