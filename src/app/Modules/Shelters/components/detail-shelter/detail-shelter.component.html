@@ -1,1 +1,51 @@
-<p>detail-shelter works!</p>
+<div class="shelter-detail">
+  <div class="container" *ngIf="shelterDetail$ | async as shelter" >
+    <header class="shelter-detail__header">
+      <h1 class="shelter-detail__title">{{shelter.name}}</h1>
+      <app-badge variant="outline">Credencial de empresa certificada</app-badge>
+    </header>
+
+    <section class="shelter-detail__content" >
+      <div class="shelter-detail__main">
+      <img
+        src="/assets/img/dog-287420_1920.jpg"
+        [alt]="'Imagenes de la mascota'"
+        class="shelter-detail__image"
+      >
+        <div class="shelter-detail__location">
+          <img src="/assets/icons/location.png" [alt]="shelter.location" class="shelter-detail__location-icon">
+            <span class="shelter-detail__location-text">{{ shelter.location }}
+          </span>
+        </div>
+        <p class="shelter-detail__description">
+         {{shelter.description}} La raza labrador retriever es una de las razas favoritas en Inglaterra y Estados Unidos. Pero también es uno de los cachorros más éxito en muchos países europeos. Esto se debe a que, además de tener un vínculo especial con las personas, es muy obediente. La agresividad, la timidez, el miedo o la inseguridad son desconocidos en esta raza tan sociable.
+        </p>
+      </div>
+      <div class="shelter-detail__data">
+      <app-data-breeder-shelter-card
+          title="Información general"
+          [item]="shelterData | async">
+        </app-data-breeder-shelter-card>
+
+        <div class="shelter-detail__actions">
+          <app-button variant="outline" (click)="goToBack()" [fullWidth]="true">
+            Volver a listado de refugios y protectoras
+          </app-button>
+        </div>
+      </div>
+    </section>
+      <h1 class="shelter-detail__title-section">Mascotas del Refugio</h1>
+      <section class="section" >
+      <div class="section__card" *ngFor="let animal of animalsShelter$ | async">
+        <app-card [animal]="animal" (click)="goToAnimalDetail(animal.id)" ></app-card>
+      </div>
+      <app-no-data
+        class="section__card-nodata"
+        *ngIf="(animalsShelter$ | async)?.length === 0"
+        [title]="'Refugio sin mascotas publicadas'"
+        [content]="'Seguro que muy pronto, encontrarás aquí las mejores máscotas.'"
+      ></app-no-data>
+    </section>
+  </div>
+</div>
+

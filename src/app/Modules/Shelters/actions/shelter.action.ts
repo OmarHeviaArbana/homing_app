@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { ShelterDTO } from '../models/shelter.dto';
+import { AnimalDTO } from '../../Animals/models/animal.dto';
 
 export const getAllShelters = createAction(
   '[Shelters] Load Shelter',
@@ -14,6 +15,36 @@ export const getAllSheltersSuccess = createAction(
 export const getAllSheltersFailure = createAction(
   '[Shelters] Load Shelters Failure',
   props<{ error: any }>()
+);
+
+export const getShelterById = createAction(
+  '[ShelterForm Page] Get Shelter',
+  props<{ shelterId: string }>()
+);
+export const getShelterByIdSuccess = createAction(
+  '[ShelterForm Page] Get Shelter Success',
+  props<{ shelterDetail: ShelterDTO[] }>()
+);
+
+export const getShelterByIdFailure = createAction(
+  '[ShelterForm Page] Get Shelter Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+
+
+export const getAnimalsShelter = createAction(
+  '[AnimalsShelterForm Page] Get AnimalsShelter',
+  props<{ shelterId: string }>()
+);
+export const getAnimalsShelterSuccess = createAction(
+  '[AnimalsShelterForm Page] Get AnimalsShelter Success',
+  props<{ animalsShelter: AnimalDTO[] }>()
+);
+
+export const getAnimalsShelterFailure = createAction(
+  '[AnimalsShelterForm Page] Get AnimalsShelter Failure',
+  props<{ payload: HttpErrorResponse }>()
 );
 
 

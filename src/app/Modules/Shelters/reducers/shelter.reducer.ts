@@ -5,6 +5,8 @@ import { ShelterDTO } from '../models/shelter.dto';
 
 export interface ShelterState {
   shelters: ShelterDTO[];
+  shelterDetail: ShelterDTO[];
+  animalsShelter: ShelterDTO[];
   shelterFormData: Partial<ShelterDTO> | null;
   loading: boolean;
   loaded: boolean;
@@ -13,6 +15,8 @@ export interface ShelterState {
 
 export const initialState: ShelterState = {
   shelters: [],
+  shelterDetail: [],
+  animalsShelter: [],
   shelterFormData: null,
   loading: false,
   loaded: false,
@@ -49,6 +53,47 @@ const _shelterReducer = createReducer(
   on(ShelterActions.clearShelterFormData, state => ({
     ...state,
     shelterFormData: null,
+  })),
+
+  on(ShelterActions.getShelterById, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(ShelterActions.getShelterByIdSuccess, (state,  {shelterDetail} ) => ({
+    ...state,
+    shelterDetail,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(ShelterActions.getShelterByIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  })),
+
+
+  on(ShelterActions.getAnimalsShelter, (state) => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null,
+    })),
+  on(ShelterActions.getAnimalsShelterSuccess, (state,  {animalsShelter} ) => ({
+    ...state,
+    animalsShelter,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(ShelterActions.getAnimalsShelterFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
   })),
 
   on(ShelterActions.createShelterFailure, (state, { error, shelterToRegister}) => ({

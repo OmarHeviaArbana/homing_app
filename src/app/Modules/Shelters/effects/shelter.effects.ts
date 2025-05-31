@@ -39,6 +39,29 @@ export class ShelterEffects {
     )
   );
 
+  getShelterById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ShelterActions.getShelterById),
+          switchMap(({ shelterId }) =>
+        this.shelterService.getShelterById(shelterId).pipe(
+          map((shelterDetail) => ShelterActions.getShelterByIdSuccess({ shelterDetail })),
+          catchError((error) => of(ShelterActions.getShelterByIdFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
+  getAnimalsShelter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ShelterActions.getAnimalsShelter),
+          switchMap(({ shelterId }) =>
+        this.shelterService.getAnimalsShelter(shelterId).pipe(
+          map((animalsShelter) => ShelterActions.getAnimalsShelterSuccess({ animalsShelter })),
+          catchError((error) => of(ShelterActions.getAnimalsShelterFailure({ payload: error })))
+        )
+      )
+    )
+  );
 
   registerShelterAfterUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -85,8 +108,8 @@ export class ShelterEffects {
       this.actions$.pipe(
         ofType(ShelterActions.createShelterFailure),
         switchMap(({ error, shelterToRegister }) => {
-          const failerBreeder = shelterToRegister;
-          const id = failerBreeder.user_id
+          const failerShelter = shelterToRegister;
+          const id = failerShelter.user_id
           console.log(id);
           this.store.dispatch(UserActions.deleteUser({ id}));
 

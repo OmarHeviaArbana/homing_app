@@ -25,12 +25,12 @@
   </section>
 </article>
 <h1 class="shelter__title">Listado de colaboradores</h1>
-<section  *ngIf="shelters$ | async as shelters" class="shelter__list" >
-    <div class="shelter__list-card" *ngFor="let shelter of shelters">
-      <app-shelter-breeder-card [item]="shelter"></app-shelter-breeder-card>
+<section class="shelter__list" >
+    <div class="shelter__list-card" *ngFor="let shelter of shelters$ | async">
+      <app-shelter-breeder-card [item]="shelter" (click)="goToShelterDetail(shelter.id)"></app-shelter-breeder-card>
     </div>
     <app-no-data
-      *ngIf="shelters.length === 0"
+      *ngIf="(shelters$ | async)?.length === 0"
       [title]="'No tenemos registros de refugios o protectoras en estos momentos'"
       [content]="'Esperemos que en un muy poco tiempo puedas encontrar un espacio donde contactar con colaboradores que quieran atajar el problema de la adopción'"
     ></app-no-data>
