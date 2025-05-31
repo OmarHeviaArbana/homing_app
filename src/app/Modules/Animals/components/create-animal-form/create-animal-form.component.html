@@ -116,7 +116,6 @@
     <legend class="form__legend">Adjunta una fotografía principal</legend>
     <input type="file" id="principal-image" (change)="onImageSelected($event, 'principal_image')" formControlName="principal_image" accept="image/*" />
      <img *ngIf="imagePreviews.principal_image" [src]="imagePreviews.principal_image" width="150" />
-
     <mat-error *ngIf="principal_image?.invalid">{{ getErrorMessage('principal_image') }}</mat-error>
   </fieldset>
 

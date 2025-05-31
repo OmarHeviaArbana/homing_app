@@ -1,6 +1,5 @@
 @use '@angular/material' as mat;
-@use './variables' as *;
-
+@use './variables' as vars;
 
 $custom-primary: mat.define-palette(mat.$green-palette, 500);
 $custom-accent: mat.define-palette(mat.$brown-palette, 500);
@@ -13,9 +12,11 @@ $custom-theme: mat.define-light-theme((
     primary: $custom-primary,
     accent: $custom-accent,
     warn: $custom-warn,
+    focus: $custom-primary,
+    unselected: $custom-primary
   ),
   density: 0,
 ));
 
-// Aplica el tema
 @include mat.all-component-themes($custom-theme);
+

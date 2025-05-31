@@ -6,12 +6,13 @@ import { DialogComponent } from './Components/dialog/dialog.component';
 import { MatDialogModule} from '@angular/material/dialog';
 import { NoDataComponent } from './Components/no-data/no-data.component';
 import { ShelterBreederCardComponent } from './Components/shelter-breeder-card/shelter-breeder-card.component';
-import { BadgeComponent } from './Components/badge/badge.component'
+import { BadgeComponent } from './Components/badge/badge.component';
+import { DataBreederShelterCardComponent } from './Components/data-breeder-shelter-card/data-breeder-shelter-card.component'
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent],
+  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent, DataBreederShelterCardComponent],
   imports: [
   CommonModule,
   MatDialogModule
