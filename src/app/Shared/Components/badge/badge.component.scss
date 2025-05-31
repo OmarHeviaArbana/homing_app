@@ -36,9 +36,20 @@
     background-color: vars.$color-accent;
     color: vars.$color-white;
     font-size:  vars.$font-size-16;
-    font-weight: 300;
+    font-weight: 00;
     text-transform: capitalize;
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
 
+  &--outline {
+    background-color: vars.$color-white;
+    color: vars.$color-text;
+    border: 2px solid vars.$color-primary;
+    font-size:  vars.$font-size-16;
+    font-weight: 500;
+    text-transform: capitalize;
     &:active:not(:disabled) {
       transform: translateY(1px);
     }

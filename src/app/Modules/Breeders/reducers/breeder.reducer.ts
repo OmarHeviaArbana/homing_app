@@ -5,15 +5,18 @@ import { BreederDTO } from '../models/breeder.dto';
 
 export interface BreederState {
   breeders: BreederDTO[];
+  breederDetail: BreederDTO[];
+  animalsBreeder: BreederDTO[];
   breederFormData: Partial<BreederDTO> | null;
   loading: boolean;
   loaded: boolean;
   error: any;
-
 }
 
 export const initialState: BreederState = {
   breeders: [],
+  breederDetail: [],
+  animalsBreeder: [],
   breederFormData: null,
   loading: false,
   loaded: false,
@@ -49,6 +52,46 @@ const _breederReducer = createReducer(
     on(BreederActions.clearBreederFormData, state => ({
       ...state,
       breederFormData: null,
+    })),
+
+    on(BreederActions.getBreederById, (state) => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null,
+    })),
+    on(BreederActions.getBreederByIdSuccess, (state,  {breederDetail} ) => ({
+      ...state,
+      breederDetail,
+      loading: false,
+      loaded: true,
+      error: null,
+    })),
+    on(BreederActions.getBreederByIdFailure, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload },
+    })),
+
+    on(BreederActions.getAnimalsBreeder, (state) => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null,
+    })),
+    on(BreederActions.getAnimalsBreederSuccess, (state,  {animalsBreeder} ) => ({
+      ...state,
+      animalsBreeder,
+      loading: false,
+      loaded: true,
+      error: null,
+    })),
+    on(BreederActions.getAnimalsBreederFailure, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload },
     })),
 
     on(BreederActions.createBreederFailure, (state, { error, breederToRegister}) => ({

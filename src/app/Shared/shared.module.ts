@@ -8,6 +8,7 @@ import { NoDataComponent } from './Components/no-data/no-data.component';
 import { ShelterBreederCardComponent } from './Components/shelter-breeder-card/shelter-breeder-card.component';
 import { BadgeComponent } from './Components/badge/badge.component';
 import { DataBreederShelterCardComponent } from './Components/data-breeder-shelter-card/data-breeder-shelter-card.component'
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -15,7 +16,7 @@ import { DataBreederShelterCardComponent } from './Components/data-breeder-shelt
   declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent, DataBreederShelterCardComponent],
   imports: [
   CommonModule,
-  MatDialogModule
+  MatDialogModule,
 ]
   ,
   exports: [
@@ -24,7 +25,9 @@ import { DataBreederShelterCardComponent } from './Components/data-breeder-shelt
     DialogComponent,
     NoDataComponent,
     ShelterBreederCardComponent,
-    BadgeComponent
+    BadgeComponent,
+    DataBreederShelterCardComponent,
+    MatIconModule
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,54 @@
+@use '/src/assets/styles/variables' as vars;
+
+.data-card {
+  background-color: vars.$color-white;
+  border-radius: 0px;
+  overflow: hidden;
+  border: 1px solid vars.$color-primary;
+  border-radius: 8px;
+
+  &__title {
+    background-color: vars.$color-primary;
+    color: vars.$color-text;
+    padding: 8px;
+    margin: 0;
+    font-size: vars.$font-size-16;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  &__link {
+    cursor: pointer;
+    font-weight: 500;
+    color: vars.$color-primary;
+    font-weight: 700;
+  }
+
+  &__content {
+    padding: 20px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+
+    align-items: center;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__label {
+    color: vars.$color-text;
+    font-weight: 600;
+    font-size: vars.$font-size-16;
+  }
+
+  &__value {
+    color: vars.$color-text;
+    font-weight: 500;
+    text-align: right;
+    font-size: vars.$font-size-16;
+  }
+}

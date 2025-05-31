@@ -61,7 +61,7 @@ export const animalReducer = createReducer(
   })),
 
 
-   on(AnimalActions.getAnimalById, (state) => ({
+  on(AnimalActions.getAnimalById, (state) => ({
     ...state,
     loading: true,
     loaded: false,

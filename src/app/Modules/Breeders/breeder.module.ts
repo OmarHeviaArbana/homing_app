@@ -24,7 +24,7 @@ import { BreederListComponent } from './component/breeder-list/breeder-list.comp
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    SharedModule
+    SharedModule,
   ],
 })
 export class BreederModule {}

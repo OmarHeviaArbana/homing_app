@@ -18,6 +18,7 @@ export const getAllAnimalsFailure = createAction(
   props<{ error: any }>()
 );
 
+
 export const getAnimalById = createAction(
   '[AnimalForm Page] Get Animal',
   props<{ animalId: string }>()

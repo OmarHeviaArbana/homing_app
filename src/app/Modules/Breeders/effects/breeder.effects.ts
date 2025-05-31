@@ -24,17 +24,41 @@ export class BreederEffects {
     private sharedService: SharedService
   ) {}
 
-   getAllBreeder$ = createEffect(() =>
-      this.actions$.pipe(
-        ofType(BreederActions.getAllBreeders),
-        mergeMap(() =>
-          this.breederService.getAllBreeders().pipe(
-            map((breeders) => BreederActions.getAllBreedersSuccess({ breeders })),
-            catchError((error) => of(BreederActions.getAllBreedersFailure({ error })))
-          )
+  getAllBreeder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BreederActions.getAllBreeders),
+      mergeMap(() =>
+        this.breederService.getAllBreeders().pipe(
+          map((breeders) => BreederActions.getAllBreedersSuccess({ breeders })),
+          catchError((error) => of(BreederActions.getAllBreedersFailure({ error })))
         )
       )
-    );
+    )
+  );
+
+  getBreederById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BreederActions.getBreederById),
+          switchMap(({ breederId }) =>
+        this.breederService.getBreederById(breederId).pipe(
+          map((breederDetail) => BreederActions.getBreederByIdSuccess({ breederDetail })),
+          catchError((error) => of(BreederActions.getBreederByIdFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
+  getAnimalsBreeder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BreederActions.getAnimalsBreeder),
+          switchMap(({ breederId }) =>
+        this.breederService.getAnimalsBreeder(breederId).pipe(
+          map((animalsBreeder) => BreederActions.getAnimalsBreederSuccess({ animalsBreeder })),
+          catchError((error) => of(BreederActions.getAnimalsBreederFailure({ payload: error })))
+        )
+      )
+    )
+  );
 
 
   registerBreederAfterUser$ = createEffect(() =>

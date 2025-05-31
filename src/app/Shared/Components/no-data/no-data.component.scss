@@ -3,7 +3,8 @@
 .container {
   padding: 20px;
   background-color: vars.$color-white;
-  border: 1px solid vars.$color-primary;
+  border: 1px solid vars.$color-gray;
+  border-radius: 8px;
   &__title {
     color: vars.$color-primary;
   }

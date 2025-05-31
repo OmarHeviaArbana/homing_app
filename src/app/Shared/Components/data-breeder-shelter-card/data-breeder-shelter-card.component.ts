@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-data-breeder-shelter-card',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./data-breeder-shelter-card.component.scss']
 })
 export class DataBreederShelterCardComponent {
+  @Input() item: any
+  @Input() title = '';
 
 }

@@ -54,7 +54,7 @@
   }
 
   &__title {
-    margin: 10px 0 20px 0;
+    margin: 10px 0 30px 0;
     font-weight: 700;
     font-size: vars.$font-size-18;
     color: vars.$color-primary;
@@ -108,6 +108,8 @@
       width:            97%;
       height:           100%;
       background-color: vars.$color-primary;
+      border-radius:    8px;
+
       @media (min-width: vars.$breakpoint-md) { bottom: -3%; }
     }
   }
@@ -119,6 +121,7 @@
       background-color: vars.$color-gray;
       display: grid;
       grid-template-columns: 1fr;
+      border-radius: 8px;
       @media  (min-width: vars.$breakpoint-md ) {
         grid-template-columns: 1fr 1fr;
       }

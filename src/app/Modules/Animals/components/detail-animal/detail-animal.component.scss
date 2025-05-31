@@ -78,7 +78,7 @@
   &__data {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 40px;
   }
 
   &__actions {
@@ -132,10 +132,6 @@
     font-size: 24px;
     z-index: 2;
     transition: all 150ms ease;
-
-   /*  &:hover {
-      background-color: rgba(0, 0, 0, 0.7);
-    } */
 
     &--prev {
       left: 16px;

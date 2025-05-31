@@ -34,7 +34,7 @@
   private filtersChanged$ = new Subject<void>();
   private destroy$ = new Subject<void>();
 
-  constructor(private store: Store<AppState>, private router: Router,) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.animals$ = this.store.select(state => state.animals.animals);
     this.user$ = this.store.select(state => state.user.user);
     this.loading$ = this.store.select(state => state.animals.loading);

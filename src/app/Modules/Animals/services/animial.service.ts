@@ -35,10 +35,10 @@ export class AnimalService {
       return this.http.post<{ images: AnimalPhotoDTO[] }>(`${this.API_URL}/animal-images/add`,data);
   }
 
- getAnimalById(animalId: string): Observable<AnimalDTO[]> {
-  return this.http.get<AnimalDTO[]>(`${this.API_URL}/animals/getAnimal/${animalId}`);
-}
-/* map(response => response), */
+  getAnimalById(animalId: string): Observable<AnimalDTO[]> {
+    return this.http.get<AnimalDTO[]>(`${this.API_URL}/animals/getAnimal/${animalId}`);
+  }
+
   deleteAnimal(id: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/animals/delete/${id}`);
   }

@@ -1,0 +1,51 @@
+<div class="breeder-detail">
+  <div class="container" *ngIf="breederDetail$ | async as breeder" >
+    <header class="breeder-detail__header">
+      <h1 class="breeder-detail__title">{{breeder.name}}</h1>
+      <app-badge variant="outline">Certificado con núcleo zoológico</app-badge>
+    </header>
+
+    <section class="breeder-detail__content" >
+      <div class="breeder-detail__main">
+      <img
+        src="/assets/img/dog-287420_1920.jpg"
+        [alt]="'Imagenes de la mascota'"
+        class="breeder-detail__image"
+      >
+        <div class="breeder-detail__location">
+          <img src="/assets/icons/location.png" [alt]="breeder.location" class="breeder-detail__location-icon">
+            <span class="breeder-detail__location-text">{{ breeder.location }}
+          </span>
+        </div>
+        <p class="breeder-detail__description">
+         {{breeder.description}} La raza labrador retriever es una de las razas favoritas en Inglaterra y Estados Unidos. Pero también es uno de los cachorros más éxito en muchos países europeos. Esto se debe a que, además de tener un vínculo especial con las personas, es muy obediente. La agresividad, la timidez, el miedo o la inseguridad son desconocidos en esta raza tan sociable.
+        </p>
+      </div>
+      <div class="breeder-detail__data">
+      <app-data-breeder-shelter-card
+          title="Información general"
+          [item]="breederData | async">
+        </app-data-breeder-shelter-card>
+
+        <div class="breeder-detail__actions">
+          <app-button variant="outline" (click)="goToBack()" [fullWidth]="true">
+            Volver a listado de criadores
+          </app-button>
+        </div>
+      </div>
+    </section>
+      <h1 class="breeder-detail__title-section">Mascotas del criadero</h1>
+      <section class="section" >
+      <div class="section__card" *ngFor="let animal of animalsBreeder$ | async">
+        <app-card [animal]="animal" (click)="goToAnimalDetail(animal.id)" ></app-card>
+      </div>
+      <app-no-data
+        class="section__card-nodata"
+        *ngIf="(animalsBreeder$ | async)?.length === 0"
+        [title]="'Criadero sin mascotas publicadas'"
+        [content]="'Seguro que muy pronto, encontrarás aquí las mejores máscotas.'"
+      ></app-no-data>
+    </section>
+  </div>
+</div>
+

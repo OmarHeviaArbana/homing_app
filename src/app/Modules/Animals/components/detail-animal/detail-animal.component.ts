@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as AnimalActions from './../../actions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail-animal',
@@ -21,21 +22,24 @@ export class DetailAnimalComponent {
   mainData!: Observable<{ label: string; value: string | number | boolean }[]>;
   healthData!: Observable<{ label: string; value: string | number | boolean}[]>;
 
-   constructor( private activatedRoute: ActivatedRoute, private store: Store<AppState>
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private store: Store<AppState>,
+    private location: Location,
   ) {
     this.animalId = this.activatedRoute.snapshot.paramMap.get('id') ?? '';
     this.animalDetail$ = this.store.select(state => state.animals.animalDetail);
 
-this.mainData = this.animalDetail$.pipe(
-  map(animal => animal ? [
-    { label: 'Sexo', value: animal.genre?.name || 'N/D' },
-    { label: 'Edad', value: animal.age_category?.name || 'N/D' },
-    { label: 'Peso', value: animal.weight ? `${animal.weight} Kg` : 'N/D' },
-    { label: 'Cruz', value: animal.height ? `${animal.height} cm` : 'N/D' },
-    { label: 'Tamaño', value: animal.size?.name || 'N/D' },
-    { label: 'Energía', value: animal.energy_level?.name || 'N/D' }
-  ] : [])
-);
+  this.mainData = this.animalDetail$.pipe(
+    map(animal => animal ? [
+      { label: 'Sexo', value: animal.genre?.name || 'N/D' },
+      { label: 'Edad', value: animal.age_category?.name || 'N/D' },
+      { label: 'Peso', value: animal.weight ? `${animal.weight} Kg` : 'N/D' },
+      { label: 'Cruz', value: animal.height ? `${animal.height} cm` : 'N/D' },
+      { label: 'Tamaño', value: animal.size?.name || 'N/D' },
+      { label: 'Energía', value: animal.energy_level?.name || 'N/D' }
+    ] : [])
+  );
 
   this.healthData = this.animalDetail$.pipe(
     map(animal => animal ? [
@@ -60,6 +64,10 @@ this.mainData = this.animalDetail$.pipe(
 
   prevImage(length: number): void {
     this.currentIndex = (this.currentIndex - 1 + length) % length;
+  }
+
+  goToBack() :void {
+    this.location.back();
   }
 
 }

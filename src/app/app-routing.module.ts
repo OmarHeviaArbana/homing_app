@@ -11,6 +11,7 @@ import { ShelterListComponent } from './Modules/Shelters/components/shelter-list
 import { DetailShelterComponent } from './Modules/Shelters/components/detail-shelter/detail-shelter.component';
 import { BreederListComponent } from './Modules/Breeders/component/breeder-list/breeder-list.component';
 import { DetailAnimalComponent } from './Modules/Animals/components/detail-animal/detail-animal.component';
+import { DetailBreederComponent } from './Modules/Breeders/component/detail-breeder/detail-breeder.component';
 
 
 const routes: Routes = [
@@ -48,12 +49,16 @@ const routes: Routes = [
     component: ShelterListComponent,
   },
   {
-    path: 'detalle-refugio',
+    path: 'detalle-refugio/:id',
     component: DetailShelterComponent,
   },
   {
     path: 'criaderos',
     component: BreederListComponent,
+  },
+  {
+    path: 'detalle-criadero/:id',
+    component: DetailBreederComponent,
   },
 ];
 

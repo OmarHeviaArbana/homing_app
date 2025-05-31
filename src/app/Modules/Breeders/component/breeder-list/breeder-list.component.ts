@@ -5,6 +5,7 @@ import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
 import { AppState } from 'src/app/app.reducers';
 import { Store } from '@ngrx/store';
 import * as BreederActions from './../../actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breeder-list',
@@ -17,7 +18,7 @@ export class BreederListComponent {
   loading$: Observable<boolean>;
   loaded$: Observable<boolean>;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.breeders$ = this.store.select(state => state.breeder.breeders);
     this.user$ = this.store.select(state => state.user.user);
     this.loading$ = this.store.select(state => state.breeder.loading);
@@ -32,6 +33,8 @@ export class BreederListComponent {
   loadBreeders(): void {
     this.store.dispatch(BreederActions.getAllBreeders());
   }
-
+  goToBreederDetail(breederId: any) {
+    this.router.navigateByUrl('/detalle-criadero/' + breederId);
+  }
 
 }

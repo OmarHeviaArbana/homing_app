@@ -31,7 +31,7 @@ import { UserModule } from './Modules/Users/user.module';
 import { SharedModule } from './Shared/shared.module';
 import { ShelterModule } from './Modules/Shelters/shelter.module';
 import { BreederModule } from './Modules/Breeders/breeder.module';
-import { DetailBreederComponent } from './Modules/Breeder/components/detail-breeder/detail-breeder.component';
+import { DetailBreederComponent } from './Modules/Breeders/component/detail-breeder/detail-breeder.component';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, DetailBreederComponent],

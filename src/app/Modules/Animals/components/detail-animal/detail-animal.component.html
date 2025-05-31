@@ -5,7 +5,7 @@
       <app-badge [variant]="animal.status?.name == 'En adopción' ? 'enAdopcion' : animal.status?.name">{{ animal.status?.name }}</app-badge>
     </header>
 
-    <div class="animal-detail__content" >
+    <section class="animal-detail__content" >
       <div class="animal-detail__main">
         <div class="carousel">
           <button class="carousel__arrow carousel__arrow--prev" (click)="prevImage(1)" [attr.aria-label]="'Imagen anterior'">
@@ -19,8 +19,8 @@
               class="carousel__image"
             > -->
             <img
-               src="/assets/img/dog-287420_1920.jpg"
-              [alt]="'Imagen ' "
+              src="/assets/img/dog-287420_1920.jpg"
+              [alt]="'Imagenes de la mascota'"
               class="carousel__image"
             >
           </div>
@@ -40,22 +40,22 @@
       <div class="animal-detail__data">
         <app-animal-data-table
           title="Datos principales"
-              [item]="mainData | async"
-        ></app-animal-data-table>
+          [item]="mainData | async">
+        </app-animal-data-table>
 
         <app-animal-data-table
           title="Datos del animal"
-          [item]="healthData | async"
-        ></app-animal-data-table>
+          [item]="healthData | async">
+        </app-animal-data-table>
         <div class="animal-detail__actions">
+          <app-button variant="outline" (click)="goToBack()" [fullWidth]="true">
+            Volver a listado
+          </app-button>
           <app-button variant="primary" [fullWidth]="true">
             Solicitar adopción
           </app-button>
-          <app-button variant="terciary" [fullWidth]="true">
-            Guardar
-          </app-button>
         </div>
       </div>
-    </div>
+    </section>
   </div>
 </div>

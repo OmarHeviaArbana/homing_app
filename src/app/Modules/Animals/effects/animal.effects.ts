@@ -49,31 +49,8 @@ export class AnimalEffects {
           catchError((error) => of(AnimalActions.getAnimalByIdFailure({ payload: error })))
         )
       )
-      /* exhaustMap(({ animalId }) =>
-        this.animalService.getAnimalById(animalId).pipe(
-          map((animal: AnimalDTO) =>
-            AnimalActions.getAnimalByIdSuccess({ animal })
-          ),
-          catchError((error) =>
-            of(AnimalActions.getAnimalByIdSuccess({ payload: error }))
-          )
-        )
-      ) */
     )
   );
-
- /*  getAnimalByIdFailure$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(AnimalActions.getAnimalByIdFailure),
-        map((error) => {
-          this.errorResponse = error.payload.error;
-          this.sharedService.errorLog(error.payload.error);
-        })
-      ),
-    { dispatch: false }
-  ); */
-
 
   getSpeciesAux$ = createEffect(() =>
     this.actions$.pipe(

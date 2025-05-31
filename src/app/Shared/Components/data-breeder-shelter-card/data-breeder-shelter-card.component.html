@@ -1,1 +1,24 @@
-<p>data-breeder-shelter-card works!</p>
+<div class="data-card  ">
+   <h2 class="data-card__title">{{ title }}</h2>
+  <div class="data-card__content">
+    <div class="data-card__row" *ngFor="let data of item">
+ <div class="data-card__label">{{ data.label }}</div>
+
+      <div *ngIf="data.label === 'Dirección'" class="data-card__value">
+        <span>{{ data.value }}</span>
+      </div>
+
+      <div *ngIf="data.label === 'Teléfono'" class="data-card__value">
+        <a class="data-card__link" [href]="'tel:' + data.value">{{ data.value }}</a>
+      </div>
+
+      <div *ngIf="data.label === 'Email'" class="data-card__value">
+        <a class="data-card__link" [href]="'mailto:' + data.value">{{ data.value }}</a>
+      </div>
+
+      <div *ngIf="data.label !== 'Dirección' && data.label !== 'Teléfono' && data.label !== 'Email'" class="data-card__value">
+        <span>{{ data.value }}</span>
+      </div>
+    </div>
+  </div>
+</div>

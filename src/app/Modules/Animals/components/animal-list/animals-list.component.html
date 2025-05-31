@@ -10,54 +10,54 @@
       Mascotas que te esperan
     </h2>
   </div>
-<h1 class="animal__title">Estas son nuestras mascotas y están deseando conocerte</h1>
-<section class="animal__filters">
-  <mat-form-field appearance="fill">
-  <mat-label>Epecie</mat-label>
-  <mat-select [(ngModel)]="selectedSpecies" (ngModelChange)="onFilterChange()">
-    <mat-option *ngFor="let item of speciesList$ | async" [value]="item.id">
-      {{ item.name }}
-    </mat-option>
-     <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field >
-  <mat-label>Edad</mat-label>
-  <mat-select [(ngModel)]="selectedAge" (ngModelChange)="onFilterChange()" >
-    <mat-option *ngFor="let item of ageCategoriesList$ | async" [value]="item.id">
-      {{ item.name }}
-    </mat-option>
-     <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Sexo</mat-label>
-  <mat-select [(ngModel)]="selectedGenre"  (ngModelChange)="onFilterChange()" >
-    <mat-option *ngFor="let item of genresList$ | async" [value]="item.id">
-      {{ item.name }}
-    </mat-option>
-    <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field appearance="fill">
-  <mat-label>Situación actúal</mat-label>
-  <mat-select  [(ngModel)]="selectedStatus"  (ngModelChange)="onFilterChange()">
-    <mat-option *ngFor="let item of statusList$ | async" [value]="item.id">
-      {{ item.name }}
-    </mat-option>
-     <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
-  </mat-select>
-</mat-form-field>
-</section>
-<section class="section" >
+  <h1 class="animal__title">Estas son nuestras mascotas y están deseando conocerte</h1>
+  <section class="animal__filters">
+    <mat-form-field appearance="fill">
+      <mat-label>Epecie</mat-label>
+      <mat-select [(ngModel)]="selectedSpecies" (ngModelChange)="onFilterChange()">
+        <mat-option *ngFor="let item of speciesList$ | async" [value]="item.id">
+          {{ item.name }}
+        </mat-option>
+        <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field >
+      <mat-label>Edad</mat-label>
+      <mat-select [(ngModel)]="selectedAge" (ngModelChange)="onFilterChange()" >
+        <mat-option *ngFor="let item of ageCategoriesList$ | async" [value]="item.id">
+          {{ item.name }}
+        </mat-option>
+        <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Sexo</mat-label>
+      <mat-select [(ngModel)]="selectedGenre"  (ngModelChange)="onFilterChange()" >
+        <mat-option *ngFor="let item of genresList$ | async" [value]="item.id">
+          {{ item.name }}
+        </mat-option>
+        <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Situación actúal</mat-label>
+      <mat-select  [(ngModel)]="selectedStatus"  (ngModelChange)="onFilterChange()">
+        <mat-option *ngFor="let item of statusList$ | async" [value]="item.id">
+          {{ item.name }}
+        </mat-option>
+        <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </section>
+    <section class="section" >
     <div class="section__card" *ngFor="let animal of filteredAnimals$ | async">
-      <app-card [animal]="animal" (click)="goToAnimalDetail(animal.id)" ></app-card>
-    </div>
-    <app-no-data
-     *ngIf="(filteredAnimals$ | async)?.length === 0"
-      [title]="'Sin resultados'"
-      [content]="'En estos momentos no hemos encontrado una mascota con los filtros seleccionados. ¡Sigue buscando, muchas te están esperando!'"
-    ></app-no-data>
-  </section>
+        <app-card [animal]="animal" (click)="goToAnimalDetail(animal.id)" ></app-card>
+      </div>
+      <app-no-data
+      *ngIf="(filteredAnimals$ | async)?.length === 0"
+        [title]="'Sin resultados'"
+        [content]="'En estos momentos no hemos encontrado una mascota con los filtros seleccionados. ¡Sigue buscando, muchas te están esperando!'"
+      ></app-no-data>
+    </section>
 </div>
 
