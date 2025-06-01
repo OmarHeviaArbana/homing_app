@@ -17,7 +17,7 @@ export class DetailAnimalComponent {
 
   animalDetail$: Observable<any| null>;
   animalId: string;
-  imageList$!: Observable<string[]>;
+  imageList$!: Observable<any | null>;
   currentIndex = 0;
   mainData!: Observable<{ label: string; value: string | number | boolean }[]>;
   healthData!: Observable<{ label: string; value: string | number | boolean}[]>;
@@ -61,7 +61,17 @@ export class DetailAnimalComponent {
 
   });
   this.loadDetailAnimal()
-  console.log(this.user);
+
+  this.imageList$ = this.animalDetail$.pipe(
+    map(animal => {
+      if (!animal.images) return '/assets/img/breeders.jpg';
+
+      return animal.images
+      .filter((img: { image_url: string }) => img.image_url && img.image_url.trim() !== '')
+      .sort((a: { principal: boolean; }, b: { principal: boolean; }) => (b.principal ? 1 : 0) - (a.principal ? 1 : 0)) // Principal primero
+      .map((img: { image_url: string }) => img.image_url);
+    })
+  );
 
   }
 

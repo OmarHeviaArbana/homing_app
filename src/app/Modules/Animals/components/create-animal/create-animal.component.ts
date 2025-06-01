@@ -19,6 +19,7 @@ export class CreateAnimalComponent {
   formPublicAnimal!: FormGroup;
   auth: any | null = null;
   user: any;
+  selectedFiles: { [key: string]: File | null } = {};
 
     constructor(
       private formBuilder: FormBuilder,
@@ -43,6 +44,12 @@ export class CreateAnimalComponent {
       this.formPublicAnimal = form;
     }
 
+    onFilesChanged(files: { [key: string]: File | null }) {
+      console.log(files);
+
+      this.selectedFiles = files;
+    }
+
     publicAnimal(): void {
 
       if (this.formPublicAnimal.invalid) return;
@@ -50,7 +57,9 @@ export class CreateAnimalComponent {
       const animal: AnimalDTO = {
           ...this.formPublicAnimal.value,
           shelter_id: this.user.role_id == 3 ? this.user.shelter.id : null,
-          breeder_id: this.user.role_id == 4 ? this.user.breeder.id : null
+          breeder_id: this.user.role_id == 4 ? this.user.breeder.id : null,
+          files: this.selectedFiles
+
       };
 
 
@@ -58,8 +67,11 @@ export class CreateAnimalComponent {
 
       const animalData: Partial<AnimalDTO> = this.formPublicAnimal.value
 
+      console.log(this.selectedFiles);
+
 
       this.store.dispatch(AnimalActions.saveAnimalFormData({ animalFormData: animalData }));
+      this.store.dispatch(AnimalActions.setFilesFormData({ files: this.selectedFiles}));
       this.store.dispatch(AnimalActions.createAnimal({ animal}));
     }
 

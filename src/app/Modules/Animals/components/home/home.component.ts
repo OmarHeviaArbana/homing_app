@@ -73,4 +73,8 @@ export class HomeComponent implements OnInit {
 
     this.currentSlide = this.currentSlide < this.animals.length - 1 ? this.currentSlide + 1 : 0;
   }
+
+  goToAnimalDetail(animalId: number) {
+    this.router.navigateByUrl('/detalle-mascota/' + animalId);
+  }
 }

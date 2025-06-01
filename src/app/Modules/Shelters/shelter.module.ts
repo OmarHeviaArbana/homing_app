@@ -26,7 +26,7 @@ import { DetailShelterComponent } from './components/detail-shelter/detail-shelt
     MatButtonModule,
     MatProgressSpinnerModule,
     MatSelectModule,
-    SharedModule
+    SharedModule,
   ],
 })
 export class ShelterModule {}

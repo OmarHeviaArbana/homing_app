@@ -19,7 +19,6 @@ export interface LaravelError {
   };
 }
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -34,11 +33,9 @@ export class SharedService {
   const toastMsg = document.getElementById(element);
   if (!toastMsg) return;
 
-  // Primero limpia clases y texto para reiniciar animación
   toastMsg.classList.remove('show', 'requestOk', 'requestKo');
   toastMsg.textContent = '';
 
-  // Forzar reflow para reiniciar animación CSS
   void toastMsg.offsetWidth;
 
   if (validRequest) {
@@ -56,19 +53,18 @@ export class SharedService {
         .join(', ');
       toastMsg.textContent = laravelError.message || errorMessages;
     } else if (error && 'message' in error) {
-      // Asumimos que error es ResponseError u otro tipo con message
+
       toastMsg.textContent = (error as any).message || 'Ha ocurrido un error';
     } else {
       toastMsg.textContent = 'Ha ocurrido un error desconocido.';
     }
   }
 
-  // Espera el tiempo total de la animación (fadein 0.5s + fadeout 0.5s + visible 2.5s = 3.5s)
   await this.wait(3500);
 
-  // Luego oculta el toast para que pueda volver a mostrarse correctamente
   toastMsg.classList.remove('show', 'requestOk', 'requestKo');
   toastMsg.textContent = '';
+
 }
 
 

@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as AnimalActions from '../actions/animal.action';
 import { AnimalService } from '../services/animial.service'
 import { catchError, exhaustMap, finalize, map, mergeMap, switchMap, tap, timeout, withLatestFrom } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
@@ -106,7 +106,6 @@ export class AnimalEffects {
       this.actions$.pipe(
         ofType(AnimalActions.createAnimalSuccess),
         map((action) => {
-          console.log(action);
           const response = 'Animal creado y publicado con éxito.'
           this.sharedService.managementToast('createAnimalSuccessFeedback', this.responseOK, response);
         })
@@ -128,40 +127,44 @@ export class AnimalEffects {
     { dispatch: false }
   );
 
-
   addAnimalPhotos$ = createEffect(() =>
   this.actions$.pipe(
     ofType(AnimalActions.createAnimalSuccess),
     withLatestFrom(this.store.select(state => state.animals)),
-    switchMap(([action, animalFormData]) => {
-      const dataPhoto = animalFormData.animalFormData;
+    mergeMap(([action, animalFormData]) => {
+      const dataPhoto = animalFormData?.files;
       const animal = action.animal;
 
-     const photos: { image_url: string; principal: boolean; }[] = [];
+      const requests = [];
 
       if (dataPhoto?.principal_image) {
-        photos.push({ image_url: dataPhoto.principal_image, principal: true });
+        requests.push(
+          this.animalService.addAnimalImage(animal.id, dataPhoto.principal_image, true)
+        );
       }
 
       if (dataPhoto?.optional_image_one) {
-        photos.push({ image_url: dataPhoto.optional_image_one, principal: false });
+        requests.push(
+          this.animalService.addAnimalImage(animal.id, dataPhoto.optional_image_one, false)
+        );
       }
 
       if (dataPhoto?.optional_image_two) {
-        photos.push({ image_url: dataPhoto.optional_image_two, principal: false });
+        requests.push(
+          this.animalService.addAnimalImage(animal.id, dataPhoto.optional_image_two, false)
+        );
       }
-      const payload = {
-        animal_id: animal.id,
-        photos
-      };
-      return this.animalService.addAnimalPhotos(payload).pipe(
-        map(() => AnimalActions.addAnimalPhotosSuccess({ photos })),
+
+      return forkJoin(requests).pipe(
+        map((responses) =>
+          AnimalActions.addAnimalPhotosSuccess({ photo: responses })
+        ),
         catchError((error) =>
           of(
             AnimalActions.addAnimalPhotosFailure({
               error: {
-                message: error.error?.message || 'Error al subir imágenes',
-                errors: error.error?.errors || {}
+                message: error?.error?.message || 'Error al subir imágenes',
+                errors: error?.error?.errors || {}
               },
               animal_id: animal.id
             })
@@ -171,7 +174,6 @@ export class AnimalEffects {
     })
   )
 );
-
 
 addAnimalPhotosSuccess$ = createEffect(
   () =>

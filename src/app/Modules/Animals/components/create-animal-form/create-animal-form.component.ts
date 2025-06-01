@@ -14,7 +14,7 @@ import { AppState } from 'src/app/app.reducers';
 
 export class CreateAnimalFormComponent implements OnInit{
    @Output() formReady = new EventEmitter<FormGroup>();
-
+    @Output() filesChanged = new EventEmitter<{ [key: string]: File | null }>();
     formPublicAnimal!: FormGroup;
 
     speciesList$!: Observable<AuxiliarEntityDTO[]>;
@@ -23,6 +23,10 @@ export class CreateAnimalFormComponent implements OnInit{
     genresList$!: Observable<AuxiliarEntityDTO[]>;
     sizesList$!: Observable<AuxiliarEntityDTO[]>;
     energyLevelsList$!: Observable<AuxiliarEntityDTO[]>;
+
+
+   selectedFiles: { [key: string]: File | null } = {};
+  imagePreviews: { [key: string]: string | null } = {};
 
 
     constructor(private formBuilder: FormBuilder,  private store: Store<AppState>,) {}
@@ -71,30 +75,104 @@ export class CreateAnimalFormComponent implements OnInit{
 
     }
 
-  imagePreviews: { [key: string]: string | null } = {
-    principal_image: null,
-    option_image_1: null,
-    option_image_2: null
-  };
+ /*    imagePreviews: { [key: string]: string | null } = {
+      principal_image: null,
+      optional_image_one: null,
+      optional_image_two: null
+    };
 
-  onImageSelected(event: Event, field: string): void {
+  selectedFiles: { [key: string]: File | null } = {}; */
+
+  /* onImageSelected(event: Event, field: string): void {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files[0]) {
       const file = input.files[0];
+          this.selectedFiles[field] = file;
       const reader = new FileReader();
 
       reader.onload = () => {
         this.imagePreviews[field] = reader.result as string;
 
         // Opcional: guardar en el form
-      /*  this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]); */
+       this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]);
+       this.filesChanged.emit(this.selectedFiles);
       };
 
         reader.readAsDataURL(file); // base64 para preview inmediato
-      }
-    }
 
+      console.log(file)
+      }
+
+    } */
+/*
+    onImageSelected(event: Event, field: string): void {
+  const input = event.target as HTMLInputElement;
+
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    this.selectedFiles[field] = file;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreviews[field] = reader.result as string;
+
+      this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]);
+      this.filesChanged.emit(this.selectedFiles);
+    };
+
+    reader.readAsDataURL(file);
+  }
+} */
+/* onImageSelected(event: Event, field: string): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.selectedFiles[field] = file;
+
+      // Actualizar control del formulario con el archivo
+      this.formPublicAnimal.get(field)?.setValue(file);
+
+      // Crear preview base64 para mostrar en template
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreviews[field] = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+
+      // Emitir archivos para padre
+      this.filesChanged.emit(this.selectedFiles);
+    }
+  } */
+
+   /*  onImageSelected(event: Event, field: string): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.selectedFiles[field] = file;
+      this.fileNames[field] = file.name;
+      this.filesChanged.emit(this.selectedFiles);
+    }
+  } */
+
+    onImageSelected(event: Event, field: string): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.selectedFiles[field] = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreviews[field] = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+
+      this.filesChanged.emit(this.selectedFiles);
+    }
+  }
     get name() {
       return this.formPublicAnimal.get('name');
     }
@@ -157,5 +235,13 @@ export class CreateAnimalFormComponent implements OnInit{
       if (control?.hasError('required')) return 'Campo obligatorio';
       return '';
     }
+
+     /* getSelectedFiles(): { [key: string]: File | null } {
+      return {
+        principal_image: this.principalImageFile,
+        optional_image_one: this.optionalImageOneFile,
+        optional_image_two: this.optionalImageTwoFile
+      };
+    } */
 
 }

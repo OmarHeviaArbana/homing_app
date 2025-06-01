@@ -9,7 +9,9 @@
       <form [formGroup]="form" (ngSubmit)="publicAnimal()" class="public__form">
 
       <app-create-animal-form
-        (formReady)="onAnimalFormReady($event)">
+      (formReady)="onAnimalFormReady($event)"
+        (filesChanged)="onFilesChanged($event)"
+        >
       </app-create-animal-form>
 
         <div class="public__actions">

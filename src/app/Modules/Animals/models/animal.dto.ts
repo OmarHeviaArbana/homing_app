@@ -18,6 +18,9 @@ export interface AnimalDTO {
   optional_image_one: string,
   optional_image_two: string,
   animal: number
+   animals: AnimalDTO[];
+  animalFormData: any;
+  files: { [key: string]: File | null };
 
   species_id: number;
   status_id: number;

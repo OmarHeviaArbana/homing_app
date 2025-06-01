@@ -9,11 +9,12 @@ import { ShelterBreederCardComponent } from './Components/shelter-breeder-card/s
 import { BadgeComponent } from './Components/badge/badge.component';
 import { DataBreederShelterCardComponent } from './Components/data-breeder-shelter-card/data-breeder-shelter-card.component'
 import { MatIconModule } from '@angular/material/icon';
+import { ImageUrlPipe } from './Pipes/image-url.pipe';
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent, DataBreederShelterCardComponent],
+  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent, DataBreederShelterCardComponent, ImageUrlPipe],
   imports: [
   CommonModule,
   MatDialogModule,
@@ -27,7 +28,8 @@ import { MatIconModule } from '@angular/material/icon';
     ShelterBreederCardComponent,
     BadgeComponent,
     DataBreederShelterCardComponent,
-    MatIconModule
+    MatIconModule,
+    ImageUrlPipe
   ]
 })
 export class SharedModule { }

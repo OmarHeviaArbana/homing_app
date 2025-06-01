@@ -34,7 +34,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       }
     }
 
-    if (token) {
+   /*  if (token) {
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -42,7 +42,21 @@ export class AuthInterceptorService implements HttpInterceptor {
           Authorization: `Bearer ${token}`,
         },
       });
+    } */
+   if (token) {
+    const headersConfig: { [header: string]: string } = {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    };
+  const isFormData = req.body instanceof FormData;
+    if (!isFormData) {
+      headersConfig['Content-Type'] = 'application/json; charset=utf-8';
     }
+
+    req = req.clone({
+      setHeaders: headersConfig
+    });
+  }
 
     return next.handle(req);
   }

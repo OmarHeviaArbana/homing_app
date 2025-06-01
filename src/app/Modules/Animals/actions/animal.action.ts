@@ -73,19 +73,25 @@ export const clearAnimalFormData = createAction(
   '[Animal Form] Clear Animal Form Data'
 );
 
+export const setFilesFormData = createAction(
+  '[Animal] Set Animal Form Data',
+  props<{  files: { [key: string]: File | null } }>()
+);
+
 
 export const addAnimalPhotos = createAction(
-  '[Photo] Add photo ',
+  '[Animal] Add Animal Photos',
+  props<{ animal: any; files: any }>()
 );
 
 export const addAnimalPhotosSuccess = createAction(
-  '[Photo Add photo Success',
-    props<{ photos: AnimalPhotoDTO[]}>()
+  '[Animal] Add Animal Photos Success',
+  props<{ photo: any }>()
 );
 
 export const addAnimalPhotosFailure = createAction(
-  '[Photo] Add photo Failure',
-  props<{  error: any , animal_id: number }>()
+  '[Animal] Add Animal Photos Failure',
+  props<{ error: any  , animal_id: number}>()
 );
 
 

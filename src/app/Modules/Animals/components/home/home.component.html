@@ -34,7 +34,7 @@
 </section>
 
 <section class="animal-section">
-  <div class="container">
+  <div  *ngIf="animals.length !== 0" class="container">
     <h2 class="animal-section__title">
       <img class="animal-section__icon" src="/assets/icons/mascotas.png" alt="Icono Corazón">
       Mascotas que te esperan
@@ -51,7 +51,7 @@
       <div class="carousel__container">
         <div class="carousel__track" [style.transform]="'translateX(' + (-currentSlide * 100) + '%)'">
           <div class="carousel__item"  *ngFor="let animal of animals">
-            <app-card [animal]="animal"></app-card>
+            <app-card [animal]="animal" (click)="goToAnimalDetail(animal.id)" ></app-card>
           </div>
         </div>
       </div>
@@ -64,5 +64,12 @@
          <img class="carousel__arrow-icon" src="/assets/icons/navegacion/arrow-carousel.svg" alt="Icono flecha derecha">
       </button>
     </div>
+  </div>
+  <div class="section__card" >
+      <app-no-data
+      *ngIf="animals.length === 0"
+        [title]="'Sin resultados'"
+        [content]="'En estos momentos no tenemos registrada ninguna mascota en la plataforma. Muy pronto nuestros colaboradores comenzaran a publicar sus mascotas'"
+      ></app-no-data>
   </div>
 </section>

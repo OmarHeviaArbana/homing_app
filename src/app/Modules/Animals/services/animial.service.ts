@@ -36,6 +36,20 @@ export class AnimalService {
       return this.http.post<{ images: AnimalPhotoDTO[] }>(`${this.API_URL}/animal-images/add`,data);
   }
 
+  addAnimalImage(animalId: number, image: File, principal: boolean): Observable<any> {
+  const formData = new FormData();
+  formData.append('animal_id', animalId.toString());
+  formData.append('image', image);
+  formData.append('principal', principal ? '1' : '0');
+
+    return this.http.post(`${this.API_URL}/animal-images/upload-and-save`, formData)
+}
+
+/*   uploadAnimalPhotos(formData: FormData) {
+    console.log(formData)
+  return this.http.post(`${this.API_URL}/animal-images/upload-and-save`, formData); // La URL real que espera el backend
+}
+ */
   getAnimalById(animalId: string): Observable<AnimalDTO[]> {
     return this.http.get<AnimalDTO[]>(`${this.API_URL}/animals/getAnimal/${animalId}`);
   }
