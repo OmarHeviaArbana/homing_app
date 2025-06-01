@@ -17,9 +17,24 @@ export const getAllBreedersFailure = createAction(
   props<{ error: any }>()
 );
 
+export const updateBreeder = createAction(
+  '[Profile Page] Update Breeder',
+  props<{ breederId: number; breeder: BreederDTO }>()
+);
+export const updateBreederSuccess = createAction(
+  '[Profile Page] Update Breeder Success',
+  props<{ breederId: number; breeder: BreederDTO }>()
+);
+
+export const updateBreederFailure = createAction(
+  '[Profile Page] Update Breeder Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+
 export const getBreederById = createAction(
   '[BreederForm Page] Get Breeder',
-  props<{ breederId: string }>()
+  props<{ breederId: number }>()
 );
 export const getBreederByIdSuccess = createAction(
   '[BreederForm Page] Get Breeder Success',

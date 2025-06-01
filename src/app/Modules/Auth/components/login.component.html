@@ -3,7 +3,7 @@
 </div>
 <section class="login">
   <div class="login__container">
-    <h1 class="login__title">Login</h1>
+    <h1 class="login__title">Login de acceso</h1>
     <div *ngIf="(loaded$ | async) || !(loading$ | async) ">
       <form [formGroup]="loginForm" (ngSubmit)="login()" class="login__container-form">
         <mat-form-field appearance="fill" >

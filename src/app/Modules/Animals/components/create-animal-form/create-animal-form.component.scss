@@ -9,6 +9,7 @@ border-radius: 8px;
     font-weight: 700;
     border: none;
     border-radius: 8px;
+
   }
   &__legend {
     font-size:       vars.$font-size-18;
@@ -28,7 +29,7 @@ border-radius: 8px;
 mat-form-field {
 
   margin-bottom: 10px;
- padding: 20px;
+ padding: 20px 20px 0 20px;
 
   @media  (min-width: vars.$breakpoint-sm ) {
     width: calc(97% - 20px);

@@ -101,5 +101,5 @@ console.log(this.animal);
   cancel() {
     this.formApplicationAnimal.reset();
     this.location.back();
-    }
+  }
 }

@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
 export class DetailBreederComponent {
   breederDetail$: Observable<any| null>;
   animalsBreeder$: Observable<any| null>;
-  breederId: string;
+  breederId: any;
   breederData!: Observable<{ label: string; value: string | number | boolean }[]>;
 
    constructor(

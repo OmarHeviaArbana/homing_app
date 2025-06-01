@@ -42,6 +42,8 @@ export class HeaderComponent implements OnInit {
         this.showNoAuthSection = true;
       }
     });
+
+
   }
 
   logout(): void {
@@ -50,7 +52,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
-
+  goToProfile(): void {
+    this.router.navigateByUrl('mi-perfil');
+  }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;

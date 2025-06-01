@@ -16,7 +16,7 @@ export class DetailShelterComponent {
 
   shelterDetail$: Observable<any| null>;
   animalsShelter$: Observable<any| null>;
-  shelterId: string;
+  shelterId: any;
   shelterData!: Observable<{ label: string; value: string | number | boolean }[]>;
 
    constructor(

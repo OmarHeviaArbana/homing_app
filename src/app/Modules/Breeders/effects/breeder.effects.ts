@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, withLatestFrom, filter, tap, mergeMap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom, filter, tap, mergeMap, exhaustMap, finalize } from 'rxjs/operators';
 import { AppState } from 'src/app/app.reducers';
 import { BreederService } from '../services//breeder.service';
 import * as BreederActions from './../actions';
@@ -118,5 +118,48 @@ export class BreederEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  updateBreeder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BreederActions.updateBreeder),
+      exhaustMap(({ breederId, breeder }) =>
+        this.breederService.updateBreeder(breederId, breeder).pipe(
+          map((breeder) => {
+            this.responseOK = true;
+            return BreederActions.updateBreederSuccess({
+              breederId,
+              breeder,
+            });
+          }),
+          catchError((error) => {
+            this.responseOK = false;
+            return of(BreederActions.updateBreederFailure({ payload: error }));
+          }),
+          finalize(async () => {
+            this.errorResponse = 'Lo sentimos, algo ha salido mal. Vuelve a intentarlo';
+            await this.sharedService.managementToast(
+              'profileFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+
+            if (this.responseOK) {
+              this.breederService.getBreederById(breederId).subscribe({
+                next: (breederDetail) => {
+                  this.store.dispatch(
+                    BreederActions.getBreederByIdSuccess({ breederDetail })
+                  );
+                  this.router.navigateByUrl('/mi-perfil');
+                },
+                error: (err) => {
+                  console.error('Error al refrescar el refugio tras actualizar:', err);
+                },
+              });
+            }
+          })
+        )
+      )
+    )
   );
 }

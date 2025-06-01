@@ -64,6 +64,12 @@ const routes: Routes = [
   {
     path: 'solicitud-mascota',
     component: ApplicationAnimalComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'mi-perfil',
+    component: RegisterComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

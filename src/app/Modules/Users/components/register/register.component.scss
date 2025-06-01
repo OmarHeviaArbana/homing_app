@@ -37,10 +37,10 @@
 }
 
 .error {
-  color: red;
+  color: vars.$color-warn;
 }
 
-#registerFeedback , #registerBreederFeedback, #registerShelterFeedback {
+#registerFeedback , #registerBreederFeedback, #registerShelterFeedback, #profileFeedback  {
   visibility: hidden;
   min-width: 250px;
   color: #fff;
@@ -61,15 +61,15 @@
 
 }
 
-#registerFeedback.requestOk,  #registerBreederFeedback.requestOk, #registerShelterFeedback.requestOk {
-  background-color: vars.$color-primary;
+#registerFeedback.requestOk,  #registerBreederFeedback.requestOk, #registerShelterFeedback.requestOk , #profileFeedback.requestOk {
+  background-color: vars.$color-accent;
 }
 
-#registerFeedback.requestKo, #registerBreederFeedback.requestKo, #registerShelterFeedback.requestKo {
+#registerFeedback.requestKo, #registerBreederFeedback.requestKo, #registerShelterFeedback.requestKo, #profileFeedback.requestKo {
   background-color: vars.$color-warn;
 }
 
-#registerFeedback.show, #registerBreederFeedback.show, #registerShelterFeedback.show {
+#registerFeedback.show, #registerBreederFeedback.show, #registerShelterFeedback.show , #profileFeedback.show{
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
@@ -77,11 +77,11 @@
 
 @-webkit-keyframes fadein {
   from {
-   top: 0;
+   top: 30px;
     opacity: 0;
   }
   to {
-   top: 30px;
+   top: 0;
     opacity: 1;
   }
 }
@@ -110,11 +110,11 @@
 
 @keyframes fadeout {
   from {
-    bottom: 0px;
+    top: 30px;
     opacity: 1;
   }
   to {
-    bottom: 0;
+    top: 0;
     opacity: 0;
   }
 }

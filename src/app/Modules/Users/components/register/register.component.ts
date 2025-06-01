@@ -9,6 +9,7 @@ import { UserDTO } from './../../models/user.dto';
 import { ShelterDTO } from 'src/app/Modules/Shelters/models/shelter.dto';
 import { BreederDTO } from 'src/app/Modules/Breeders/models/breeder.dto';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -23,12 +24,16 @@ export class RegisterComponent implements OnInit {
   formBreeder!: FormGroup;
 
   selectedRoleId!: number;
-  userId!: string;
+  userId!: number;
+
+  isEditMode = false;
+  currentUserData: UserDTO | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
-    private router: Router
+    private router: Router,
+    private location: Location,
   ) {
 
     this.form = this.formBuilder.group({
@@ -36,24 +41,64 @@ export class RegisterComponent implements OnInit {
       shelter: this.formShelter,
       breeder: this.formBreeder,
     });
+
+    const currentUrl = this.router.url;
+    this.isEditMode = currentUrl.includes('/mi-perfil');
+
+    if (this.isEditMode) {
+      this.store.select('auth').subscribe((authState) => {
+        if (authState?.user) {
+          this.currentUserData = authState.user;
+          this.selectedRoleId = authState.user.role_id;
+        }
+      });
+    }
+
   }
   ngOnInit(): void {
   }
   onUserFormReady(form: FormGroup) {
     this.formUser = form;
+    if (this.isEditMode && this.currentUserData) {
+      this.formUser.patchValue({
+        name: this.currentUserData.name,
+        username: this.currentUserData.username,
+        email: this.currentUserData.email,
+        role_id: this.currentUserData.role_id,
+      });
+      this.formUser.get('role_id')?.disable();
+      this.formUser.get('email')?.disable();
+      this.formUser.markAllAsTouched();
+      this.formUser.updateValueAndValidity();
+    }
   }
 
   onShelterFormReady(form: FormGroup) {
     this.formShelter = form;
+    if (this.isEditMode && this.selectedRoleId === 3 && this.currentUserData?.shelter) {
+      this.formShelter.patchValue(this.currentUserData.shelter);
+      this.formShelter.markAllAsTouched();
+      this.formShelter.updateValueAndValidity();
+
+    }
   }
 
   onBreederFormReady(form: FormGroup) {
     this.formBreeder = form;
+     if (this.isEditMode && this.selectedRoleId === 4 && this.currentUserData?.breeder) {
+      this.formBreeder.patchValue(this.currentUserData.breeder);
+      this.formBreeder.markAllAsTouched();
+      this.formBreeder.updateValueAndValidity();
+    }
   }
 
   onRoleSelected(roleId: number) {
     this.selectedRoleId = roleId;
   }
+
+logFormStates() {
+
+}
 
 /*  onFileSelected(event: Event): void {
   const input = event.target as HTMLInputElement;
@@ -91,14 +136,43 @@ export class RegisterComponent implements OnInit {
     this.store.dispatch(UserActions.register({ user }));
   }
 
+  update(): void {
+    if (this.formUser.invalid) return;
+
+    const userFormValues = this.formUser.getRawValue();
+    const userId = this.currentUserData?.id;
+
+    if (userId) {
+      this.store.dispatch(UserActions.updateUser({ userId: userId, user: userFormValues }));
+    }
+    if (this.selectedRoleId === 3 && this.formShelter.valid && this.currentUserData?.shelter) {
+    const shelterId : any = this.currentUserData.shelter.id;
+      this.store.dispatch(
+        ShelterActions.updateShelter({
+          shelterId: shelterId,
+          shelter: this.formShelter.value,
+        })
+      );
+    }
+
+    if (this.selectedRoleId === 4 && this.formBreeder.valid && this.currentUserData?.breeder) {
+      const breederId : any = this.currentUserData.breeder.id;
+      this.store.dispatch(
+        BreederActions.updateBreeder({
+          breederId: breederId,
+          breeder: this.formBreeder.value,
+        })
+      );
+    }
+    this.isEditMode = false
+
+  }
+
   cancel() {
     this.formUser.reset();
-    if (this.formShelter) {
-      this.formShelter.reset();
-    } else if (this.formBreeder) {
-      this.formBreeder.reset();
-    }
+    this.formShelter?.reset();
+    this.formBreeder?.reset();
     this.selectedRoleId = 0;
-    this.router.navigateByUrl('/');
+    this.location.back();
   }
 }

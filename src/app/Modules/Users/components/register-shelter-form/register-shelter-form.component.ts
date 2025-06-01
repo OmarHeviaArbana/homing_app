@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterShelterFormComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
-
 
   formShelter!: FormGroup;
 
@@ -22,7 +21,7 @@ export class RegisterShelterFormComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern(/^(\+34|0034|34)?[6|7|9][0-9]{8}$/)]],
       address: ['', Validators.required],
       location: ['', Validators.required],
-      logo_url: ['', Validators.required],
+      logo_url: ['',  Validators.required],
       description: ['', [Validators.required, Validators.maxLength(300)]]
     });
 
@@ -71,12 +70,14 @@ export class RegisterShelterFormComponent implements OnInit {
     return '';
   }
 
-  imagePreviews: { [key: string]: string | null } = {
-    logo_url: null,
+  imagePreviews: { [key: string]: any | null } = {
+
+    logo_url:  null
 
   };
 
   onImageSelected(event: Event, field: string): void {
+
   const input = event.target as HTMLInputElement;
 
   if (input.files && input.files[0]) {
@@ -92,5 +93,6 @@ export class RegisterShelterFormComponent implements OnInit {
 
       reader.readAsDataURL(file); // base64 para preview inmediato
     }
+
   }
 }

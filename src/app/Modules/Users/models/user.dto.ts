@@ -1,3 +1,6 @@
+import { BreederDTO } from "../../Breeders/models/breeder.dto";
+import { ShelterDTO } from "../../Shelters/models/shelter.dto";
+
 export class UserDTO {
   id: number;
   name: string;
@@ -6,6 +9,8 @@ export class UserDTO {
   role_id: number;
   password: string;
   user: UserDTO | null = null;
+  shelter: ShelterDTO | null = null
+  breeder: BreederDTO | null = null
   constructor(
     id: number,
     name: string,

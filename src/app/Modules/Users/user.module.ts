@@ -13,14 +13,13 @@ import { RegisterBreederFormComponent } from './components/register-breeder-form
 
 
 
-
-
 @NgModule({
   declarations: [
     RegisterComponent,
     RegisterUserFormComponent,
     RegisterShelterFormComponent,
-    RegisterBreederFormComponent
+    RegisterBreederFormComponent,
+
   ],
   imports: [
     CommonModule,

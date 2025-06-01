@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterUserFormComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
   @Output() roleSelected = new EventEmitter<number>();
+  @Input() isEditMode: boolean = false;
 
 
   formUser!: FormGroup;

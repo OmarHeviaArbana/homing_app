@@ -75,6 +75,28 @@ const _shelterReducer = createReducer(
     error: { payload },
   })),
 
+  on(ShelterActions.updateShelter, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+
+  on(ShelterActions.updateShelterSuccess, (state, action) => ({
+    ...state,
+    shelter: action.shelter,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+
+  on(ShelterActions.updateShelterFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  })),
+
 
   on(ShelterActions.getAnimalsShelter, (state) => ({
       ...state,

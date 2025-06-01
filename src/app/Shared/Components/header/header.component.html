@@ -18,7 +18,7 @@
 
     <mat-menu #appMenu="matMenu" class="header__avatar-menu">
       <ng-template matMenuContent>
-        <button mat-menu-item>Settings</button>
+        <button mat-menu-item (click)="goToProfile()">Mi perfil</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
       </ng-template>
     </mat-menu>

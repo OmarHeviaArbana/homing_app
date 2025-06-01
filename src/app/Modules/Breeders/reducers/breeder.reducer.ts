@@ -74,6 +74,29 @@ const _breederReducer = createReducer(
       error: { payload },
     })),
 
+    on(BreederActions.updateBreeder, (state) => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null,
+    })),
+
+    on(BreederActions.updateBreederSuccess, (state, action) => ({
+      ...state,
+      breeder: action.breeder,
+      loading: false,
+      loaded: true,
+      error: null,
+    })),
+
+    on(BreederActions.updateBreederFailure, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload },
+    })),
+
+
     on(BreederActions.getAnimalsBreeder, (state) => ({
       ...state,
       loading: true,

@@ -58,7 +58,50 @@ const _userReducer = createReducer(
     loaded: false,
     error: { payload },
   })),
+
+  on(UserActions.updateUser, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+
+  on(UserActions.updateUserSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+
+  on(UserActions.updateUserFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  })),
+
+    on(UserActions.getUserById, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(UserActions.getUserByIdSuccess, (state, action) => ({
+    ...state,
+    user: action.user,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(UserActions.getUserByIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  }))
 );
+
 
 export function userReducer(
   state: UserState | undefined,

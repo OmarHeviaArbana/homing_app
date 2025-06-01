@@ -35,7 +35,13 @@ export class ShelterService {
     ;
   }
 
-  getShelterById(breederId: string): Observable<ShelterDTO[]> {
+  getShelterById(breederId: number): Observable<ShelterDTO[]> {
     return this.http.get<ShelterDTO[]>(`${this.API_URL}/shelters/getShelter/${breederId}`);
+  }
+
+  updateShelter(shelterId: number, shelter: ShelterDTO): Observable<ShelterDTO> {
+  return this.http
+    .put<ShelterDTO>(`${this.API_URL}/shelters/update/${shelterId}`, shelter)
+    .pipe(catchError(this.sharedService.handleError));
   }
 }

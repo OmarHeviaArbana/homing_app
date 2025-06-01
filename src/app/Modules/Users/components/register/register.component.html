@@ -1,14 +1,16 @@
-<div style="margin-left: auto; margin-right: auto">
+  <div style="margin-left: auto; margin-right: auto">
   <p id="registerFeedback"></p>
   <p id="registerBreederFeedback"></p>
-   <p id="registerShelterFeedback"></p>
+  <p id="registerShelterFeedback"></p>
+  <p id="profileFeedback"></p>
 </div>
 <section class="register">
   <div class="register__container">
-    <h1 class="register__title">Formulario de registro</h1>
-      <form [formGroup]="form" (ngSubmit)="register()">
-
+    <h1 class="register__title"> {{ isEditMode ? 'Editar perfil' : 'Formulario de registro' }}</h1>
+      <form [formGroup]="form" (ngSubmit)="isEditMode ? update() : register()">
       <app-register-user-form
+        [isEditMode]="isEditMode"
+
         (formReady)="onUserFormReady($event)"
         (roleSelected)="onRoleSelected($event)">
       </app-register-user-form>
@@ -33,7 +35,7 @@
           || (selectedRoleId === 4 && (!formBreeder || !formBreeder.valid))">
           Registrarme
         </app-button>
-        <app-button variant="outline" (click)="cancel()">Cancelar</app-button>
+        <app-button variant="outline" (click)="cancel()"> {{ isEditMode ? 'Cancelar' : 'Volver' }}</app-button>
       </div>
       </form>
     </div>

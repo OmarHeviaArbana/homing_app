@@ -32,4 +32,33 @@ export const deleteUserFailure = createAction(
   props<{  payload: HttpErrorResponse }>()
 );
 
+export const updateUser = createAction(
+  '[Profile Page] Update User',
+  props<{ userId: number; user: UserDTO }>()
+);
+export const updateUserSuccess = createAction(
+  '[Profile Page] Update User Success',
+  props<{ userId: number; user: UserDTO }>()
+);
+
+export const updateUserFailure = createAction(
+  '[Profile Page] Update User Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+
+export const getUserById = createAction(
+  '[Profile Page] Get user by ID',
+  props<{ userId: number }>()
+);
+export const getUserByIdSuccess = createAction(
+  '[Profile Page] Get user by ID Success',
+  props<{ user: UserDTO }>()
+);
+
+export const getUserByIdFailure = createAction(
+  '[Profile Page] Get user by ID Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
 

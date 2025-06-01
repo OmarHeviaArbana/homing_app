@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { act, Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, withLatestFrom, filter, tap, mergeMap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom, filter, tap, mergeMap, exhaustMap, finalize } from 'rxjs/operators';
 
 import { AppState } from 'src/app/app.reducers';
 import { ShelterService } from '../services/shelter.service';
@@ -121,5 +121,48 @@ export class ShelterEffects {
         })
       ),
     { dispatch: false }
+  );
+
+  updateShelter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ShelterActions.updateShelter),
+      exhaustMap(({ shelterId, shelter }) =>
+        this.shelterService.updateShelter(shelterId, shelter).pipe(
+          map((shelter) => {
+            this.responseOK = true;
+            return ShelterActions.updateShelterSuccess({
+              shelterId,
+              shelter,
+            });
+          }),
+          catchError((error) => {
+            this.responseOK = false;
+            return of(ShelterActions.updateShelterFailure({ payload: error }));
+          }),
+          finalize(async () => {
+            this.errorResponse = 'Lo sentimos, algo ha salido mal. Vuelve a intentarlo';
+            await this.sharedService.managementToast(
+              'profileFeedback',
+              this.responseOK,
+              this.errorResponse
+            );
+
+            if (this.responseOK) {
+              this.shelterService.getShelterById(shelterId).subscribe({
+                next: (shelterDetail) => {
+                  this.store.dispatch(
+                    ShelterActions.getShelterByIdSuccess({ shelterDetail })
+                  );
+                  this.router.navigateByUrl('/mi-perfil');
+                },
+                error: (err) => {
+                  console.error('Error al refrescar el refugio tras actualizar:', err);
+                },
+              });
+            }
+          })
+        )
+      )
+    )
   );
 }

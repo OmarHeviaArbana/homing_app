@@ -27,36 +27,50 @@ export class SharedService {
   constructor() {}
 
   async managementToast(
-    element: string,
-    validRequest: boolean,
-    error?: ResponseError | LaravelError | string
-  ): Promise<void> {
-    const toastMsg = document.getElementById(element);
-    if (toastMsg) {
-    if (validRequest) {
-      toastMsg.className = 'show requestOk';
-      toastMsg.textContent = 'Form submitted successfully.';
-    } else {
-      toastMsg.className = 'show requestKo';
+  element: string,
+  validRequest: boolean,
+  error?: ResponseError | LaravelError | string
+): Promise<void> {
+  const toastMsg = document.getElementById(element);
+  if (!toastMsg) return;
 
-      // Si es un string simple
-      if (typeof error === 'string') {
-        toastMsg.textContent = error;
-      }
-      // Si es un error de Laravel
-      else if (error && 'errors' in error) {
-        const laravelError = error as LaravelError;
-        const errorMessages = Object.values(laravelError.errors || {})
-          .flat()
-          .join(', ');
-        toastMsg.textContent = laravelError.message || errorMessages;
-      }
-      // Si es el error ResponseError original
-    await this.wait(2500);
-        toastMsg.className = toastMsg.className.replace('show', '');
-      }
+  // Primero limpia clases y texto para reiniciar animación
+  toastMsg.classList.remove('show', 'requestOk', 'requestKo');
+  toastMsg.textContent = '';
+
+  // Forzar reflow para reiniciar animación CSS
+  void toastMsg.offsetWidth;
+
+  if (validRequest) {
+    toastMsg.textContent = 'Form submitted successfully.';
+    toastMsg.classList.add('show', 'requestOk');
+  } else {
+    toastMsg.classList.add('show', 'requestKo');
+
+    if (typeof error === 'string') {
+      toastMsg.textContent = error;
+    } else if (error && 'errors' in error) {
+      const laravelError = error as LaravelError;
+      const errorMessages = Object.values(laravelError.errors || {})
+        .flat()
+        .join(', ');
+      toastMsg.textContent = laravelError.message || errorMessages;
+    } else if (error && 'message' in error) {
+      // Asumimos que error es ResponseError u otro tipo con message
+      toastMsg.textContent = (error as any).message || 'Ha ocurrido un error';
+    } else {
+      toastMsg.textContent = 'Ha ocurrido un error desconocido.';
     }
   }
+
+  // Espera el tiempo total de la animación (fadein 0.5s + fadeout 0.5s + visible 2.5s = 3.5s)
+  await this.wait(3500);
+
+  // Luego oculta el toast para que pueda volver a mostrarse correctamente
+  toastMsg.classList.remove('show', 'requestOk', 'requestKo');
+  toastMsg.textContent = '';
+}
+
 
   errorLog(error: ResponseError): void {
     console.error('path:', error.path);

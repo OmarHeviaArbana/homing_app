@@ -35,7 +35,13 @@ export class BreederService {
     ;
   }
 
-  getBreederById(breederId: string): Observable<BreederDTO[]> {
+  getBreederById(breederId: number): Observable<BreederDTO[]> {
     return this.http.get<BreederDTO[]>(`${this.API_URL}/breeders/getBreeder/${breederId}`);
   }
+
+    updateBreeder(breederId: number, breeder: BreederDTO): Observable<BreederDTO> {
+    return this.http
+      .put<BreederDTO>(`${this.API_URL}/breeders/update/${breederId}`, breeder)
+      .pipe(catchError(this.sharedService.handleError));
+    }
 }

@@ -17,9 +17,24 @@ export const getAllSheltersFailure = createAction(
   props<{ error: any }>()
 );
 
+export const updateShelter = createAction(
+  '[Profile Page] Update Shelter',
+  props<{ shelterId: number; shelter: ShelterDTO }>()
+);
+export const updateShelterSuccess = createAction(
+  '[Profile Page] Update Shelter Success',
+  props<{ shelterId: number; shelter: ShelterDTO }>()
+);
+
+export const updateShelterFailure = createAction(
+  '[Profile Page] Update Shelter Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
+
 export const getShelterById = createAction(
   '[ShelterForm Page] Get Shelter',
-  props<{ shelterId: string }>()
+  props<{ shelterId: number }>()
 );
 export const getShelterByIdSuccess = createAction(
   '[ShelterForm Page] Get Shelter Success',

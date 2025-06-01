@@ -73,11 +73,11 @@
 
 @-webkit-keyframes fadein {
   from {
-   top: 0;
+   top: 30px;
     opacity: 0;
   }
   to {
-   top: 30px;
+   top: 0;
     opacity: 1;
   }
 }
@@ -106,11 +106,11 @@
 
 @keyframes fadeout {
   from {
-    bottom: 0px;
+    top: 30px;
     opacity: 1;
   }
   to {
-    bottom: 0;
+    top: 0;
     opacity: 0;
   }
 }

@@ -23,4 +23,16 @@ export class UserService {
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/users/delete/${id}`);
   }
+
+  updateUser(userId: number, user: UserDTO): Observable<UserDTO> {
+  return this.http
+    .put<UserDTO>(`${this.API_URL}/users/update/${userId}`, user)
+    .pipe(catchError(this.sharedService.handleError));
+}
+
+  getUserById(userId: number): Observable<UserDTO> {
+    return this.http
+      .get<UserDTO>(`${this.API_URL}/users/getUser/${userId}`)
+      .pipe(catchError(this.sharedService.handleError));
+  }
 }
