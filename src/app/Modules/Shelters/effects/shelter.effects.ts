@@ -148,21 +148,38 @@ export class ShelterEffects {
             );
 
             if (this.responseOK) {
-              this.shelterService.getShelterById(shelterId).subscribe({
-                next: (shelterDetail) => {
-                  this.store.dispatch(
-                    ShelterActions.getShelterByIdSuccess({ shelterDetail })
-                  );
-                  this.router.navigateByUrl('/mi-perfil');
-                },
-                error: (err) => {
-                  console.error('Error al refrescar el refugio tras actualizar:', err);
-                },
-              });
+              this.router.navigateByUrl('/');
+
             }
           })
         )
       )
     )
   );
+
+  uploadShelterLogo$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(ShelterActions.updateShelterSuccess, ShelterActions.createShelterSuccess),
+    withLatestFrom(this.store.select(state => state.shelter)),
+    switchMap(([action, shelterFormData]) => {
+
+
+      console.log(action);
+      console.log(shelterFormData.files);
+
+      return this.shelterService.uploadShelterPhotos(shelterFormData.files).pipe(
+        map(response => ShelterActions.uploadShelterLogoSuccess({ response })),
+        catchError(error =>
+          of(ShelterActions.uploadShelterLogoFailure({
+            error: {
+              message: error.error?.message || 'Error al subir el logo',
+              errors: error.error?.errors || {}
+            }
+          }))
+        )
+      );
+    })
+  )
+);
+
 }

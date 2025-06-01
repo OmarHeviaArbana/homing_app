@@ -19,7 +19,7 @@ export const getAllBreedersFailure = createAction(
 
 export const updateBreeder = createAction(
   '[Profile Page] Update Breeder',
-  props<{ breederId: number; breeder: BreederDTO }>()
+  props<{ breederId: number; breeder: BreederDTO ;}>()
 );
 export const updateBreederSuccess = createAction(
   '[Profile Page] Update Breeder Success',
@@ -85,3 +85,17 @@ export const createBreederFailure = createAction(
   props<{ error: any , breederToRegister: any}>()
 );
 
+export const uploadBreeederLogo = createAction(
+  '[Breeeder] Upload Breeeder Logo',
+  props<{ files: FormData }>()
+);
+
+export const uploadBreeederLogoSuccess = createAction(
+  '[Breeeder] Upload Breeeder Logo Success',
+  props<{ response: any }>()
+);
+
+export const uploadBreeederLogoFailure = createAction(
+  '[Breeeder] Upload Breeeder Logo Failure',
+  props<{ error: { message: string; errors: any } }>()
+);

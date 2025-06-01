@@ -10,6 +10,8 @@ import { ShelterDTO } from 'src/app/Modules/Shelters/models/shelter.dto';
 import { BreederDTO } from 'src/app/Modules/Breeders/models/breeder.dto';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/Shared/Components/dialog/dialog.component';
 
 
 @Component({
@@ -29,11 +31,14 @@ export class RegisterComponent implements OnInit {
   isEditMode = false;
   currentUserData: UserDTO | null = null;
 
+  selectedFiles: any= {};
+
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private router: Router,
     private location: Location,
+    private dialog: MatDialog
   ) {
 
     this.form = this.formBuilder.group({
@@ -53,7 +58,6 @@ export class RegisterComponent implements OnInit {
         }
       });
     }
-
   }
   ngOnInit(): void {
   }
@@ -92,47 +96,49 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  onFilesChanged(files: { [key: string]: File | null }) {
+    this.selectedFiles = files;
+    console.log(this.selectedFiles.logo_url);
+
+  }
+
+
   onRoleSelected(roleId: number) {
     this.selectedRoleId = roleId;
   }
-
-logFormStates() {
-
-}
-
-/*  onFileSelected(event: Event): void {
-  const input = event.target as HTMLInputElement;
-
-  if (!input.files || input.files.length === 0) {
-    this.logo_url.setValue(null);
-    this.logo_url.updateValueAndValidity();
-    return;
-  }
-
-  const file = input.files[0];
-  this.logo_url.setValue(file);
-  this.logo_url.updateValueAndValidity();
-
-
-} */
-
 
   register(): void {
 
     if (this.formUser.invalid) return;
 
-    const user: UserDTO = this.formUser.value;
+    const user: UserDTO =  {
+      ...this.formUser.value,
+
+    }
+    console.log(user);
 
     if (this.selectedRoleId === 3) {
       if (this.formShelter.invalid) return;
-      const shelterData: Partial<ShelterDTO> = this.formShelter.value;
+
+      const shelterData: Partial<ShelterDTO> = {
+        ...this.formShelter.value,
+        files: this.selectedFiles.logo_url
+      };
       this.store.dispatch(ShelterActions.saveShelterFormData({ shelterFormData: shelterData }));
+      this.store.dispatch(ShelterActions.uploadShelterLogo({ files: this.selectedFiles}));
     }
     if (this.selectedRoleId === 4) {
       if (this.formBreeder.invalid) return;
-      const BreederData: Partial<BreederDTO> = this.formBreeder.value;
+
+      const BreederData: Partial<BreederDTO> =  {
+        ...this.formBreeder.value,
+        files: this.selectedFiles.logo_url
+      }
+
       this.store.dispatch(BreederActions.saveBreederFormData({ breederFormData: BreederData }));
+      this.store.dispatch(BreederActions.uploadBreeederLogo({ files: this.selectedFiles.logo_url}));
     }
+
     this.store.dispatch(UserActions.register({ user }));
   }
 
@@ -146,26 +152,41 @@ logFormStates() {
       this.store.dispatch(UserActions.updateUser({ userId: userId, user: userFormValues }));
     }
     if (this.selectedRoleId === 3 && this.formShelter.valid && this.currentUserData?.shelter) {
-    const shelterId : any = this.currentUserData.shelter.id;
+    const shelterId : any =  this.currentUserData.shelter.id;
+      this.store.dispatch(ShelterActions.uploadShelterLogo({ files: this.selectedFiles.logo_url}));
       this.store.dispatch(
         ShelterActions.updateShelter({
+          ... this.formShelter.value,
           shelterId: shelterId,
-          shelter: this.formShelter.value,
+          files: this.selectedFiles.logo_url
+
         })
       );
     }
 
     if (this.selectedRoleId === 4 && this.formBreeder.valid && this.currentUserData?.breeder) {
       const breederId : any = this.currentUserData.breeder.id;
+      this.store.dispatch(BreederActions.uploadBreeederLogo({ files: this.selectedFiles.logo_url}));
       this.store.dispatch(
         BreederActions.updateBreeder({
+          ...this.formBreeder.value,
           breederId: breederId,
-          breeder: this.formBreeder.value,
+          files: this.selectedFiles.logo_url
         })
       );
     }
     this.isEditMode = false
 
+  }
+
+  openDialog(): void {
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Atención',
+        content: '¿Estás seguro/a de que deseas continuar, ya que se perderan los datos de la mascota ya cumplimentados?',
+        onConfirm: () => this.cancel()
+      }
+    });
   }
 
   cancel() {

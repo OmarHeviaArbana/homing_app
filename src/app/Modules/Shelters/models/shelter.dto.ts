@@ -9,6 +9,7 @@ export class ShelterDTO {
   phone?: string;
   email_shelter?: string;
   cif?: string;
+  files?: { [key: string]: File | null };
 
   constructor(
     user_id: number,
@@ -21,7 +22,6 @@ export class ShelterDTO {
     email_shelter: string,
     cif: string,
     id?: number
-/* sdfsdfds@vit.com */
   ) {
     this.id = id;
     this.user_id = user_id;

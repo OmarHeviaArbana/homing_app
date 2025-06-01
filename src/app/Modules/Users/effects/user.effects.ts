@@ -141,7 +141,7 @@ export class UserEffects {
               }
             });
 
-              this.router.navigateByUrl('/mi-perfil');
+              this.router.navigateByUrl('/');
             }
           })
         )

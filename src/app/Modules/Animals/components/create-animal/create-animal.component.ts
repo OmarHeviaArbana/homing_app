@@ -21,72 +21,66 @@ export class CreateAnimalComponent {
   user: any;
   selectedFiles: { [key: string]: File | null } = {};
 
-    constructor(
-      private formBuilder: FormBuilder,
-      private store: Store<AppState>,
-      private router: Router,
-      private location: Location,
-      private dialog: MatDialog
-    ) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<AppState>,
+    private router: Router,
+    private location: Location,
+    private dialog: MatDialog
+  ) {
 
-      this.form = this.formBuilder.group({
-        animal: this.formPublicAnimal,
-      });
-
-
-    this.store.select('auth').subscribe((auth) => {
-      this.auth = auth?.user;
-      this.user = this.auth
-     });
-    }
-
-    onAnimalFormReady(form: FormGroup) {
-      this.formPublicAnimal = form;
-    }
-
-    onFilesChanged(files: { [key: string]: File | null }) {
-      console.log(files);
-
-      this.selectedFiles = files;
-    }
-
-    publicAnimal(): void {
-
-      if (this.formPublicAnimal.invalid) return;
-
-      const animal: AnimalDTO = {
-          ...this.formPublicAnimal.value,
-          shelter_id: this.user.role_id == 3 ? this.user.shelter.id : null,
-          breeder_id: this.user.role_id == 4 ? this.user.breeder.id : null,
-          files: this.selectedFiles
-
-      };
+    this.form = this.formBuilder.group({
+      animal: this.formPublicAnimal,
+    });
 
 
-      if (this.formPublicAnimal.invalid) return;
+  this.store.select('auth').subscribe((auth) => {
+    this.auth = auth?.user;
+    this.user = this.auth
+    });
+  }
 
-      const animalData: Partial<AnimalDTO> = this.formPublicAnimal.value
+  onAnimalFormReady(form: FormGroup) {
+    this.formPublicAnimal = form;
+  }
 
-      console.log(this.selectedFiles);
+  onFilesChanged(files: { [key: string]: File | null }) {
+    this.selectedFiles = files;
+  }
+
+  publicAnimal(): void {
+
+    if (this.formPublicAnimal.invalid) return;
+
+    const animal: AnimalDTO = {
+      ...this.formPublicAnimal.value,
+      shelter_id: this.user.role_id == 3 ? this.user.shelter.id : null,
+      breeder_id: this.user.role_id == 4 ? this.user.breeder.id : null,
+      files: this.selectedFiles
+    };
 
 
-      this.store.dispatch(AnimalActions.saveAnimalFormData({ animalFormData: animalData }));
-      this.store.dispatch(AnimalActions.setFilesFormData({ files: this.selectedFiles}));
-      this.store.dispatch(AnimalActions.createAnimal({ animal}));
-    }
+    if (this.formPublicAnimal.invalid) return;
 
-    openDialog(): void {
-      this.dialog.open(DialogComponent, {
-        data: {
-          title: 'Atención',
-          content: '¿Estás seguro/a de que deseas continuar, ya que se perderan los datos de la mascota ya cumplimentados?',
-          onConfirm: () => this.cancel()
-        }
-      });
-    }
-    cancel() {
-      this.formPublicAnimal.reset();
-      this.location.back();
-    }
+    const animalData: Partial<AnimalDTO> = this.formPublicAnimal.value
+
+    this.store.dispatch(AnimalActions.saveAnimalFormData({ animalFormData: animalData }));
+    this.store.dispatch(AnimalActions.setFilesFormData({ files: this.selectedFiles}));
+    this.store.dispatch(AnimalActions.createAnimal({ animal}));
+  }
+
+  openDialog(): void {
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Atención',
+        content: '¿Estás seguro/a de que deseas continuar, ya que se perderan los datos de la mascota ya cumplimentados?',
+        onConfirm: () => this.cancel()
+      }
+    });
+  }
+  cancel() {
+    this.formPublicAnimal.reset();
+    this.location.back();
+  }
 
 }

@@ -13,151 +13,68 @@ import { AppState } from 'src/app/app.reducers';
 })
 
 export class CreateAnimalFormComponent implements OnInit{
-   @Output() formReady = new EventEmitter<FormGroup>();
-    @Output() filesChanged = new EventEmitter<{ [key: string]: File | null }>();
-    formPublicAnimal!: FormGroup;
+  @Output() formReady = new EventEmitter<FormGroup>();
+  @Output() filesChanged = new EventEmitter<{ [key: string]: File | null }>();
+  formPublicAnimal!: FormGroup;
 
-    speciesList$!: Observable<AuxiliarEntityDTO[]>;
-    statusList$!: Observable<AuxiliarEntityDTO[]>;
-    ageCategoriesList$!: Observable<AuxiliarEntityDTO[]>;
-    genresList$!: Observable<AuxiliarEntityDTO[]>;
-    sizesList$!: Observable<AuxiliarEntityDTO[]>;
-    energyLevelsList$!: Observable<AuxiliarEntityDTO[]>;
+  speciesList$!: Observable<AuxiliarEntityDTO[]>;
+  statusList$!: Observable<AuxiliarEntityDTO[]>;
+  ageCategoriesList$!: Observable<AuxiliarEntityDTO[]>;
+  genresList$!: Observable<AuxiliarEntityDTO[]>;
+  sizesList$!: Observable<AuxiliarEntityDTO[]>;
+  energyLevelsList$!: Observable<AuxiliarEntityDTO[]>;
 
-
-   selectedFiles: { [key: string]: File | null } = {};
+  selectedFiles: { [key: string]: File | null } = {};
   imagePreviews: { [key: string]: string | null } = {};
 
+  constructor(private formBuilder: FormBuilder,  private store: Store<AppState>,) {}
 
-    constructor(private formBuilder: FormBuilder,  private store: Store<AppState>,) {}
+  ngOnInit(): void {
+    this.formPublicAnimal = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      location: ['', Validators.required],
+      weight: ['', Validators.required],
+      height: ['', Validators.required],
+      species_id: ['', Validators.required],
+      status_id: ['', Validators.required],
+      agecategory_id: ['', Validators.required],
+      genre_id: ['', Validators.required],
+      size_id: ['', Validators.required],
+      energylevel_id: ['', Validators.required],
+      identifier: [false, Validators.required],
+      vaccines: [false, Validators.required],
+      sterilization: [false, Validators.required],
+      care: ['', Validators.required],
+      principal_image: ['', Validators.required],
+      optional_image_one: [''],
+      optional_image_two: [''],
+    });
 
-    ngOnInit(): void {
-      this.formPublicAnimal = this.formBuilder.group({
-        name: ['', Validators.required],
-        description: ['', Validators.required],
-        location: ['', Validators.required],
-        weight: ['', Validators.required],
-        height: ['', Validators.required],
-        species_id: ['', Validators.required],
-        status_id: ['', Validators.required],
-        agecategory_id: ['', Validators.required],
-        genre_id: ['', Validators.required],
-        size_id: ['', Validators.required],
-        energylevel_id: ['', Validators.required],
-        identifier: [false, Validators.required],
-        vaccines: [false, Validators.required],
-        sterilization: [false, Validators.required],
-        care: ['', Validators.required],
-        principal_image: ['', Validators.required],
-        optional_image_one: [''],
-        optional_image_two: [''],
-      });
+    this.formReady.emit(this.formPublicAnimal);
 
-      this.formReady.emit(this.formPublicAnimal);
+    this.store.dispatch(AnimalActions.getSpeciesAux());
+    this.store.dispatch(AnimalActions.getStatusAux());
+    this.store.dispatch(AnimalActions.getAgeCategoriesAux());
+    this.store.dispatch(AnimalActions.getGenresAux());
+    this.store.dispatch(AnimalActions.getSizesAux());
+    this.store.dispatch(AnimalActions.getEnergyLevelsAux());
 
-      this.store.dispatch(AnimalActions.getSpeciesAux());
-      this.store.dispatch(AnimalActions.getStatusAux());
-      this.store.dispatch(AnimalActions.getAgeCategoriesAux());
-      this.store.dispatch(AnimalActions.getGenresAux());
-      this.store.dispatch(AnimalActions.getSizesAux());
-      this.store.dispatch(AnimalActions.getEnergyLevelsAux());
-
-      this.loadSelects();
-    }
-
-    loadSelects(): void {
-      this.speciesList$ = this.store.select(state => state.animals.species);
-      this.statusList$ = this.store.select(state => state.animals.status);
-      this.ageCategoriesList$ = this.store.select(state => state.animals.ageCategories);
-      this.genresList$ = this.store.select(state => state.animals.genres);
-      this.sizesList$ = this.store.select(state => state.animals.sizes);
-      this.energyLevelsList$ = this.store.select(state => state.animals.energyLevels);
-
-    }
-
- /*    imagePreviews: { [key: string]: string | null } = {
-      principal_image: null,
-      optional_image_one: null,
-      optional_image_two: null
-    };
-
-  selectedFiles: { [key: string]: File | null } = {}; */
-
-  /* onImageSelected(event: Event, field: string): void {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-          this.selectedFiles[field] = file;
-      const reader = new FileReader();
-
-      reader.onload = () => {
-        this.imagePreviews[field] = reader.result as string;
-
-        // Opcional: guardar en el form
-       this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]);
-       this.filesChanged.emit(this.selectedFiles);
-      };
-
-        reader.readAsDataURL(file); // base64 para preview inmediato
-
-      console.log(file)
-      }
-
-    } */
-/*
-    onImageSelected(event: Event, field: string): void {
-  const input = event.target as HTMLInputElement;
-
-  if (input.files && input.files[0]) {
-    const file = input.files[0];
-    this.selectedFiles[field] = file;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreviews[field] = reader.result as string;
-
-      this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]);
-      this.filesChanged.emit(this.selectedFiles);
-    };
-
-    reader.readAsDataURL(file);
+    this.loadSelects();
   }
-} */
-/* onImageSelected(event: Event, field: string): void {
-    const input = event.target as HTMLInputElement;
 
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      this.selectedFiles[field] = file;
+  loadSelects(): void {
+    this.speciesList$ = this.store.select(state => state.animals.species);
+    this.statusList$ = this.store.select(state => state.animals.status);
+    this.ageCategoriesList$ = this.store.select(state => state.animals.ageCategories);
+    this.genresList$ = this.store.select(state => state.animals.genres);
+    this.sizesList$ = this.store.select(state => state.animals.sizes);
+    this.energyLevelsList$ = this.store.select(state => state.animals.energyLevels);
 
-      // Actualizar control del formulario con el archivo
-      this.formPublicAnimal.get(field)?.setValue(file);
+  }
 
-      // Crear preview base64 para mostrar en template
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreviews[field] = reader.result as string;
-      };
-      reader.readAsDataURL(file);
 
-      // Emitir archivos para padre
-      this.filesChanged.emit(this.selectedFiles);
-    }
-  } */
-
-   /*  onImageSelected(event: Event, field: string): void {
-    const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      this.selectedFiles[field] = file;
-      this.fileNames[field] = file.name;
-      this.filesChanged.emit(this.selectedFiles);
-    }
-  } */
-
-    onImageSelected(event: Event, field: string): void {
+  onImageSelected(event: Event, field: string): void {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files[0]) {
@@ -236,12 +153,6 @@ export class CreateAnimalFormComponent implements OnInit{
       return '';
     }
 
-     /* getSelectedFiles(): { [key: string]: File | null } {
-      return {
-        principal_image: this.principalImageFile,
-        optional_image_one: this.optionalImageOneFile,
-        optional_image_two: this.optionalImageTwoFile
-      };
-    } */
+
 
 }

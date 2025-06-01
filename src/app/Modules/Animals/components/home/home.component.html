@@ -34,7 +34,7 @@
 </section>
 
 <section class="animal-section">
-  <div  *ngIf="animals.length !== 0" class="container">
+  <div *ngIf="animals.length !== 0" class="container">
     <h2 class="animal-section__title">
       <img class="animal-section__icon" src="/assets/icons/mascotas.png" alt="Icono Corazón">
       Mascotas que te esperan
@@ -65,11 +65,10 @@
       </button>
     </div>
   </div>
-  <div class="section__card" >
+  <div *ngIf="animals.length === 0" class="animal-section__nodata" >
       <app-no-data
-      *ngIf="animals.length === 0"
         [title]="'Sin resultados'"
-        [content]="'En estos momentos no tenemos registrada ninguna mascota en la plataforma. Muy pronto nuestros colaboradores comenzaran a publicar sus mascotas'"
+        [content]="'En estos momentos no tenemos registrada ninguna mascota en la plataforma. Muy pronto nuestros colaboradores comenzarán a publicar sus mascotas.'"
       ></app-no-data>
   </div>
 </section>

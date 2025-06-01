@@ -10,18 +10,19 @@
       <form [formGroup]="form" (ngSubmit)="isEditMode ? update() : register()">
       <app-register-user-form
         [isEditMode]="isEditMode"
-
         (formReady)="onUserFormReady($event)"
         (roleSelected)="onRoleSelected($event)">
       </app-register-user-form>
 
       <app-register-shelter-form
         *ngIf="selectedRoleId === 3"
+        (filesChanged)="onFilesChanged($event)"
         (formReady)="onShelterFormReady($event)">
       </app-register-shelter-form>
 
       <app-register-breeder-form
         *ngIf="selectedRoleId === 4"
+        (filesChanged)="onFilesChanged($event)"
         (formReady)="onBreederFormReady($event)">
       </app-register-breeder-form>
 
@@ -32,8 +33,7 @@
           [disabled]="
           !formUser.valid
           || (selectedRoleId === 3 && (!formShelter || !formShelter.valid))
-          || (selectedRoleId === 4 && (!formBreeder || !formBreeder.valid))">
-          Registrarme
+          || (selectedRoleId === 4 && (!formBreeder || !formBreeder.valid))"> {{ isEditMode ? 'Modificar' : 'Registrarme' }}
         </app-button>
         <app-button variant="outline" (click)="cancel()"> {{ isEditMode ? 'Cancelar' : 'Volver' }}</app-button>
       </div>

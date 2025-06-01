@@ -5,6 +5,7 @@ import * as UserActions from '../actions';
 
 export interface UserState {
   user: UserDTO | null;
+  files: any;
   loading: boolean;
   loaded: boolean;
   error: any;
@@ -12,6 +13,7 @@ export interface UserState {
 
 export const initialState: UserState = {
   user: null,
+  files: [],
   loading: false,
   loaded: false,
   error: null,
@@ -99,7 +101,13 @@ const _userReducer = createReducer(
     loading: false,
     loaded: false,
     error: { payload },
-  }))
+  })),
+
+  on(UserActions.setFilesFormData, (state, {  files }) => ({
+    ...state,
+    files
+  })),
+
 );
 
 

@@ -46,6 +46,10 @@ export const updateUserFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
+export const setFilesFormData = createAction(
+  '[User] Set User File Data',
+  props<{  files: { [key: string]: File | null } }>()
+);
 
 export const getUserById = createAction(
   '[Profile Page] Get user by ID',

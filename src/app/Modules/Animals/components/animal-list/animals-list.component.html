@@ -51,7 +51,7 @@
     </mat-form-field>
     </section>
     <section class="section" >
-    <div class="section__card" *ngFor="let animal of filteredAnimals$ | async">
+      <div class="section__card" *ngFor="let animal of filteredAnimals$ | async">
         <app-card [animal]="animal" (click)="goToAnimalDetail(animal.id)" ></app-card>
       </div>
       <app-no-data

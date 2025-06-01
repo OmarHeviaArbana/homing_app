@@ -87,3 +87,17 @@ export const createShelterFailure = createAction(
   props<{ error: any , shelterToRegister: any }>()
 );
 
+export const uploadShelterLogo = createAction(
+  '[Shelter] Upload Shelter Logo',
+  props<{ files: FormData }>()
+);
+
+export const uploadShelterLogoSuccess = createAction(
+  '[Shelter] Upload Shelter Logo Success',
+  props<{ response: any }>()
+);
+
+export const uploadShelterLogoFailure = createAction(
+  '[Shelter] Upload Shelter Logo Failure',
+  props<{ error: { message: string; errors: any } }>()
+);

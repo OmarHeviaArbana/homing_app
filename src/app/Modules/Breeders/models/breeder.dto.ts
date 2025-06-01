@@ -9,6 +9,7 @@ export class BreederDTO {
   phone?: string;
   email_breeder?: string;
   certification?: string;
+  files?: { [key: string]: File | null };
 
   constructor(
     user_id: number,

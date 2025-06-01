@@ -74,7 +74,7 @@ export const clearAnimalFormData = createAction(
 );
 
 export const setFilesFormData = createAction(
-  '[Animal] Set Animal Form Data',
+  '[Animal] Set Animal File Data',
   props<{  files: { [key: string]: File | null } }>()
 );
 

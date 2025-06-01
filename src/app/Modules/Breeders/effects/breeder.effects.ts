@@ -127,6 +127,7 @@ export class BreederEffects {
         this.breederService.updateBreeder(breederId, breeder).pipe(
           map((breeder) => {
             this.responseOK = true;
+
             return BreederActions.updateBreederSuccess({
               breederId,
               breeder,
@@ -145,21 +146,36 @@ export class BreederEffects {
             );
 
             if (this.responseOK) {
-              this.breederService.getBreederById(breederId).subscribe({
-                next: (breederDetail) => {
-                  this.store.dispatch(
-                    BreederActions.getBreederByIdSuccess({ breederDetail })
-                  );
-                  this.router.navigateByUrl('/mi-perfil');
-                },
-                error: (err) => {
-                  console.error('Error al refrescar el refugio tras actualizar:', err);
-                },
-              });
+              this.router.navigateByUrl('/');
+
             }
           })
         )
       )
+    )
+  );
+
+    uploadBreederLogo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BreederActions.updateBreederSuccess, BreederActions.createBreederSuccess),
+      withLatestFrom(this.store.select(state => state.breeder)),
+      switchMap(([action, breederFormData]) => {
+
+        console.log(action);
+        console.log(breederFormData.files);
+
+        return this.breederService.uploadBreederPhotos(breederFormData.files).pipe(
+          map(response => BreederActions.uploadBreeederLogoSuccess({ response })),
+          catchError(error =>
+            of(BreederActions.uploadBreeederLogoFailure({
+              error: {
+                message: error.error?.message || 'Error al subir el logo',
+                errors: error.error?.errors || {}
+              }
+            }))
+          )
+        );
+      })
     )
   );
 }

@@ -8,8 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterShelterFormComponent implements OnInit {
   @Output() formReady = new EventEmitter<FormGroup>();
+  @Output() filesChanged = new EventEmitter<{ [key: string]: File | null }>();
 
   formShelter!: FormGroup;
+
+  selectedFiles: { [key: string]: File | null } = {};
+  imagePreviews: { [key: string]: string | null } = {};
 
   constructor(private formBuilder: FormBuilder) {}
 
@@ -27,6 +31,23 @@ export class RegisterShelterFormComponent implements OnInit {
 
     this.formReady.emit(this.formShelter);
   }
+
+  onImageSelected(event: Event, field: string): void {
+  const input = event.target as HTMLInputElement;
+
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    this.selectedFiles[field] = file;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreviews[field] = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+
+    this.filesChanged.emit(this.selectedFiles);
+  }
+}
 
   get name() {
     return this.formShelter.get('name');
@@ -68,31 +89,5 @@ export class RegisterShelterFormComponent implements OnInit {
     if (controlName === 'description' && control?.hasError('maxlength')) return 'Máximo 300 caracteres';
     if (controlName === 'cif' && control?.hasError('pattern')) return 'CIF no valido';
     return '';
-  }
-
-  imagePreviews: { [key: string]: any | null } = {
-
-    logo_url:  null
-
-  };
-
-  onImageSelected(event: Event, field: string): void {
-
-  const input = event.target as HTMLInputElement;
-
-  if (input.files && input.files[0]) {
-    const file = input.files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      this.imagePreviews[field] = reader.result as string;
-
-      // Opcional: guardar en el form
-    /*  this.formPublicAnimal.get(field)?.setValue(this.imagePreviews[field]); */
-    };
-
-      reader.readAsDataURL(file); // base64 para preview inmediato
-    }
-
   }
 }

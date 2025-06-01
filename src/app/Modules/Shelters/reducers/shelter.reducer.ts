@@ -8,6 +8,7 @@ export interface ShelterState {
   shelterDetail: ShelterDTO[];
   animalsShelter: ShelterDTO[];
   shelterFormData: Partial<ShelterDTO> | null;
+  files: any;
   loading: boolean;
   loaded: boolean;
   error: any;
@@ -17,6 +18,7 @@ export const initialState: ShelterState = {
   shelters: [],
   shelterDetail: [],
   animalsShelter: [],
+  files: [],
   shelterFormData: null,
   loading: false,
   loaded: false,
@@ -124,7 +126,11 @@ const _shelterReducer = createReducer(
     loading: false,
     loaded: false,
     error: error,
-  }))
+  })),
+  on(ShelterActions.uploadShelterLogo, (state, {  files }) => ({
+      ...state,
+      files
+    })),
 );
 
 export function shelterReducer(

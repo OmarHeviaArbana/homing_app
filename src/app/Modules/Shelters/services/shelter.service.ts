@@ -44,4 +44,20 @@ export class ShelterService {
     .put<ShelterDTO>(`${this.API_URL}/shelters/update/${shelterId}`, shelter)
     .pipe(catchError(this.sharedService.handleError));
   }
+
+/*   uploadShelterPhotos(formData: FormData) {
+    console.log(formData);
+
+    return this.http.post(`${this.API_URL}/shelters/upload-logo`, formData);
+  } */
+
+   uploadShelterPhotos( image: File, ): Observable<any> {
+    const formData = new FormData();
+    console.log(image);
+
+    formData.append('image', image);
+    return this.http.post(`${this.API_URL}/shelters/upload-logo`, formData)
+  }
+
+
 }
