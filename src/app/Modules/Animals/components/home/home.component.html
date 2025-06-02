@@ -2,7 +2,7 @@
 <section class="home">
   <div class="container">
     <div class="home__content">
-      <h1 class="home__title_small_devices">¡Bienvenido a Homing. {{this.auth?.name ? this.auth?.name : '' }}!</h1>
+      <h1 class="home__title_small_devices">¡Bienvenido a Homing. {{this.auth?.user?.name ? this.auth?.user?.name : '' }}!</h1>
       <div class="home__image-container">
         <img
           src="/assets/img/dog-287420_1920.jpg"
@@ -12,7 +12,7 @@
         <span class="home__image-author"> Imagen de  <a href="https://pixabay.com/es/users/beatriz57-189088/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=287420">Beatrix Döring</a> en <a href="https://pixabay.com/es//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=287420">Pixabay</a></span>
       </div>
       <div class="home__text">
-        <h1 class="home__title">¡Bienvenido a Homing!</h1>
+        <h1 class="home__title">¡Bienvenido a Homing. {{this.auth?.user?.name ? this.auth?.user?.name : '' }}!</h1>
         <div class="home__divider"></div>
         <p class="home__description">
           En Homing tenemos el compromiso de dar un hogar a todos aquellos animales que lo necesiten.
@@ -20,7 +20,7 @@
         <p class="home__question">¿Nos ayudas a conseguirlo?</p>
         <div *ngIf="!user" class="home__actions">
           <app-button variant="primary" (click)="goToLogin()">Iniciar sesión</app-button>
-          <app-button variant="secondary" (click)="goToRegister()">Registrate</app-button>
+          <app-button variant="secondary" (click)="goToRegister()">Regístrate</app-button>
         </div>
         <div *ngIf="user" class="home__actions">
           <app-button *ngIf="role == 2" variant="primary" (click)="goToAnimals()">Ver mascotas</app-button>

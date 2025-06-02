@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducers';
 import * as AuthAction from '../../../Modules/Auth/actions';
+import { UserDTO } from 'src/app/Modules/Users/models/user.dto';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,14 @@ export class HeaderComponent implements OnInit {
   showNoAuthSection: boolean;
   userInitials: string;
   isMenuOpen: Boolean;
+  rolUser: number | any;
 
   constructor(private router: Router, private store: Store<AppState>) {
     this.showAuthSection = false;
     this.showNoAuthSection = true;
     this.userInitials = '';
     this.isMenuOpen = false;
+    this.rolUser = 2;
   }
 
   ngOnInit(): void {
@@ -30,16 +33,13 @@ export class HeaderComponent implements OnInit {
       if (auth.access_token ) {
         this.showAuthSection = true;
         this.showNoAuthSection = false;
+        this.rolUser = auth.user?.role_id
+
         if (auth.user)  {
           this.userInitials = `${auth.user.name[0]}${auth.user.username[0]}`.toUpperCase();
         } else {
           this.userInitials = 'H.';
         }
-      }
-
-      if(!localStorage.getItem('auth_homing')) {
-        this.showAuthSection = false;
-        this.showNoAuthSection = true;
       }
     });
 
@@ -64,6 +64,11 @@ export class HeaderComponent implements OnInit {
       document.body.classList.remove('no-scroll');
     }
   }
+
+  goToAnimalManage(): void {
+    this.router.navigateByUrl('gestion-mascotas');
+  }
+
 
   ngOnDestroy(): void {
     document.body.classList.remove('no-scroll');

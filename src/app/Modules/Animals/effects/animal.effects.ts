@@ -10,6 +10,7 @@ import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { AppState } from 'src/app/app.reducers';
 import { Store } from '@ngrx/store';
 import { AnimalDTO } from '../models/animal.dto';
+import { Location } from '@angular/common';
 
 @Injectable()
 export class AnimalEffects {
@@ -23,6 +24,7 @@ export class AnimalEffects {
     private router: Router,
     private sharedService: SharedService,
     private store: Store<AppState>,
+    private location: Location,
 
   ) {
     this.responseOK = false;
@@ -127,9 +129,48 @@ export class AnimalEffects {
     { dispatch: false }
   );
 
+    updateAnimal$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AnimalActions.updateAnimal),
+      exhaustMap(({ animal, animalId }) =>
+        this.animalService.updateAnimal(animal, animalId).pipe(
+          map(animalFromApi => {
+            this.responseOK = true;
+            return AnimalActions.updateAnimalSuccess({ animal: animalFromApi, animalId: animalId });
+          }),
+          catchError((error: HttpErrorResponse) => {
+
+             this.errorResponse = {
+              message: error.error?.message || 'Error en el registro',
+              errors: error.error?.errors || {}
+            };
+
+            return of(AnimalActions.updateAnimalFailure({
+              payload: this.errorResponse
+            }));
+          }),
+        )
+      )
+    )
+  );
+
+  updateAnimalSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AnimalActions.updateAnimalSuccess),
+        map((action) => {
+          this.location.back();
+          const response = 'Animal modificado con éxito.'
+          this.sharedService.managementToast('updateAnimalSuccessFeedback', this.responseOK, response);
+        })
+      ),
+    { dispatch: false }
+  );
+
+
   addAnimalPhotos$ = createEffect(() =>
   this.actions$.pipe(
-    ofType(AnimalActions.createAnimalSuccess),
+    ofType(AnimalActions.createAnimalSuccess, AnimalActions.updateAnimalSuccess),
     withLatestFrom(this.store.select(state => state.animals)),
     mergeMap(([action, animalFormData]) => {
       const dataPhoto = animalFormData?.files;
@@ -185,7 +226,8 @@ addAnimalPhotosSuccess$ = createEffect(
         this.sharedService.managementToast('createAnimalFeedback', this.responseOK, response);
         this.store.dispatch(AnimalActions.clearAnimalFormData());
       timeout(2000)
-        this.router.navigate(['/mascotas']);
+      this.location.back();
+
       })
     ),
   { dispatch: false }

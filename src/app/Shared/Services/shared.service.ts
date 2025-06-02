@@ -61,9 +61,9 @@ export class SharedService {
   }
 
   await this.wait(3500);
-
   toastMsg.classList.remove('show', 'requestOk', 'requestKo');
   toastMsg.textContent = '';
+
 
 }
 

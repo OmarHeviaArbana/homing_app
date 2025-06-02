@@ -115,6 +115,29 @@ export const animalReducer = createReducer(
     animalFormData: null,
   })),
 
+   on(AnimalActions.updateAnimal, (state) => ({
+      ...state,
+      loading: true,
+      loaded: false,
+      error: null,
+    })),
+
+    on(AnimalActions.updateAnimalSuccess, (state, animal) => ({
+      ...state,
+      animal: animal,
+      loading: false,
+      loaded: true,
+      error: null,
+    })),
+
+    on(AnimalActions.updateAnimalFailure, (state, { payload }) => ({
+      ...state,
+      loading: false,
+      loaded: false,
+      error: { payload },
+    })),
+
+
 
   on(AnimalActions.addAnimalPhotos, (state) => ({
     ...state,

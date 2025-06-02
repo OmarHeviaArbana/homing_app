@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -15,6 +15,7 @@ import { AppState } from 'src/app/app.reducers';
 export class CreateAnimalFormComponent implements OnInit{
   @Output() formReady = new EventEmitter<FormGroup>();
   @Output() filesChanged = new EventEmitter<{ [key: string]: File | null }>();
+  @Input () isEdit: any
   formPublicAnimal!: FormGroup;
 
   speciesList$!: Observable<AuxiliarEntityDTO[]>;
@@ -23,6 +24,7 @@ export class CreateAnimalFormComponent implements OnInit{
   genresList$!: Observable<AuxiliarEntityDTO[]>;
   sizesList$!: Observable<AuxiliarEntityDTO[]>;
   energyLevelsList$!: Observable<AuxiliarEntityDTO[]>;
+  housing_stageList$!: Observable<AuxiliarEntityDTO[]>;
 
   selectedFiles: { [key: string]: File | null } = {};
   imagePreviews: { [key: string]: string | null } = {};
@@ -46,7 +48,8 @@ export class CreateAnimalFormComponent implements OnInit{
       vaccines: [false, Validators.required],
       sterilization: [false, Validators.required],
       care: ['', Validators.required],
-      principal_image: ['', Validators.required],
+      housing_stage_id: [''],
+      principal_image: ['', !this.isEdit ? Validators.required : ''],
       optional_image_one: [''],
       optional_image_two: [''],
     });
@@ -59,6 +62,7 @@ export class CreateAnimalFormComponent implements OnInit{
     this.store.dispatch(AnimalActions.getGenresAux());
     this.store.dispatch(AnimalActions.getSizesAux());
     this.store.dispatch(AnimalActions.getEnergyLevelsAux());
+    this.store.dispatch(AnimalActions.getHousingStagesAux());
 
     this.loadSelects();
   }
@@ -70,6 +74,7 @@ export class CreateAnimalFormComponent implements OnInit{
     this.genresList$ = this.store.select(state => state.animals.genres);
     this.sizesList$ = this.store.select(state => state.animals.sizes);
     this.energyLevelsList$ = this.store.select(state => state.animals.energyLevels);
+    this.housing_stageList$ = this.store.select(state => state.animals.housingStages);
 
   }
 
@@ -96,6 +101,9 @@ export class CreateAnimalFormComponent implements OnInit{
 
     get description() {
       return this.formPublicAnimal.get('description');
+    }
+    get housing_stage_id() {
+      return this.formPublicAnimal.get('housing_stage_id');
     }
     get location() {
       return this.formPublicAnimal.get('location');

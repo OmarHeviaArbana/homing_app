@@ -49,6 +49,20 @@ export const createAnimalFailure = createAction(
   props<{ payload: HttpErrorResponse }>()
 );
 
+export const updateAnimal = createAction(
+  '[Profile Page] Update Animal',
+  props<{ animalId: number; animal: AnimalDTO }>()
+);
+export const updateAnimalSuccess = createAction(
+  '[Profile Page] Update Animal Success',
+  props<{ animalId: number; animal: AnimalDTO }>()
+);
+
+export const updateAnimalFailure = createAction(
+  '[Profile Page] Update Animal Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
 
 export const deleteAnimal = createAction(
   '[Animal] Delete Animal',
@@ -93,7 +107,6 @@ export const addAnimalPhotosFailure = createAction(
   '[Animal] Add Animal Photos Failure',
   props<{ error: any  , animal_id: number}>()
 );
-
 
 
 export const getSpeciesAux = createAction(

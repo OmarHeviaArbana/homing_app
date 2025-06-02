@@ -8,19 +8,12 @@
     <section class="animal-detail__content" >
       <div class="animal-detail__main">
         <div class="carousel" *ngIf="imageList$ | async as images">
-      <!--     <button  disabled class="carousel__arrow carousel__arrow--prev" (click)="prevImage(images?.length || 1)" [attr.aria-label]="'Imagen anterior'">
-            <mat-icon>arrow_back_ios</mat-icon>
-          </button>
- -->
           <div class="carousel__container" >
             <div >
               <img [src]="images[0] | imageUrl" alt="Animal image" class="carousel__image" />
             </div>
 
           </div>
-     <!--    <button disabled class="carousel__arrow carousel__arrow--next" (click)="nextImage(images?.length || 1)" [attr.aria-label]="'Imagen siguiente'">
-          <mat-icon>arrow_forward_ios</mat-icon>
-        </button> -->
         </div>
         <div class="animal-detail__location">
           <img src="/assets/icons/location.png" [alt]="animal.location" class="animal-detail__location-icon">

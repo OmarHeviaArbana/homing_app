@@ -18,7 +18,9 @@
 
     <mat-menu #appMenu="matMenu" class="header__avatar-menu">
       <ng-template matMenuContent>
-        <button mat-menu-item (click)="goToProfile()">Mi perfil</button>
+        <button  mat-menu-item (click)="goToProfile()">Mi perfil</button>
+        <button *ngIf="rolUser == 2" mat-menu-item (click)="goToProfile()">Mi solicitudes</button>
+        <button *ngIf="rolUser == 3 || rolUser == 4" mat-menu-item (click)="goToAnimalManage()">Gestiónar mascotas</button>
         <button mat-menu-item (click)="logout()">Cerrar sesión</button>
       </ng-template>
     </mat-menu>

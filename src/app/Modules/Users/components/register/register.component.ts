@@ -98,8 +98,6 @@ export class RegisterComponent implements OnInit {
 
   onFilesChanged(files: { [key: string]: File | null }) {
     this.selectedFiles = files;
-    console.log(this.selectedFiles.logo_url);
-
   }
 
 

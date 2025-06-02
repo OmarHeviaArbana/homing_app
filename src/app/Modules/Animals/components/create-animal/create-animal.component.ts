@@ -56,9 +56,9 @@ export class CreateAnimalComponent {
       ...this.formPublicAnimal.value,
       shelter_id: this.user.role_id == 3 ? this.user.shelter.id : null,
       breeder_id: this.user.role_id == 4 ? this.user.breeder.id : null,
-      files: this.selectedFiles
+      files: this.selectedFiles,
+      housing_stage_id: 1,
     };
-
 
     if (this.formPublicAnimal.invalid) return;
 

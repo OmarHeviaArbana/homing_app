@@ -161,37 +161,4 @@ export class UserEffects {
   )
 );
 
-/*   updateUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(UserActions.updateUserSuccess),
-        map(() => {
-          this.responseOK = true;
-        })
-      ),
-    { dispatch: false }
-  ); */
-  /* updateUserSuccess$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(UserActions.updateUserSuccess),
-        map(() => {
-          this.responseOK = true;
-        })
-      ),
-    { dispatch: false }
-  );
-
-  updateUserFailure$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(UserActions.updateUserFailure),
-        map((error) => {
-          this.responseOK = false;
-          this.errorResponse = error.payload.error;
-          this.sharedService.errorLog(error.payload.error);
-        })
-      ),
-    { dispatch: false }
-  ); */
 }

@@ -38,11 +38,6 @@ export class AuthEffects {
             return of(AuthActions.loginFailure({ payload: this.errorResponse }));
           }),
           finalize(async () => {
-            await this.sharedService.managementToast(
-              'loginFeedback',
-              this.responseOK,
-              this.errorResponse
-            );
 
             if (this.responseOK) {
               this.router.navigateByUrl('/');
@@ -58,7 +53,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
         map((action) => {
-          this.responseOK = true;
+
           const userData = action.user;
           const accessToken = action.access_token;
           localStorage.setItem( 'auth_homing', JSON.stringify({ user: userData, access_token: accessToken }));

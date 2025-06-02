@@ -17,6 +17,10 @@ import { AnimalsListComponent } from './components/animal-list//animals-list.com
 import { DetailAnimalComponent } from './components/detail-animal/detail-animal.component';
 import { AnimalDataTableComponent } from './components/animal-data-table/animal-data-table.component';
 import { ApplicationAnimalComponent } from './components/application-animal/application-animal.component';
+import { AnimalsControlComponent } from './components/animals-control/animals-control.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { EditAnimalComponent } from './components/edit-animal/edit-animal.component';
 
 
 @NgModule({
@@ -28,6 +32,8 @@ import { ApplicationAnimalComponent } from './components/application-animal/appl
     DetailAnimalComponent,
     AnimalDataTableComponent,
     ApplicationAnimalComponent,
+    AnimalsControlComponent,
+    EditAnimalComponent,
 
   ],
   imports: [
@@ -43,6 +49,9 @@ import { ApplicationAnimalComponent } from './components/application-animal/appl
     MatButtonModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule
+
   ],
 })
 export class AnimalModule {}

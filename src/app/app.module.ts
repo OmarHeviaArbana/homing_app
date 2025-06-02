@@ -67,6 +67,7 @@ import { DetailBreederComponent } from './Modules/Breeders/component/detail-bree
     MatMenuModule,
     MatIconModule,
     MatGridListModule,
+
   ],
   providers: [
     {

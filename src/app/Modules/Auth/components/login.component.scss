@@ -40,7 +40,8 @@
 }
 
 .mat-mdc-form-field {
-   min-width: 300px;
+   max-width: 450px;
+   width: 400px;
 }
 #loginFeedback {
    visibility: hidden;
@@ -76,7 +77,9 @@
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
-@-webkit-keyframes fadein {
+
+
+@keyframes fadein {
   from {
    top: 0;
     opacity: 0;
@@ -87,35 +90,14 @@
   }
 }
 
-@keyframes fadein {
-  from {
-   top: 0;
-    opacity: 0;
-  }
-  to {
-   top: 0;
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeout {
-  from {
-   top: 0;
-    opacity: 1;
-  }
-  to {
-   top: 0;
-    opacity: 0;
-  }
-}
 
 @keyframes fadeout {
   from {
-    bottom: 0px;
+    top: 30px;
     opacity: 1;
   }
   to {
-    bottom: 0;
+    top: 0px;
     opacity: 0;
   }
 }

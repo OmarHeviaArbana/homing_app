@@ -45,6 +45,12 @@ export class AnimalService {
     return this.http.post(`${this.API_URL}/animal-images/upload-and-save`, formData)
   }
 
+  updateAnimal(animal: AnimalDTO, animalId: number): Observable<AnimalDTO> {
+  return this.http
+    .put<{message: string; animal: AnimalDTO}>(`${this.API_URL}/animals/update/${animalId}`, animal)
+    .pipe( map(response => response.animal), catchError(this.sharedService.handleError));
+  }
+
   getAnimalById(animalId: string): Observable<AnimalDTO[]> {
     return this.http.get<AnimalDTO[]>(`${this.API_URL}/animals/getAnimal/${animalId}`);
   }

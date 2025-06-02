@@ -13,6 +13,7 @@ import { ImageUrlPipe } from './Pipes/image-url.pipe';
 
 
 
+
 @NgModule({
   declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent, DataBreederShelterCardComponent, ImageUrlPipe],
   imports: [
@@ -29,7 +30,7 @@ import { ImageUrlPipe } from './Pipes/image-url.pipe';
     BadgeComponent,
     DataBreederShelterCardComponent,
     MatIconModule,
-    ImageUrlPipe
+    ImageUrlPipe,
   ]
 })
 export class SharedModule { }

@@ -1,16 +1,16 @@
 <div style="margin-left: auto; margin-right: auto">
-  <p id="createAnimalFeedback"></p>
-  <p id="createAnimalSuccessFeedback"></p>
+  <p id="updateAnimalSuccessFeedback"></p>
 </div>
 <section class="public">
-  <div class="public__container">
-    <h1 class="public__title">Publicar mascota</h1>
+  <div class="public__container" *ngIf="animalDetail$ | async as animal">
+    <h1 class="public__title">Editar mascota | <span class=""> {{animal.name}}</span></h1>
 
-      <form [formGroup]="form" (ngSubmit)="publicAnimal()" class="public__form">
+      <form [formGroup]="form" (ngSubmit)="updateAnimal()" class="public__form">
 
       <app-create-animal-form
         (formReady)="onAnimalFormReady($event)"
         (filesChanged)="onFilesChanged($event)"
+        [isEdit]= 'true'
         >
       </app-create-animal-form>
 
@@ -20,8 +20,9 @@
           type="submit"
           [disabled]="
           !formPublicAnimal.valid"
+          (click)="openDialogUpdate()"
           >
-          Publicar mascota
+          Editar mascota
         </app-button>
       <app-button variant="outline" (click)="openDialog()">Cancelar</app-button>
       </div>

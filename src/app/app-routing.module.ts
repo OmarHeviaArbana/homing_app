@@ -13,6 +13,8 @@ import { BreederListComponent } from './Modules/Breeders/component/breeder-list/
 import { DetailAnimalComponent } from './Modules/Animals/components/detail-animal/detail-animal.component';
 import { DetailBreederComponent } from './Modules/Breeders/component/detail-breeder/detail-breeder.component';
 import { ApplicationAnimalComponent } from './Modules/Animals/components/application-animal/application-animal.component';
+import { AnimalsControlComponent } from './Modules/Animals/components/animals-control/animals-control.component';
+import { EditAnimalComponent } from './Modules/Animals/components/edit-animal/edit-animal.component';
 
 
 const routes: Routes = [
@@ -70,6 +72,16 @@ const routes: Routes = [
     path: 'mi-perfil',
     component: RegisterComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'gestion-mascotas',
+    component: AnimalsControlComponent,
+    canActivate: [AuthGuard, RoleGuard],
+  },
+  {
+    path: 'editar-mascota/:id',
+    component: EditAnimalComponent,
+    canActivate: [AuthGuard, RoleGuard],
   },
 ];
 

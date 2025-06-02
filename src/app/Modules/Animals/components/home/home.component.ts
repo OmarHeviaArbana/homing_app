@@ -35,13 +35,8 @@ export class HomeComponent implements OnInit {
       this.user = this.auth.user !== null ? this.auth.user : null
       this.role = this.user !== null ? this.user.role_id : null
      });
-
-     console.log(this.user)
-     console.log(this.role)
-
     this.loading$ = this.store.select((state) => state.auth.loading);
     this.loaded$ = this.store.select((state) => state.auth.loaded);
-
   }
 
   ngOnInit(): void {
@@ -70,7 +65,6 @@ export class HomeComponent implements OnInit {
   }
 
   nextSlide(): void {
-
     this.currentSlide = this.currentSlide < this.animals.length - 1 ? this.currentSlide + 1 : 0;
   }
 
