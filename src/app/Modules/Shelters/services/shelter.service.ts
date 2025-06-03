@@ -35,8 +35,12 @@ export class ShelterService {
     ;
   }
 
-  getShelterById(breederId: number): Observable<ShelterDTO[]> {
-    return this.http.get<ShelterDTO[]>(`${this.API_URL}/shelters/getShelter/${breederId}`);
+  getShelterById(shelterId: number): Observable<ShelterDTO[]> {
+    return this.http.get<ShelterDTO[]>(`${this.API_URL}/shelters/getShelter/${shelterId}`);
+  }
+
+  getApplicationsShelter(shelterId: number): Observable<ShelterDTO[]> {
+    return this.http.get<ShelterDTO[]>(`${this.API_URL}/applications/shelter/${shelterId}`);
   }
 
   updateShelter(shelterId: number, shelter: ShelterDTO): Observable<ShelterDTO> {
@@ -45,19 +49,12 @@ export class ShelterService {
     .pipe(catchError(this.sharedService.handleError));
   }
 
-/*   uploadShelterPhotos(formData: FormData) {
-    console.log(formData);
-
-    return this.http.post(`${this.API_URL}/shelters/upload-logo`, formData);
-  } */
-
-   uploadShelterPhotos( image: File, ): Observable<any> {
+  uploadShelterPhotos( image: File, ): Observable<any> {
     const formData = new FormData();
     console.log(image);
 
     formData.append('image', image);
     return this.http.post(`${this.API_URL}/shelters/upload-logo`, formData)
   }
-
 
 }

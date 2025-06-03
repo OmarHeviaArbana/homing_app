@@ -21,6 +21,7 @@ import { AnimalsControlComponent } from './components/animals-control/animals-co
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { EditAnimalComponent } from './components/edit-animal/edit-animal.component';
+import { AnimalApplicationsComponent } from './components/animal-applications/animal-applications.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { EditAnimalComponent } from './components/edit-animal/edit-animal.compon
     ApplicationAnimalComponent,
     AnimalsControlComponent,
     EditAnimalComponent,
+    AnimalApplicationsComponent,
 
   ],
   imports: [
@@ -50,7 +52,8 @@ import { EditAnimalComponent } from './components/edit-animal/edit-animal.compon
     MatSelectModule,
     MatCheckboxModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+
 
   ],
 })

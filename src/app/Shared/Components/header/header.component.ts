@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
     this.showNoAuthSection = true;
     this.userInitials = '';
     this.isMenuOpen = false;
-    this.rolUser = 2;
+    this.rolUser = 0;
   }
 
   ngOnInit(): void {
@@ -67,6 +67,13 @@ export class HeaderComponent implements OnInit {
 
   goToAnimalManage(): void {
     this.router.navigateByUrl('gestion-mascotas');
+  }
+
+  goToAnimalApplications(): void {
+    this.router.navigateByUrl('solicitudes-adopcion');
+  }
+  goToAnimalUserApplications(): void {
+    this.router.navigateByUrl('solicitudes-adopcion-usuario');
   }
 
 

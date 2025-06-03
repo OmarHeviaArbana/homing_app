@@ -13,8 +13,8 @@
   </div>
   <h1 class="animal__title">Estas son nuestras mascotas y están deseando conocerte</h1>
   <section class="animal__filters">
-    <mat-form-field appearance="fill">
-      <mat-label>Epecie</mat-label>
+    <mat-form-field appearance="outline">
+      <mat-label>Especie</mat-label>
       <mat-select [(ngModel)]="selectedSpecies" (ngModelChange)="onFilterChange()">
         <mat-option *ngFor="let item of speciesList$ | async" [value]="item.id">
           {{ item.name }}
@@ -22,8 +22,8 @@
         <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field >
-      <mat-label>Edad</mat-label>
+    <mat-form-field appearance="outline" >
+      <mat-label>Edad</mat-label >
       <mat-select [(ngModel)]="selectedAge" (ngModelChange)="onFilterChange()" >
         <mat-option *ngFor="let item of ageCategoriesList$ | async" [value]="item.id">
           {{ item.name }}
@@ -31,7 +31,7 @@
         <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Sexo</mat-label>
       <mat-select [(ngModel)]="selectedGenre"  (ngModelChange)="onFilterChange()" >
         <mat-option *ngFor="let item of genresList$ | async" [value]="item.id">
@@ -40,7 +40,7 @@
         <mat-option [value]="null" class="animal__filters-clean">Todos</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Situación actúal</mat-label>
       <mat-select  [(ngModel)]="selectedStatus"  (ngModelChange)="onFilterChange()">
         <mat-option *ngFor="let item of statusList$ | async" [value]="item.id">

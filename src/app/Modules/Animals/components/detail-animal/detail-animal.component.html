@@ -38,10 +38,10 @@
           <app-button variant="outline" (click)="goToBack()" [fullWidth]="true">
             Volver a listado
           </app-button>
-          <app-button *ngIf="role == 2" variant="primary" (click)="goToApplicationAnimal(animal)" [fullWidth]="true">
+          <app-button *ngIf="role == 2 || role == null" variant="primary" (click)="goToApplicationAnimal(animal)" [fullWidth]="true">
             Solicitar adopción
           </app-button>
-          <app-button *ngIf="role == 3 || role == 4" variant="terciary" (click)="goToApplicationAnimal(animal.id)" [fullWidth]="true">
+          <app-button *ngIf="role == 3 || role == 4" variant="terciary" (click)="goToUpddateAnimal(animal.id)" [fullWidth]="true">
             Editar mascota
           </app-button>
         </div>

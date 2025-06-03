@@ -36,7 +36,7 @@
   color: red;
 }
 
-#createAnimalFeedback , #registerBreederFeedback, #registerShelterFeedback {
+#updateAnimalSuccessFeedback  {
   visibility: hidden;
   min-width: 250px;
   color: #fff;
@@ -57,15 +57,15 @@
 
 }
 
-#createAnimalFeedback.requestOk , #createAnimalSuccessFeedback.requestOk  {
+#updateAnimalSuccessFeedback.requestOk   {
   background-color: vars.$color-primary;
 }
 
-#createAnimalFeedback.requestKo, #createAnimalSuccessFeedback.requestKo  {
+#updateAnimalSuccessFeedback.requestKo  {
   background-color: vars.$color-warn;
 }
 
-#createAnimalFeedback.show, #createAnimalSuccessFeedback.show {
+#updateAnimalSuccessFeedback.show {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;

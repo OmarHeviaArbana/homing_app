@@ -11,9 +11,7 @@ html, .mat-typography, .mat-typography h1 , .mat-typography h2, .mat-typography 
 
 html, body { height: 100vh; background-color: vars.$color-white }
 body { margin: 0 }
-/*   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto; */
+
 a {
   color: vars.$color-text;
   text-decoration: none;
@@ -28,8 +26,35 @@ margin-bottom: 20px;
 background-color: vars.$color-gray;
 }
 
+.mat-mdc-text-field-wrapper, .mdc-notched-outline.ng-tns-c69-2.mdc-notched-outline--notched.mdc-notched-outline--upgraded.ng-star-inserted   {
+  background-color: vars.$color-white !important;
+  box-shadow: 0px 2px 4px 2.5px rgb(229, 229, 229, 0.5) ;
+  border-radius: 25px;
+}
+
+td > a , td > span {
+  color: vars.$color-primary;
+  font-weight: 700;
+}
+.mat-mdc-cell.mdc-data-table__cell.cdk-cell, .mat-mdc-header-cell.mdc-data-table__header-cell.cdk-header-cell , #mat-paginator-page-size-label-0, .mat-mdc-paginator-range-label, .mat-mdc-select-min-line.ng-tns-c101-2.ng-star-inserted{
+  font-family: "Poppins", sans-serif;
+  letter-spacing: normal;
+}
+
+
 .no-scroll {
   overflow: hidden;
+}
+
+.mat-mdc-checkbox  {
+
+  background-color: vars.$color-primary;
+}
+
+
+
+.mat-mdc-checkbox.mat-accent .mdc-checkbox--selected ~ .mdc-checkbox__ripple {
+  background-color: vars.$color-primary;
 }
 
 /* Shadows */

@@ -6,6 +6,7 @@ import * as UserActions from '../actions';
 export interface UserState {
   user: UserDTO | null;
   files: any;
+   userApplications: any | null
   loading: boolean;
   loaded: boolean;
   error: any;
@@ -14,6 +15,7 @@ export interface UserState {
 export const initialState: UserState = {
   user: null,
   files: [],
+  userApplications: [],
   loading: false,
   loaded: false,
   error: null,
@@ -107,6 +109,27 @@ const _userReducer = createReducer(
     ...state,
     files
   })),
+
+   on(UserActions.getApplicationsUser, (state) => ({
+     ...state,
+     loading: true,
+     loaded: false,
+     error: null,
+   })),
+   on(UserActions.getApplicationsUserSuccess, (state,  {userApplications} ) => ({
+     ...state,
+     userApplications,
+     loading: false,
+     loaded: true,
+     error: null,
+   })),
+   on(UserActions.getApplicationsUserFailure, (state, { payload }) => ({
+     ...state,
+     loading: false,
+     loaded: false,
+     error: { payload },
+   })),
+
 
 );
 

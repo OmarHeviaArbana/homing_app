@@ -99,3 +99,18 @@ export const uploadBreeederLogoFailure = createAction(
   '[Breeeder] Upload Breeeder Logo Failure',
   props<{ error: { message: string; errors: any } }>()
 );
+
+export const getApplicationsBreeder = createAction(
+  '[Application Breeder Page] Application Breeder',
+  props<{ breederId: number}>()
+);
+
+export const getApplicationsBreederSuccess = createAction(
+  '[Application Breeder Page] Application Breeder Success',
+  props<{ breederApplications: any;  }>()
+);
+
+export const getApplicationsBreederFailure = createAction(
+  '[Application Breeder Page] Application Breeder Failure',
+  props<{ payload: HttpErrorResponse }>()
+);

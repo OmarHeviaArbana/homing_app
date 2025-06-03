@@ -3,14 +3,14 @@ import { act, Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, withLatestFrom, filter, tap, mergeMap, exhaustMap, finalize } from 'rxjs/operators';
-
 import { AppState } from 'src/app/app.reducers';
 import { ShelterService } from '../services/shelter.service';
 import * as ShelterActions from './../actions';
 import * as UserActions from '../../Users/actions';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Location } from '@angular/common';
+
 
 @Injectable()
 export class ShelterEffects {
@@ -22,7 +22,8 @@ export class ShelterEffects {
     private shelterService: ShelterService,
     private store: Store<AppState>,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private location: Location,
   ) {
      this.responseOK = false;
   }
@@ -148,7 +149,7 @@ export class ShelterEffects {
             );
 
             if (this.responseOK) {
-              this.router.navigateByUrl('/');
+              this.location.back();
 
             }
           })
@@ -181,5 +182,17 @@ export class ShelterEffects {
     })
   )
 );
+
+ getApplicationsByShelter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ShelterActions.getApplicationsShelter),
+         switchMap(({ shelterId }) =>
+        this.shelterService.getApplicationsShelter(shelterId).pipe(
+          map((shelterApplications) => ShelterActions.getApplicationsShelterSuccess({ shelterApplications })),
+          catchError((error) => of(ShelterActions.getApplicationsShelterFailure({ payload: error })))
+        )
+      )
+    )
+  );
 
 }

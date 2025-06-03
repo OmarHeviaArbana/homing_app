@@ -1,0 +1,90 @@
+  <div style="margin-left: auto; margin-right: auto">
+    <p id="createAnimalFeedback"></p>
+    <p id="createAnimalSuccessFeedback"></p>
+    <p id="updateAnimalSuccessFeedback"></p>
+  </div>
+
+  <div class="gestion">
+    <div class="gestion__section">
+      <h2 class="gestion__section-title">
+        <img class="gestion__section-icon" src="/assets/icons/solicitudes.png" alt="Icono Corazón">
+        Mis solicitudes de adopción
+      </h2>
+    </div>
+    <div class="gestion__section-action-container">
+      <h1 class="gestion__section-subtitle">Listado de mascotas solicitadas</h1>
+    </div>
+   <section class="gestion__section-cards-container" *ngIf="(applicationsAnimalsUser$ | async) as applications">
+    <div *ngIf="applications.length > 0;">
+      <div class="gestion__section-application-card" *ngFor="let app of applications">
+        <img [src]="app.animal?.image_url | imageUrl" alt="Mascota" class="gestion__section-animal-img" />
+        <div class="gestion__section-info">
+          <div class="data-table">
+            <h2 class="data-table__title">Datos de la mascota </h2>
+            <div class="data-table__content">
+            <div class="data-table__row">
+              <div class="data-table__label">Nombre</div>
+              <div class="data-table__value">{{app.animal?.name}}</div>
+            </div>
+            <div class="data-table__row">
+              <div class="data-table__label">Sexo</div>
+              <div class="data-table__value"> {{app.animal?.location}}</div>
+            </div>
+            <div class="data-table__row">
+              <div class="data-table__label">Edad</div>
+              <div class="data-table__value">{{app.animal?.agecategory_id | ageName}}</div>
+            </div>
+            <div class="data-table__row">
+                <div class="data-table__label">Peso</div>
+                <div class="data-table__value"> {{ app.animal?.weight }} kg</div>
+            </div>
+              <div class="data-table__row">
+                <div class="data-table__label">Cruz</div>
+                <div class="data-table__value">{{ app.animal?.height}} cm </div>
+              </div>
+              <div class="data-table__row">
+                <div class="data-table__label">Tamaño</div>
+                <div class="data-table__value">{{ app.animal?.size_id | sizeName}} </div>
+              </div>
+              <div class="data-table__row">
+                <div class="data-table__label">Energia</div>
+                <div class="data-table__value">{{ app.animal?.energylevel_id | energieName}} </div>
+              </div>
+            </div>
+          </div>
+          <div class="data-table">
+            <h2 class="data-table__title">Datos de contacto {{app.breeder_id !== null ? app.breeder.name : app.shelter.name}}</h2>
+            <div class="data-table__content">
+            <div class="data-table__row">
+              <div class="data-table__label">Localización:</div>
+              <div class="data-table__value">{{ app.breeder?.location }}</div>
+            </div>
+            <div class="data-table__row">
+              <div class="data-table__label">Email</div>
+              <div class="data-table__value"> <a [href]="'mailto:' + (app.breeder_id !== null ? app.breeder.email_breeder : app.shelter.email_shelter)">{{app.breeder_id !== null ? app.breeder.email_breeder : app.shelter.email_shelter}}</a></div>
+            </div>
+            <div class="data-table__row">
+              <div class="data-table__label">Teléfono</div>
+              <div class="data-table__value"><a class="data-card__link" [href]="'tel:' + (app.breeder_id !== null ? app.breeder.phone : app.shelter.phone) ">{{app.breeder_id !== null ? app.breeder.phone : app.shelter.phone }}</a></div>
+            </div>
+            <div class="data-table__row">
+                <div class="data-table__label">Estado solicitud</div>
+                <div class="data-table__value"><strong>{{ app.housing_stage_id | housingName }}</strong> </div>
+            </div>
+              <div class="data-table__row">
+                <div class="data-table__label">Fecha de solicitud</div>
+                <div class="data-table__value">{{ app.created_at | formatDate}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="applications.length == 0" >
+      <app-no-data
+      [title]="'No tienes solicitudes'"
+      [content]="'En estos momentos no tienes solicitudes de adopción.'"
+      ></app-no-data>
+    </div>
+  </section>
+ </div>

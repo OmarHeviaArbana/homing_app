@@ -35,4 +35,9 @@ export class UserService {
       .get<UserDTO>(`${this.API_URL}/users/getUser/${userId}`)
       .pipe(catchError(this.sharedService.handleError));
   }
+
+   getApplicationsUser(userId: number): Observable<UserDTO[]> {
+      return this.http.get<UserDTO[]>(`${this.API_URL}/applications/user/${userId}`);
+    }
+
 }

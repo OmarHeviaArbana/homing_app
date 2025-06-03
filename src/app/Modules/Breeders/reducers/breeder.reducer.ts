@@ -7,6 +7,7 @@ export interface BreederState {
   breeders: BreederDTO[];
   breederDetail: BreederDTO[];
   animalsBreeder: BreederDTO[];
+  breederApplications: any | null
   breederFormData: Partial<BreederDTO> | null;
   files: any;
   loading: boolean;
@@ -17,6 +18,7 @@ export interface BreederState {
 export const initialState: BreederState = {
   breeders: [],
   breederDetail: [],
+  breederApplications: [],
   animalsBreeder: [],
   files: [],
   breederFormData: null,
@@ -130,6 +132,26 @@ const _breederReducer = createReducer(
       ...state,
       files
     })),
+
+  on(BreederActions.getApplicationsBreeder, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(BreederActions.getApplicationsBreederSuccess, (state,  {breederApplications} ) => ({
+    ...state,
+    breederApplications,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(BreederActions.getApplicationsBreederFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  })),
 
 );
 

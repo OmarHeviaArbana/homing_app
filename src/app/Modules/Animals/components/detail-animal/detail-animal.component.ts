@@ -102,4 +102,8 @@ export class DetailAnimalComponent {
     }
   }
 
+  goToUpddateAnimal(animalId: string){
+  this.router.navigateByUrl('/editar-mascota/' + animalId);
+  }
 }
+

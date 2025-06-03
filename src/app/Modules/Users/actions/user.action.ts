@@ -3,6 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { UserDTO } from '../models/user.dto';
 import { ShelterDTO } from '../../Shelters/models/shelter.dto';
 import { BreederDTO } from '../../Breeders/models/breeder.dto';
+import { AnimalApplicationDTO } from '../../Animals/models/animal-application';
 
 export const register = createAction(
   '[Register Page] Register new user',
@@ -64,5 +65,22 @@ export const getUserByIdFailure = createAction(
   '[Profile Page] Get user by ID Failure',
   props<{ payload: HttpErrorResponse }>()
 );
+
+
+export const getApplicationsUser = createAction(
+  '[Application User Page] Application User',
+  props<{ userId: number}>()
+);
+
+export const getApplicationsUserSuccess = createAction(
+  '[Application User Page] Application User Success',
+  props<{ userApplications: any;  }>()
+);
+
+export const getApplicationsUserFailure = createAction(
+  '[Application User Page] Application User Failure',
+  props<{ payload: HttpErrorResponse }>()
+);
+
 
 

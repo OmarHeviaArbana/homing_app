@@ -161,4 +161,16 @@ export class UserEffects {
   )
 );
 
+ getApplicationsByUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserActions.getApplicationsUser),
+         switchMap(({ userId }) =>
+        this.userService.getApplicationsUser(userId).pipe(
+          map((userApplications) => UserActions.getApplicationsUserSuccess({ userApplications })),
+          catchError((error) => of(UserActions.getApplicationsUserFailure({ payload: error })))
+        )
+      )
+    )
+  );
+
 }

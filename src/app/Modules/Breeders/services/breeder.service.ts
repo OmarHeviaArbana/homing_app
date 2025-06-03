@@ -51,4 +51,9 @@ export class BreederService {
     formData.append('image', image);
     return this.http.post(`${this.API_URL}/breeders/upload-logo`, formData)
   }
+
+  getApplicationsBreeder(breederId: number): Observable<BreederDTO[]> {
+      return this.http.get<BreederDTO[]>(`${this.API_URL}/applications/breeder/${breederId}`);
+    }
+
 }

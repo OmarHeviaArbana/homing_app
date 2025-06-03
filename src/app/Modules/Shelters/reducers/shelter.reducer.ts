@@ -6,6 +6,7 @@ import { ShelterDTO } from '../models/shelter.dto';
 export interface ShelterState {
   shelters: ShelterDTO[];
   shelterDetail: ShelterDTO[];
+  shelterApplications: any | null
   animalsShelter: ShelterDTO[];
   shelterFormData: Partial<ShelterDTO> | null;
   files: any;
@@ -17,6 +18,7 @@ export interface ShelterState {
 export const initialState: ShelterState = {
   shelters: [],
   shelterDetail: [],
+  shelterApplications: [],
   animalsShelter: [],
   files: [],
   shelterFormData: null,
@@ -71,6 +73,26 @@ const _shelterReducer = createReducer(
     error: null,
   })),
   on(ShelterActions.getShelterByIdFailure, (state, { payload }) => ({
+    ...state,
+    loading: false,
+    loaded: false,
+    error: { payload },
+  })),
+
+  on(ShelterActions.getApplicationsShelter, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(ShelterActions.getApplicationsShelterSuccess, (state,  {shelterApplications} ) => ({
+    ...state,
+    shelterApplications,
+    loading: false,
+    loaded: true,
+    error: null,
+  })),
+  on(ShelterActions.getApplicationsShelterFailure, (state, { payload }) => ({
     ...state,
     loading: false,
     loaded: false,

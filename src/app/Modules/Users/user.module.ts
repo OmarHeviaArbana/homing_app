@@ -10,7 +10,7 @@ import { SharedModule } from 'src/app/Shared/shared.module';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { RegisterShelterFormComponent } from './components/register-shelter-form/register-shelter-form.component';
 import { RegisterBreederFormComponent } from './components/register-breeder-form/register-breeder-form.component';
-
+import { AnimalUserApplicationsComponent } from './components/animal-user-applications/animal-user-applications.component';
 
 
 @NgModule({
@@ -19,6 +19,9 @@ import { RegisterBreederFormComponent } from './components/register-breeder-form
     RegisterUserFormComponent,
     RegisterShelterFormComponent,
     RegisterBreederFormComponent,
+    AnimalUserApplicationsComponent,
+
+
 
   ],
   imports: [
@@ -28,7 +31,9 @@ import { RegisterBreederFormComponent } from './components/register-breeder-form
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    SharedModule
+    SharedModule,
+
+
   ],
 })
 export class UserModule {}

@@ -9,6 +9,8 @@ import * as BreederActions from './../actions';
 import * as UserActions from '../../Users/actions';
 import { SharedService } from 'src/app/Shared/Services/shared.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 
 @Injectable()
@@ -21,7 +23,8 @@ export class BreederEffects {
     private breederService: BreederService,
     private store: Store<AppState>,
     private router: Router,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private location: Location,
   ) {}
 
   getAllBreeder$ = createEffect(() =>
@@ -146,7 +149,7 @@ export class BreederEffects {
             );
 
             if (this.responseOK) {
-              this.router.navigateByUrl('/');
+              this.location.back();
 
             }
           })
@@ -178,4 +181,16 @@ export class BreederEffects {
       })
     )
   );
+
+   getApplicationsByBreeder$ = createEffect(() =>
+      this.actions$.pipe(
+        ofType(BreederActions.getApplicationsBreeder),
+           switchMap(({ breederId }) =>
+          this.breederService.getApplicationsBreeder(breederId).pipe(
+            map((breederApplications) => BreederActions.getApplicationsBreederSuccess({ breederApplications })),
+            catchError((error) => of(BreederActions.getApplicationsBreederFailure({ payload: error })))
+          )
+        )
+      )
+    );
 }

@@ -15,6 +15,8 @@ import { DetailBreederComponent } from './Modules/Breeders/component/detail-bree
 import { ApplicationAnimalComponent } from './Modules/Animals/components/application-animal/application-animal.component';
 import { AnimalsControlComponent } from './Modules/Animals/components/animals-control/animals-control.component';
 import { EditAnimalComponent } from './Modules/Animals/components/edit-animal/edit-animal.component';
+import { AnimalApplicationsComponent } from './Modules/Animals/components/animal-applications/animal-applications.component';
+import { AnimalUserApplicationsComponent } from './Modules/Users/components/animal-user-applications/animal-user-applications.component';
 
 
 const routes: Routes = [
@@ -82,6 +84,16 @@ const routes: Routes = [
     path: 'editar-mascota/:id',
     component: EditAnimalComponent,
     canActivate: [AuthGuard, RoleGuard],
+  },
+  {
+    path: 'solicitudes-adopcion',
+    component: AnimalApplicationsComponent,
+    canActivate: [AuthGuard, RoleGuard],
+  },
+  {
+    path: 'solicitudes-adopcion-usuario',
+    component: AnimalUserApplicationsComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

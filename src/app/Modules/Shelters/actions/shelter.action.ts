@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 import { ShelterDTO } from '../models/shelter.dto';
 import { AnimalDTO } from '../../Animals/models/animal.dto';
+import { AnimalApplicationDTO } from '../../Animals/models/animal-application';
 
 export const getAllShelters = createAction(
   '[Shelters] Load Shelter',
@@ -100,4 +101,19 @@ export const uploadShelterLogoSuccess = createAction(
 export const uploadShelterLogoFailure = createAction(
   '[Shelter] Upload Shelter Logo Failure',
   props<{ error: { message: string; errors: any } }>()
+);
+
+export const getApplicationsShelter = createAction(
+  '[Application Shelter Page] Application Shelter',
+  props<{ shelterId: number}>()
+);
+
+export const getApplicationsShelterSuccess = createAction(
+  '[Application Shelter Page] Application Shelter Success',
+  props<{ shelterApplications: any;  }>()
+);
+
+export const getApplicationsShelterFailure = createAction(
+  '[Application Shelter Page] Application Shelter Failure',
+  props<{ payload: HttpErrorResponse }>()
 );

@@ -97,6 +97,15 @@ console.log(this.animal);
       }
     });
   }
+  openDialogConfirm(): void {
+    this.dialog.open(DialogComponent, {
+      data: {
+        title: 'Atención',
+        content: 'Solicitar una adopción no implica la adopción directa de la mascota. Nuestro equipo revisará tu solicitud y se pondrá en contacto contigo a través del correo electrónico que has proporcionado. ¿Deseas continuar con la solicitud?',
+        onConfirm: () => this.applicationAnimal()
+      }
+    });
+  }
 
   cancel() {
     this.formApplicationAnimal.reset();

@@ -28,7 +28,6 @@ export class AnimalsControlComponent {
   shelterId: any;
   breederId: any;
   rolUser: any;
-  shelterData!: Observable<{ label: string; value: string | number | boolean }[]>;
   displayedColumns: string[] = ['id', 'name', 'location', 'species', 'genre', 'age_category', 'size', 'height', 'weight', 'status', 'housing_stage' ,'publication_date', 'actions', ];
   dataSource: MatTableDataSource<AnimalDTO> = new MatTableDataSource();
 
@@ -56,7 +55,6 @@ export class AnimalsControlComponent {
     this.loading$ = this.store.select(state => state.shelter.loading || state.breeder.loading);
     this.loaded$ = this.store.select(state => state.shelter.loaded || state.breeder.loaded);
   }
-
 
 
     loadAnimalsShelter(shelterId : any): void {
@@ -121,7 +119,7 @@ export class AnimalsControlComponent {
         this.loadAnimalsShelter(this.shelterId)
 
       } else {
-        this.loadAnimalsBreeder(this.shelterId)
+        this.loadAnimalsBreeder(this.breederId)
       }
 
     }

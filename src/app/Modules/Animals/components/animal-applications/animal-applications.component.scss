@@ -1,0 +1,126 @@
+@use '/src/assets/styles/variables' as vars;
+
+.gestion{
+   margin: 32px;
+  height: calc(100vh - 100px);
+
+  &__section {
+    &-title {
+      text-align: center;
+      margin-bottom: 0px;
+      font-size: vars.$font-size-18;
+      font-weight: 700;
+      color: vars.$color-text;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @media (min-width: vars.$breakpoint-md) {
+        font-size: vars.$font-size-26;
+        margin-top: 50px;
+        margin-bottom: 30px;
+      }
+    }
+    &-icon {
+      width: 16px;
+      margin-right: 8px;
+      @media (min-width: vars.$breakpoint-md) {
+        width: 24px;
+      }
+    }
+    &-action-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    &-subtitle {
+      text-align: left;
+      font-weight: 700;
+      padding-top: 15px;
+      color: vars.$color-primary;
+
+    }
+  }
+}
+.btn-table {
+  margin: 10px 5px 10px;
+  cursor: pointer;
+}
+
+
+#createAnimalSuccessFeedback, #createAnimalFeedback  , #updateAnimalSuccessFeedback{
+   visibility: hidden;
+  min-width: 250px;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 16px;
+  z-index: 1;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  right: 0;
+  width: 80%;
+  max-width: 500px;
+}
+#createAnimalSuccessFeedback.requestOk , #createAnimalFeedback.requestOk, #updateAnimalSuccessFeedbackOk {
+  background-color: vars.$color-primary;
+}
+
+#createAnimalSuccessFeedback.requestKo  , #createAnimalFeedback.requestKo , #updateAnimalSuccessFeedback.requestKo {
+  background-color: vars.$color-warn
+}
+
+#createAnimalSuccessFeedback.show , #createAnimalFeedback.show , #updateAnimalSuccessFeedback{
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+   top: 0;
+    opacity: 0;
+  }
+  to {
+   top: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+   top: 0;
+    opacity: 0;
+  }
+  to {
+   top: 0;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+   top: 0;
+    opacity: 1;
+  }
+  to {
+   top: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 0px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
