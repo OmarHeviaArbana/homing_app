@@ -19,6 +19,15 @@ a {
   text-decoration: none;
 }
 
+.mat-mdc-table.mdc-data-table__table.cdk-table {
+  border: 1px solid vars.$color-gray;
+border-radius: 8px;
+margin-bottom: 20px;
+}
+.mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted {
+background-color: vars.$color-gray;
+}
+
 .no-scroll {
   overflow: hidden;
 }

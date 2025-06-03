@@ -29,7 +29,7 @@ export class AnimalsControlComponent {
   breederId: any;
   rolUser: any;
   shelterData!: Observable<{ label: string; value: string | number | boolean }[]>;
-  displayedColumns: string[] = ['id', 'name', 'location', 'species', 'genre', 'age_category', 'size', 'height', 'weight', 'status', 'housing_stage' , 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'location', 'species', 'genre', 'age_category', 'size', 'height', 'weight', 'status', 'housing_stage' ,'publication_date', 'actions', ];
   dataSource: MatTableDataSource<AnimalDTO> = new MatTableDataSource();
 
   loading$: Observable<boolean>;
@@ -44,13 +44,13 @@ export class AnimalsControlComponent {
       this.shelterId = auth.user.shelter?.id;
       this.rolUser = 3;
       this.animalsShelter$ = this.store.select(state => state.shelter.animalsShelter);
-      this.loadAnimalsShelter(this.shelterId);
     } else if (auth.user?.role_id === 4) {
       this.breederId = auth.user.breeder?.id;
       this.rolUser = 4;
       this.animalsBreeder$ = this.store.select(state => state.breeder.animalsBreeder);
-      this.loadAnimalsBreeder(this.breederId);
     }
+    this.loadAnimalsShelter(this.shelterId);
+    this.loadAnimalsBreeder(this.breederId);
     });
 
     this.loading$ = this.store.select(state => state.shelter.loading || state.breeder.loading);
@@ -79,9 +79,11 @@ export class AnimalsControlComponent {
       if (this.breederId) {
         this.store.dispatch(BreederActions.getAnimalsBreeder({ breederId: breederId }));
       }
-      this.animalsShelter$.subscribe((animals: AnimalDTO[]) => {
+      this.animalsBreeder$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((animals: AnimalDTO[]) => {
         this.dataSource.data = animals;
-        setTimeout(() => {
+         setTimeout(() => {
           if (this.paginator) {
             this.dataSource.paginator = this.paginator;
           }
@@ -107,7 +109,7 @@ export class AnimalsControlComponent {
           this.dialog.open(DialogComponent, {
             data: {
               title: 'Atención',
-              content: '¿Vas a eliminar la mascota, estas seguro/a de ello, ya que este cambio es irreversible y se perderan los datos de la mascota?',
+              content: '¿Vas a eliminar la mascota, estas seguro/a de ello, ya que este cambio es irreversible y se perderan sus datos?',
               onConfirm: () => this.deleteAnimal(id)
             }
           });

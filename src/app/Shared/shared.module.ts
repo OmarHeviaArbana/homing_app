@@ -10,12 +10,13 @@ import { BadgeComponent } from './Components/badge/badge.component';
 import { DataBreederShelterCardComponent } from './Components/data-breeder-shelter-card/data-breeder-shelter-card.component'
 import { MatIconModule } from '@angular/material/icon';
 import { ImageUrlPipe } from './Pipes/image-url.pipe';
+import { FormatDatePipe } from './Pipes/format-date.pipe';
 
 
 
 
 @NgModule({
-  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent, DataBreederShelterCardComponent, ImageUrlPipe],
+  declarations: [ButtonComponent, CardComponent, DialogComponent, NoDataComponent, ShelterBreederCardComponent, BadgeComponent, DataBreederShelterCardComponent, ImageUrlPipe, FormatDatePipe],
   imports: [
   CommonModule,
   MatDialogModule,
@@ -31,6 +32,7 @@ import { ImageUrlPipe } from './Pipes/image-url.pipe';
     DataBreederShelterCardComponent,
     MatIconModule,
     ImageUrlPipe,
+    FormatDatePipe
   ]
 })
 export class SharedModule { }
