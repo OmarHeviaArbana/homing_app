@@ -2,43 +2,43 @@
   <fieldset class="form__fieldset">
   <legend class="form__legend">Datos del Criadero</legend>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Nombre del Criadero</mat-label>
     <input matInput formControlName="name" />
     <mat-error *ngIf="name?.invalid">{{ getErrorMessage('name') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Núcleo Zoológico</mat-label>
     <input matInput formControlName="certification" />
     <mat-error *ngIf="certification?.invalid">{{ getErrorMessage('certification') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Email del criadero</mat-label>
     <input matInput type="email" formControlName="email_breeder" />
     <mat-error *ngIf="email_breeder?.invalid">{{ getErrorMessage('email_breeder') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Teléfono</mat-label>
     <input matInput formControlName="phone" />
     <mat-error *ngIf="phone?.invalid">{{ getErrorMessage('phone') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Dirección</mat-label>
     <input matInput formControlName="address" />
     <mat-error *ngIf="address?.invalid">{{ getErrorMessage('address') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Localidad</mat-label>
     <input matInput formControlName="location" />
     <mat-error *ngIf="location?.invalid">{{ getErrorMessage('location') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Descripción</mat-label>
     <textarea matInput formControlName="description" maxlength="300" rows="4" placeholder="Describe tu actividad"></textarea>
     <mat-hint align="end">{{ description?.value?.length || 0 }}/300</mat-hint>

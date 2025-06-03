@@ -164,11 +164,7 @@ export class ShelterEffects {
     withLatestFrom(this.store.select(state => state.shelter)),
     switchMap(([action, shelterFormData]) => {
 
-
-      console.log(action);
-      console.log(shelterFormData.files);
-
-      return this.shelterService.uploadShelterPhotos(shelterFormData.files).pipe(
+      return this.shelterService.uploadShelterPhotos(shelterFormData.files.logo_url).pipe(
         map(response => ShelterActions.uploadShelterLogoSuccess({ response })),
         catchError(error =>
           of(ShelterActions.uploadShelterLogoFailure({

@@ -15,8 +15,7 @@
     <h1 class="gestion__section-subtitle">Listado de mascotas solicitadas por los usuarios</h1>
   </div>
   <section>
-    <div *ngIf="(applicationsAnimalsShelter$ | async)?.length !== 0 || (applicationsAnimalsBreeder$ | async)?.length !== 0" class="container-table">
-
+    <div *ngIf="dataSource.data.length !== 0" class="container-table">
     <table mat-table [dataSource]="dataSource" >
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -82,7 +81,7 @@
   </div>
 
       <app-no-data
-        *ngIf="(applicationsAnimalsShelter$ | async)?.length === 0 || (applicationsAnimalsBreeder$ | async)?.length === 0"
+        *ngIf="dataSource.data.length  === 0"
         [title]="'No tienes solicitudes'"
         [content]="'En estos momentos no tienes solicitudes de adopción.'"
       ></app-no-data>

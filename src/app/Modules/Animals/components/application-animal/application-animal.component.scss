@@ -27,6 +27,7 @@
   font-size: vars.$font-size-26;
   font-weight: 700;
   margin-bottom: 50px;
+  margin-top: 50px;
 }
 
   &__actions {
@@ -85,44 +86,22 @@
 
 @-webkit-keyframes fadein {
   from {
-   top: 0;
+    top: 30px;
     opacity: 0;
   }
   to {
-   top: 30px;
+    top: 0;
     opacity: 1;
   }
 }
 
 @keyframes fadein {
   from {
-   top: 0;
+    top: 30px;
     opacity: 0;
   }
   to {
-   top: 0;
+    top: 0;
     opacity: 1;
-  }
-}
-
-@-webkit-keyframes fadeout {
-  from {
-   top: 0;
-    opacity: 1;
-  }
-  to {
-   top: 0;
-    opacity: 0;
-  }
-}
-
-@keyframes fadeout {
-  from {
-    bottom: 0px;
-    opacity: 1;
-  }
-  to {
-    bottom: 0;
-    opacity: 0;
   }
 }

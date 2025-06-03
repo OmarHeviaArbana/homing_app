@@ -2,32 +2,32 @@
    <fieldset class="form__fieldset">
     <legend class="form__legend">Datos situación mascota</legend>
 
-      <mat-form-field appearance="fill" class="input-name">
+      <mat-form-field appearance="outline" class="input-name">
         <mat-label>Nombre </mat-label>
         <input matInput formControlName="name" />
         <mat-error *ngIf="name?.invalid">{{ getErrorMessage('name') }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="input-location">
+      <mat-form-field appearance="outline" class="input-location">
         <mat-label>Localidad donde se encuentra el animal</mat-label>
         <input matInput formControlName="location" />
         <mat-error *ngIf="location?.invalid">{{ getErrorMessage('location') }}</mat-error>
       </mat-form-field>
 
 
-      <mat-form-field appearance="fill" class="input-weight">
+      <mat-form-field appearance="outline" class="input-weight">
         <mat-label>Peso aproximado (kg)</mat-label>
         <input matInput formControlName="weight" />
         <mat-error *ngIf="weight?.invalid">{{ getErrorMessage('weight') }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="input-height">
+      <mat-form-field appearance="outline" class="input-height">
         <mat-label>Altura aproximada (cm)</mat-label>
         <input matInput type="height" formControlName="height" />
         <mat-error *ngIf="height?.invalid">{{ getErrorMessage('height') }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="input-description">
+      <mat-form-field appearance="outline" class="input-description">
         <mat-label>Texto descriptivo de la mascota</mat-label>
         <textarea matInput formControlName="description" maxlength="600" rows="4" placeholder="Describe tu actividad"></textarea>
         <mat-hint align="end">{{ description?.value?.length || 0 }}/600</mat-hint>
@@ -38,7 +38,7 @@
    <fieldset class="form__fieldset">
     <legend class="form__legend">Datos principales de la mascota</legend>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
   <mat-label>Selecciona la especie</mat-label>
   <mat-select formControlName="species_id">
     <mat-option *ngFor="let item of speciesList$ | async" [value]="item.id">
@@ -47,7 +47,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
   <mat-label>Selecciona una situación</mat-label>
   <mat-select formControlName="status_id">
     <mat-option *ngFor="let item of statusList$ | async" [value]="item.id">
@@ -56,7 +56,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
   <mat-label>Edad estimada</mat-label>
   <mat-select formControlName="agecategory_id">
     <mat-option *ngFor="let item of ageCategoriesList$ | async" [value]="item.id">
@@ -65,7 +65,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
   <mat-label>Sexo</mat-label>
   <mat-select formControlName="genre_id">
     <mat-option *ngFor="let item of genresList$ | async" [value]="item.id">
@@ -74,7 +74,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
   <mat-label>Tamaño</mat-label>
   <mat-select formControlName="size_id">
     <mat-option *ngFor="let item of sizesList$ | async" [value]="item.id">
@@ -83,7 +83,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
   <mat-label>Nivel de energía</mat-label>
   <mat-select formControlName="energylevel_id">
     <mat-option *ngFor="let item of energyLevelsList$ | async" [value]="item.id">
@@ -92,7 +92,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field *ngIf="isEdit" appearance="fill">
+<mat-form-field *ngIf="isEdit" appearance="outline">
   <mat-label>Nivel de energía</mat-label>
   <mat-select formControlName="housing_stage_id">
     <mat-option *ngFor="let item of housing_stageList$ | async" [value]="item.id">
@@ -103,14 +103,14 @@
 
   </fieldset>
 
-  <fieldset class="form__fieldset">
+  <fieldset class="form__fieldset-special">
     <legend class="form__legend">Datos médicos</legend>
     <mat-checkbox formControlName="identifier" class="input-checkbox">Identificado</mat-checkbox>
     <mat-checkbox formControlName="vaccines"class="input-checkbox">Vacunas</mat-checkbox>
     <mat-checkbox formControlName="sterilization" class="input-checkbox">Esterilizado</mat-checkbox>
    </fieldset>
 
-  <fieldset class="form__fieldset">
+  <fieldset class="form__fieldset-special">
     <legend class="form__legend">Cuidados especiales</legend>
 
       <mat-form-field appearance="fill" class="input-care">
@@ -121,21 +121,21 @@
       </mat-form-field>
   </fieldset>
 
-  <fieldset class="form__fieldset">
+  <fieldset class="form__fieldset-special">
     <legend class="form__legend">Adjunta una fotografía principal</legend>
     <div class="form__input-container">
       <input type="file" id="principal-image" (change)="onImageSelected($event, 'principal_image')" formControlName="principal_image" accept="image/*" />
       <img *ngIf="imagePreviews.principal_image" [src]="imagePreviews.principal_image" width="150" />
     </div>
   </fieldset>
-  <fieldset class="form__fieldset">
+  <fieldset class="form__fieldset-special">
     <legend class="form__legend">Fotografia opcional 1</legend>
       <div class="form__input-container">
       <input type="file" id="optional_image_one" (change)="onImageSelected($event, 'optional_image_one')" formControlName="optional_image_one" accept="image/*" />
       <img *ngIf="imagePreviews.optional_image_one" [src]="imagePreviews.optional_image_one" width="150" />
     </div>
   </fieldset>
-  <fieldset class="form__fieldset">
+  <fieldset class="form__fieldset-special">
     <legend class="form__legend">Fotografia opcional 2</legend>
     <div class="form__input-container">
       <input type="file" id="optional-image-two" (change)="onImageSelected($event, 'optional_image_two')" formControlName="optional_image_two" accept="image/*" />

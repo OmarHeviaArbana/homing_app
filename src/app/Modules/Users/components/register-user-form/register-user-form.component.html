@@ -1,31 +1,31 @@
 <form [formGroup]="formUser" class="form">
   <fieldset class="form__fieldset">
   <legend class="form__legend">Datos de acceso a Homing.</legend>
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Nombre</mat-label>
     <input matInput formControlName="name" />
     <mat-error *ngIf="name?.invalid">{{ getErrorMessage('name') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Apellidos</mat-label>
     <input matInput formControlName="username" />
     <mat-error *ngIf="username?.invalid">{{ getErrorMessage('username') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input matInput type="email" formControlName="email" />
     <mat-error *ngIf="email?.invalid">{{ getErrorMessage('email') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>{{ isEditMode ? 'Introduce tu contraseña o una nueva' : 'Contraseña' }}</mat-label>
     <input matInput type="password" formControlName="password" />
     <mat-error *ngIf="password?.invalid">{{ getErrorMessage('password') }}</mat-error>
   </mat-form-field>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
     <mat-label>Tipo de usuario</mat-label>
     <mat-select formControlName="role_id">
       <mat-option *ngFor="let rol of rolUserList" [value]="rol.id">

@@ -19,18 +19,13 @@ a {
 
 .mat-mdc-table.mdc-data-table__table.cdk-table {
   border: 1px solid vars.$color-gray;
-border-radius: 8px;
-margin-bottom: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 .mat-mdc-header-row.mdc-data-table__header-row.cdk-header-row.ng-star-inserted {
 background-color: vars.$color-gray;
 }
 
-.mat-mdc-text-field-wrapper, .mdc-notched-outline.ng-tns-c69-2.mdc-notched-outline--notched.mdc-notched-outline--upgraded.ng-star-inserted   {
-  background-color: vars.$color-white !important;
-  box-shadow: 0px 2px 4px 2.5px rgb(229, 229, 229, 0.5) ;
-  border-radius: 25px;
-}
 
 td > a , td > span {
   color: vars.$color-primary;
@@ -46,16 +41,6 @@ td > a , td > span {
   overflow: hidden;
 }
 
-.mat-mdc-checkbox  {
-
-  background-color: vars.$color-primary;
-}
-
-
-
-.mat-mdc-checkbox.mat-accent .mdc-checkbox--selected ~ .mdc-checkbox__ripple {
-  background-color: vars.$color-primary;
-}
 
 /* Shadows */
 

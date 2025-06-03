@@ -1,43 +1,43 @@
 <form [formGroup]="formShelter"  class="form">
   <fieldset class="form__fieldset">
   <legend class="form__legend">Datos del Refugio</legend>
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Nombre del refugio o protectora</mat-label>
       <input matInput formControlName="name" />
       <mat-error *ngIf="name?.invalid">{{ getErrorMessage('name') }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>CIF</mat-label>
       <input matInput formControlName="cif" />
       <mat-error *ngIf="cif?.invalid">{{ getErrorMessage('cif') }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Email del refugio</mat-label>
       <input matInput type="email" formControlName="email_shelter" />
       <mat-error *ngIf="email_shelter?.invalid">{{ getErrorMessage('email_shelter') }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Teléfono</mat-label>
       <input matInput formControlName="phone" />
       <mat-error *ngIf="phone?.invalid">{{ getErrorMessage('phone') }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Dirección</mat-label>
       <input matInput formControlName="address" />
       <mat-error *ngIf="address?.invalid">{{ getErrorMessage('address') }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Localidad</mat-label>
       <input matInput formControlName="location" />
       <mat-error *ngIf="location?.invalid">{{ getErrorMessage('location') }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field appearance="outline">
       <mat-label>Descripción</mat-label>
       <textarea matInput formControlName="description" maxlength="300" rows="4" placeholder="Describe tu actividad"></textarea>
       <mat-hint align="end">{{ description?.value?.length || 0 }}/300</mat-hint>

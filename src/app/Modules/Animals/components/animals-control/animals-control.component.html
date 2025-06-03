@@ -16,7 +16,7 @@
     <app-button variant="dialog-action" (click)="goToPublicAnimals()">Publicar mascota</app-button>
   </div>
   <section>
-    <div *ngIf="(animalsShelter$ | async)?.length !== 0 || (animalsBreeder$ | async)?.length !== 0" class="container-table">
+    <div *ngIf="dataSource.data.length !== 0" class="container-table">
 
     <table mat-table [dataSource]="dataSource" >
       <ng-container matColumnDef="id">
@@ -97,7 +97,7 @@
   </div>
 
       <app-no-data
-        *ngIf="(animalsShelter$ | async)?.length === 0 || (animalsBreeder$ | async)?.length === 0"
+        *ngIf="dataSource.data.length == 0"
         [title]="'No tienes mascotas públicadas'"
         [content]="'En cuanto publiques tus mascotas podras gestionar todo lo relacionado con ellas en este espacio.'"
       ></app-no-data>
