@@ -12,10 +12,12 @@ html, .mat-typography, .mat-typography h1 , .mat-typography h2, .mat-typography 
 html, body { height: 100vh; background-color: vars.$color-white }
 body { margin: 0 }
 
+
 a {
   color: vars.$color-text;
   text-decoration: none;
 }
+
 
 .mat-mdc-table.mdc-data-table__table.cdk-table {
   border: 1px solid vars.$color-gray;

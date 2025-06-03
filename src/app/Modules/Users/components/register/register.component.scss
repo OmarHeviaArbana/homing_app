@@ -2,7 +2,8 @@
 @use '/src/assets/styles/variables' as vars;
 
 .register {
-  margin: 32px;
+  margin: 32px auto;
+  margin-bottom: 200px;
   &__title {
   font-size: vars.$font-size-26;
   font-weight: 700;
